@@ -1,0 +1,36 @@
+﻿<Window x:Class="AHDB.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File"/>
+            <MenuItem Header="Service">
+                <MenuItem Header="Create new Service" Command="{Binding CreateNewService}"/>
+            </MenuItem>
+            <MenuItem Header="Customer">
+                <MenuItem Header="Create new Customer"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Label Content="Services"/>
+            <DataGrid ItemsSource="{Binding Services}" 
+                      IsReadOnly="True" 
+                      Margin="5"
+                      SelectedItem="{Binding SelectedService}"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Service Id" Binding="{Binding ServiceId}"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Company Name" Binding="{Binding Customer.CompanyName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>
