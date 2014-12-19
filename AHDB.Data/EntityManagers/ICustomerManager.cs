@@ -8,5 +8,6 @@ namespace AHDB.Data.EntityManagers
 {
     public interface ICustomerManager
     {
+        List<Customer> GetAllCustomers();
     }
 }

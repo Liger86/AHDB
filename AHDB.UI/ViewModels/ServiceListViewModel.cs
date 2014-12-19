@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AHDB.Data;
 using System.Windows;
+using AHDB.UI.Views;
 
 namespace AHDB.UI.ViewModels
 {
@@ -34,21 +35,23 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        #region Create new service
+        #region Commands
+        // See constructor.
         public CommandBase<object> CreateNewService { get; private set; }
 
         void CreateNewServiceMethod(object arg)
         {
-            // I don't know what I'm doing anymore, it's 4:28am.
-            throw new NotImplementedException(); // To do.
+            CreateNewServiceView myView = new CreateNewServiceView();
+            myView.ShowDialog();
         }
 
         bool CanCreateNewService(object arg)
         {
             return true;
         }
-        #endregion Create new service
+        #endregion Commands
 
+        #region Methods
         public void Refresh()
         {
             ObservableCollection<ServiceViewModel> services = new ObservableCollection<ServiceViewModel>();
@@ -67,8 +70,9 @@ namespace AHDB.UI.ViewModels
                         }
                     });
             }
-            Services = services;
+            this.Services = services;
         }
+        #endregion Methods
 
         #region Singleton
         private ServiceListViewModel()

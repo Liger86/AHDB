@@ -10,5 +10,6 @@ namespace AHDB.Data
     interface IDataManager
     {
         IServiceManager GetServiceManager();
+        ICustomerManager GetCustomerManager();
     }
 }

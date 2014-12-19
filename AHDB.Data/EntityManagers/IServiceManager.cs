@@ -8,6 +8,7 @@ namespace AHDB.Data.EntityManagers
 {
     public interface IServiceManager
     {
+        void CreateNewService(string description, int customerId);
         List<Service> GetAllServices();
     }
 }

@@ -65,9 +65,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CommandBase.cs" />
+    <Compile Include="ViewModels\CreateNewServiceViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\ServiceListViewModel.cs" />
     <Compile Include="ViewModels\ServiceViewModel.cs" />
+    <Compile Include="Views\CreateNewServiceView.xaml.cs">
+      <DependentUpon>CreateNewServiceView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,6 +85,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CreateNewServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -116,9 +124,7 @@
       <Name>AHDB.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

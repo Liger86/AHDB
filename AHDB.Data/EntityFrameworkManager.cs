@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AHDB.Data.EntityManagers;
+using System.Data.Entity;
 
 namespace AHDB.Data
 {
@@ -13,6 +14,12 @@ namespace AHDB.Data
         {
             return new ServiceManager();
         }
+
+        public EntityManagers.ICustomerManager GetCustomerManager()
+        {
+            return new CustomerManager();
+        }
+
 
         class ServiceManager : IServiceManager
         {
@@ -33,6 +40,27 @@ namespace AHDB.Data
                     }
                 }
                 return services;
+            }
+
+            public void CreateNewService(string description, int customerId)
+            {
+                using (AHDBEntities myEntities = new AHDBEntities())
+                {
+                    Service myService = new Service() { Description = description, CustomerId = customerId };
+                    myEntities.Services.Add(myService);
+                    myEntities.SaveChanges();
+                }
+            }
+        }
+
+        class CustomerManager : ICustomerManager
+        {
+            public List<Customer> GetAllCustomers()
+            {
+                using (AHDBEntities myEntities = new AHDBEntities())
+                {
+                    return myEntities.Customers.ToList();
+                }
             }
         }
     }

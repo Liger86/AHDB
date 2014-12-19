@@ -20,5 +20,10 @@ namespace AHDB.Data
         {
             return dataManager.GetServiceManager();
         }
+
+        public ICustomerManager GetCustomerManager()
+        {
+            return dataManager.GetCustomerManager();
+        }
     }
 }
