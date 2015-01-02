@@ -12,11 +12,11 @@ namespace AHDB.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Service
+    public partial class Repair
     {
-        public Service()
+        public Repair()
         {
-            this.ServiceComponents = new HashSet<ServiceComponent>();
+            this.RepairComponents = new HashSet<RepairComponent>();
             this.Vendors = new HashSet<Vendor>();
         }
     
@@ -25,7 +25,7 @@ namespace AHDB.Data
         public string Description { get; set; }
     
         public virtual Customer Customer { get; set; }
-        public virtual ICollection<ServiceComponent> ServiceComponents { get; set; }
+        public virtual ICollection<RepairComponent> RepairComponents { get; set; }
         public virtual ICollection<Vendor> Vendors { get; set; }
     }
 }

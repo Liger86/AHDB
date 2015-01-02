@@ -65,12 +65,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CommandBase.cs" />
-    <Compile Include="ViewModels\CreateNewServiceViewModel.cs" />
+    <Compile Include="ViewModels\CreateNewRepairViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
-    <Compile Include="ViewModels\ServiceListViewModel.cs" />
-    <Compile Include="ViewModels\ServiceViewModel.cs" />
-    <Compile Include="Views\CreateNewServiceView.xaml.cs">
-      <DependentUpon>CreateNewServiceView.xaml</DependentUpon>
+    <Compile Include="ViewModels\RepairListViewModel.cs" />
+    <Compile Include="ViewModels\RepairViewModel.cs" />
+    <Compile Include="Views\CreateNewRepairView.xaml.cs">
+      <DependentUpon>CreateNewRepairView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -85,7 +85,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CreateNewServiceView.xaml">
+    <Page Include="Views\CreateNewRepairView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/02/2015 10:06:59
+-- Date Created: 01/02/2015 16:59:48
 -- Generated from EDMX file: C:\Users\Thomas Anderson\Documents\ahdb_new\AHDB.Data\AHDBModel.edmx
 -- --------------------------------------------------
 
@@ -20,20 +20,20 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CustomerContact]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_CustomerContact];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CustomerService]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Services] DROP CONSTRAINT [FK_CustomerService];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ServiceComponentVendor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Vendors] DROP CONSTRAINT [FK_ServiceComponentVendor];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ServiceServiceComponent]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ServiceComponents] DROP CONSTRAINT [FK_ServiceServiceComponent];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ServiceVendor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Vendors] DROP CONSTRAINT [FK_ServiceVendor];
-GO
 IF OBJECT_ID(N'[dbo].[FK_VendorContact]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_VendorContact];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerService]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Repairs] DROP CONSTRAINT [FK_CustomerService];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RepairComponentVendor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Vendors] DROP CONSTRAINT [FK_RepairComponentVendor];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RepairRepairComponent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RepairComponents] DROP CONSTRAINT [FK_RepairRepairComponent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RepairVendor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Vendors] DROP CONSTRAINT [FK_RepairVendor];
 GO
 
 -- --------------------------------------------------
@@ -46,11 +46,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Customers];
 GO
-IF OBJECT_ID(N'[dbo].[ServiceComponents]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ServiceComponents];
+IF OBJECT_ID(N'[dbo].[RepairComponents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RepairComponents];
 GO
-IF OBJECT_ID(N'[dbo].[Services]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Services];
+IF OBJECT_ID(N'[dbo].[Repairs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Repairs];
 GO
 IF OBJECT_ID(N'[dbo].[Vendors]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Vendors];
@@ -76,16 +76,16 @@ CREATE TABLE [dbo].[Customers] (
 );
 GO
 
--- Creating table 'ServiceComponents'
-CREATE TABLE [dbo].[ServiceComponents] (
+-- Creating table 'RepairComponents'
+CREATE TABLE [dbo].[RepairComponents] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [ServiceId] int  NOT NULL,
+    [RepairId] int  NOT NULL,
     [Description] nvarchar(max)  NULL
 );
 GO
 
--- Creating table 'Services'
-CREATE TABLE [dbo].[Services] (
+-- Creating table 'Repairs'
+CREATE TABLE [dbo].[Repairs] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CustomerId] int  NOT NULL,
     [Description] nvarchar(max)  NOT NULL
@@ -96,8 +96,8 @@ GO
 CREATE TABLE [dbo].[Vendors] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CompanyName] nvarchar(max)  NOT NULL,
-    [ServiceComponentId] int  NULL,
-    [ServiceId] int  NULL
+    [RepairComponentId] int  NULL,
+    [RepairId] int  NULL
 );
 GO
 
@@ -117,15 +117,15 @@ ADD CONSTRAINT [PK_Customers]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ServiceComponents'
-ALTER TABLE [dbo].[ServiceComponents]
-ADD CONSTRAINT [PK_ServiceComponents]
+-- Creating primary key on [Id] in table 'RepairComponents'
+ALTER TABLE [dbo].[RepairComponents]
+ADD CONSTRAINT [PK_RepairComponents]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Services'
-ALTER TABLE [dbo].[Services]
-ADD CONSTRAINT [PK_Services]
+-- Creating primary key on [Id] in table 'Repairs'
+ALTER TABLE [dbo].[Repairs]
+ADD CONSTRAINT [PK_Repairs]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -169,8 +169,8 @@ ON [dbo].[Contacts]
     ([VendorId]);
 GO
 
--- Creating foreign key on [CustomerId] in table 'Services'
-ALTER TABLE [dbo].[Services]
+-- Creating foreign key on [CustomerId] in table 'Repairs'
+ALTER TABLE [dbo].[Repairs]
 ADD CONSTRAINT [FK_CustomerService]
     FOREIGN KEY ([CustomerId])
     REFERENCES [dbo].[Customers]
@@ -180,53 +180,53 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CustomerService'
 CREATE INDEX [IX_FK_CustomerService]
-ON [dbo].[Services]
+ON [dbo].[Repairs]
     ([CustomerId]);
 GO
 
--- Creating foreign key on [ServiceComponentId] in table 'Vendors'
+-- Creating foreign key on [RepairComponentId] in table 'Vendors'
 ALTER TABLE [dbo].[Vendors]
-ADD CONSTRAINT [FK_ServiceComponentVendor]
-    FOREIGN KEY ([ServiceComponentId])
-    REFERENCES [dbo].[ServiceComponents]
+ADD CONSTRAINT [FK_RepairComponentVendor]
+    FOREIGN KEY ([RepairComponentId])
+    REFERENCES [dbo].[RepairComponents]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ServiceComponentVendor'
-CREATE INDEX [IX_FK_ServiceComponentVendor]
+-- Creating non-clustered index for FOREIGN KEY 'FK_RepairComponentVendor'
+CREATE INDEX [IX_FK_RepairComponentVendor]
 ON [dbo].[Vendors]
-    ([ServiceComponentId]);
+    ([RepairComponentId]);
 GO
 
--- Creating foreign key on [ServiceId] in table 'ServiceComponents'
-ALTER TABLE [dbo].[ServiceComponents]
-ADD CONSTRAINT [FK_ServiceServiceComponent]
-    FOREIGN KEY ([ServiceId])
-    REFERENCES [dbo].[Services]
+-- Creating foreign key on [RepairId] in table 'RepairComponents'
+ALTER TABLE [dbo].[RepairComponents]
+ADD CONSTRAINT [FK_RepairRepairComponent]
+    FOREIGN KEY ([RepairId])
+    REFERENCES [dbo].[Repairs]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ServiceServiceComponent'
-CREATE INDEX [IX_FK_ServiceServiceComponent]
-ON [dbo].[ServiceComponents]
-    ([ServiceId]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_RepairRepairComponent'
+CREATE INDEX [IX_FK_RepairRepairComponent]
+ON [dbo].[RepairComponents]
+    ([RepairId]);
 GO
 
--- Creating foreign key on [ServiceId] in table 'Vendors'
+-- Creating foreign key on [RepairId] in table 'Vendors'
 ALTER TABLE [dbo].[Vendors]
-ADD CONSTRAINT [FK_ServiceVendor]
-    FOREIGN KEY ([ServiceId])
-    REFERENCES [dbo].[Services]
+ADD CONSTRAINT [FK_RepairVendor]
+    FOREIGN KEY ([RepairId])
+    REFERENCES [dbo].[Repairs]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ServiceVendor'
-CREATE INDEX [IX_FK_ServiceVendor]
+-- Creating non-clustered index for FOREIGN KEY 'FK_RepairVendor'
+CREATE INDEX [IX_FK_RepairVendor]
 ON [dbo].[Vendors]
-    ([ServiceId]);
+    ([RepairId]);
 GO
 
 -- --------------------------------------------------

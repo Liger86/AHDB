@@ -10,9 +10,9 @@ namespace AHDB.Data
 {
     class EntityFrameworkManager : IDataManager
     {
-        public EntityManagers.IServiceManager GetServiceManager()
+        public EntityManagers.IRepairManager GetRepairManager()
         {
-            return new ServiceManager();
+            return new RepairManager();
         }
 
         public EntityManagers.ICustomerManager GetCustomerManager()
@@ -21,17 +21,17 @@ namespace AHDB.Data
         }
 
 
-        class ServiceManager : IServiceManager
+        class RepairManager : IRepairManager
         {
-            public List<Service> GetAllServices()
+            public List<Repair> GetAllRepairs()
             {
-                List<Service> services = new List<Service>();
+                List<Repair> repairs = new List<Repair>();
                 using (AHDBEntities myEntities = new AHDBEntities())
                 {
-                    foreach (var item in myEntities.Services.ToList())
+                    foreach (var item in myEntities.Repairs.ToList())
                     {
-                        services.Add(
-                            new Service() 
+                        repairs.Add(
+                            new Repair() 
                             {
                                 Id = item.Id,
                                 Description = item.Description, 
@@ -39,15 +39,15 @@ namespace AHDB.Data
                             });
                     }
                 }
-                return services;
+                return repairs;
             }
 
-            public void CreateNewService(string description, int customerId)
+            public void CreateNewRepair(string description, int customerId)
             {
                 using (AHDBEntities myEntities = new AHDBEntities())
                 {
-                    Service myService = new Service() { Description = description, CustomerId = customerId };
-                    myEntities.Services.Add(myService);
+                    Repair myRepair = new Repair() { Description = description, CustomerId = customerId };
+                    myEntities.Repairs.Add(myRepair);
                     myEntities.SaveChanges();
                 }
             }

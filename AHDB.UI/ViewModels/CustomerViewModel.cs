@@ -28,14 +28,14 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private ObservableCollection<ServiceViewModel> services;
-        public ObservableCollection<ServiceViewModel> Services
+        private ObservableCollection<RepairViewModel> repairs;
+        public ObservableCollection<RepairViewModel> Repairs
         {
-            get { return services; }
+            get { return repairs; }
             set
             {
-                services = value;
-                RaisePropertyChanged("Services");
+                repairs = value;
+                RaisePropertyChanged("Repairs");
             }
         }
     }

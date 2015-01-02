@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AHDB.Data.EntityManagers
 {
-    public interface IServiceManager
+    public interface IRepairManager
     {
-        void CreateNewService(string description, int customerId);
-        List<Service> GetAllServices();
+        void CreateNewRepair(string description, int customerId);
+        List<Repair> GetAllRepairs();
     }
 }

@@ -27,8 +27,8 @@ namespace AHDB.Data
     
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<ServiceComponent> ServiceComponents { get; set; }
-        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<RepairComponent> RepairComponents { get; set; }
+        public virtual DbSet<Repair> Repairs { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace AHDB.Data
         public Customer()
         {
             this.Contacts = new HashSet<Contact>();
-            this.Services = new HashSet<Service>();
+            this.Repairs = new HashSet<Repair>();
         }
     
         public int Id { get; set; }
         public string CompanyName { get; set; }
     
         public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<Service> Services { get; set; }
+        public virtual ICollection<Repair> Repairs { get; set; }
     }
 }

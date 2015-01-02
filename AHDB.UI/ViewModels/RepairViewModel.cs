@@ -2,16 +2,16 @@
 
 namespace AHDB.UI.ViewModels
 {
-    public class ServiceViewModel : ViewModelBase
+    public class RepairViewModel : ViewModelBase
     {
-        private int serviceId;
-        public int ServiceId
+        private int repairId;
+        public int RepairId
         {
-            get { return serviceId; }
+            get { return repairId; }
             set 
             { 
-                serviceId = value;
-                RaisePropertyChanged("ServiceId");
+                repairId = value;
+                RaisePropertyChanged("RepairId");
             }
         }
 

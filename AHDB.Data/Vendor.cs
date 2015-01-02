@@ -21,11 +21,11 @@ namespace AHDB.Data
     
         public int Id { get; set; }
         public string CompanyName { get; set; }
-        public Nullable<int> ServiceComponentId { get; set; }
-        public Nullable<int> ServiceId { get; set; }
+        public Nullable<int> RepairComponentId { get; set; }
+        public Nullable<int> RepairId { get; set; }
     
         public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ServiceComponent ServiceComponent { get; set; }
-        public virtual Service Service { get; set; }
+        public virtual RepairComponent RepairComponent { get; set; }
+        public virtual Repair Repair { get; set; }
     }
 }

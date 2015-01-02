@@ -9,7 +9,7 @@ namespace AHDB.Data
 {
     interface IDataManager
     {
-        IServiceManager GetServiceManager();
+        IRepairManager GetRepairManager();
         ICustomerManager GetCustomerManager();
     }
 }

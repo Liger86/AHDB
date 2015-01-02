@@ -10,7 +10,7 @@ using AHDB.UI.Views;
 
 namespace AHDB.UI.ViewModels
 {
-    public sealed class CreateNewServiceViewModel : ViewModelBase
+    public sealed class CreateNewRepairViewModel : ViewModelBase
     {
         private ObservableCollection<CustomerViewModel> customers;
         public ObservableCollection<CustomerViewModel> Customers
@@ -35,29 +35,29 @@ namespace AHDB.UI.ViewModels
         }
         
 
-        private ServiceViewModel newService = new ServiceViewModel();
-        public ServiceViewModel NewService
+        private RepairViewModel newRepair = new RepairViewModel();
+        public RepairViewModel NewRepair
         {
-            get { return newService; }
+            get { return newRepair; }
             set 
             {
-                newService = value;
-                RaisePropertyChanged("NewService");
+                newRepair = value;
+                RaisePropertyChanged("NewRepair");
             }
         }
         
 
         #region Commands
-        public CommandBase<object> SaveNewService { get; private set; }
-        void SaveNewServiceMethod(object arg)
+        public CommandBase<object> SaveNewRepair { get; private set; }
+        void SaveNewRepairMethod(object arg)
         {
             FactoryManager myManager = new FactoryManager();
-            myManager.GetServiceManager().CreateNewService(newService.Description, selectedCustomer.CustomerId);
+            myManager.GetRepairManager().CreateNewRepair(newRepair.Description, selectedCustomer.CustomerId);
             
         }
-        bool CanSaveNewService(object arg)
+        bool CanSaveNewRepair(object arg)
         {
-            if (string.IsNullOrEmpty(newService.Description))
+            if (string.IsNullOrEmpty(newRepair.Description))
             {
                 return false;
             }
@@ -67,13 +67,13 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        public CommandBase<object> CreateNewService { get; private set; }
-        void CreateNewServiceMethod(object arg)
+        public CommandBase<object> CreateNewRepair { get; private set; }
+        void CreateNewRepairMethod(object arg)
         {
-            CreateNewServiceView myView = new CreateNewServiceView();
+            CreateNewRepairView myView = new CreateNewRepairView();
             myView.ShowDialog();
         }
-        bool CanCreateNewService(object arg)
+        bool CanCreateNewRepair(object arg)
         {
             return true;
         }
@@ -98,16 +98,16 @@ namespace AHDB.UI.ViewModels
         #endregion Methods
 
         #region Singleton
-        private CreateNewServiceViewModel()
+        private CreateNewRepairViewModel()
         {
             GetCustomerList();
-            this.SaveNewService = new CommandBase<object>(SaveNewServiceMethod, CanSaveNewService);
-            this.CreateNewService = new CommandBase<object>(CreateNewServiceMethod, CanCreateNewService);
+            this.SaveNewRepair = new CommandBase<object>(SaveNewRepairMethod, CanSaveNewRepair);
+            this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
         }
 
-        private static readonly Lazy<CreateNewServiceViewModel> lazy =
-            new Lazy<CreateNewServiceViewModel>(() => new CreateNewServiceViewModel());
-        public static CreateNewServiceViewModel Instance { get { return lazy.Value; } }
+        private static readonly Lazy<CreateNewRepairViewModel> lazy =
+            new Lazy<CreateNewRepairViewModel>(() => new CreateNewRepairViewModel());
+        public static CreateNewRepairViewModel Instance { get { return lazy.Value; } }
         #endregion
     }
 }

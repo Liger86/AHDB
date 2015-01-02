@@ -11,22 +11,22 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="File"/>
-            <MenuItem Header="Service">
-                <MenuItem Header="Create new Service" Command="{Binding CreateNewService}"/>
+            <MenuItem Header="Repair">
+                <MenuItem Header="Create new Repair" Command="{Binding CreateNewRepair}"/>
             </MenuItem>
             <MenuItem Header="Customer">
                 <MenuItem Header="Create new Customer"/>
             </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Vertical">
-            <Label Content="Services"/>
-            <DataGrid ItemsSource="{Binding Services}" 
+            <Label Content="Repairs"/>
+            <DataGrid ItemsSource="{Binding Repairs}" 
                       IsReadOnly="True" 
                       Margin="5"
-                      SelectedItem="{Binding SelectedService}"
+                      SelectedItem="{Binding SelectedRepair}"
                       AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Service Id" Binding="{Binding ServiceId}"/>
+                    <DataGridTextColumn Header="Repair Id" Binding="{Binding RepairId}"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
                     <DataGridTextColumn Header="Company Name" Binding="{Binding Customer.CompanyName}"/>
                 </DataGrid.Columns>

@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace AHDB.UI.Views
 {
     /// <summary>
-    /// Interaction logic for CreateNewServiceView.xaml
+    /// Interaction logic for CreateNewRepairView.xaml
     /// </summary>
-    public partial class CreateNewServiceView : Window
+    public partial class CreateNewRepairView : Window
     {
-        public CreateNewServiceView()
+        public CreateNewRepairView()
         {
             InitializeComponent();
-            this.DataContext = CreateNewServiceViewModel.Instance;
+            this.DataContext = CreateNewRepairViewModel.Instance;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -7,15 +7,15 @@
       <Diagram DiagramId="db458ac3bf4b459f9889397ff3562aa5" Name="Diagram1">
         <EntityTypeShape EntityType="AHDBModel.Contact" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AHDBModel.Customer" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.ServiceComponent" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Service" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Vendor" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.RepairComponent" Width="2.625" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Repair" Width="2.25" PointX="2" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Vendor" Width="2.875" PointX="9.25" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="AHDBModel.FK_CustomerContact" ManuallyRouted="false" />
         <AssociationConnector Association="AHDBModel.FK_VendorContact" ManuallyRouted="false" />
         <AssociationConnector Association="AHDBModel.FK_CustomerService" ManuallyRouted="false" />
-        <AssociationConnector Association="AHDBModel.FK_ServiceComponentVendor" ManuallyRouted="false" />
-        <AssociationConnector Association="AHDBModel.FK_ServiceServiceComponent" ManuallyRouted="false" />
-        <AssociationConnector Association="AHDBModel.FK_ServiceVendor" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.FK_RepairComponentVendor" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.FK_RepairRepairComponent" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.FK_RepairVendor" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

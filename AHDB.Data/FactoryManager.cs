@@ -16,9 +16,9 @@ namespace AHDB.Data
             dataManager = new EntityFrameworkManager();
         }
 
-        public IServiceManager GetServiceManager()
+        public IRepairManager GetRepairManager()
         {
-            return dataManager.GetServiceManager();
+            return dataManager.GetRepairManager();
         }
 
         public ICustomerManager GetCustomerManager()
