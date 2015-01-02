@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Thomas Anderson\Documents\Visual Studio 2013\Projects\AHDB\AHDB.Data\AHDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Thomas Anderson\Documents\ahdb_new\AHDB.Data\AHDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

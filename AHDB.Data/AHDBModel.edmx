@@ -4,153 +4,152 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Contacts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerId" Type="int" />
-          <Property Name="VendorId" Type="int" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Customers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="ServiceComponents">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ServiceId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Services">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vendors">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompanyName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ServiceComponentId" Type="int" />
-          <Property Name="ServiceId" Type="int" />
-        </EntityType>
-        <Association Name="FK_CustomerContact">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contacts">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CustomerService">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
-          <End Role="Services" Type="Self.Services" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Services">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServiceComponentVendor">
-          <End Role="ServiceComponents" Type="Self.ServiceComponents" Multiplicity="0..1" />
-          <End Role="Vendors" Type="Self.Vendors" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceComponents">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Vendors">
-              <PropertyRef Name="ServiceComponentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServiceServiceComponent">
-          <End Role="Services" Type="Self.Services" Multiplicity="1" />
-          <End Role="ServiceComponents" Type="Self.ServiceComponents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ServiceComponents">
-              <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServiceVendor">
-          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
-          <End Role="Vendors" Type="Self.Vendors" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Vendors">
-              <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorContact">
-          <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
-          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contacts">
-              <PropertyRef Name="VendorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="AHDBModelStoreContainer">
-          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ServiceComponents" EntityType="Self.ServiceComponents" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_CustomerContact" Association="Self.FK_CustomerContact">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Contacts" EntitySet="Contacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerService" Association="Self.FK_CustomerService">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Services" EntitySet="Services" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServiceComponentVendor" Association="Self.FK_ServiceComponentVendor">
-            <End Role="ServiceComponents" EntitySet="ServiceComponents" />
-            <End Role="Vendors" EntitySet="Vendors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServiceServiceComponent" Association="Self.FK_ServiceServiceComponent">
-            <End Role="Services" EntitySet="Services" />
-            <End Role="ServiceComponents" EntitySet="ServiceComponents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServiceVendor" Association="Self.FK_ServiceVendor">
-            <End Role="Services" EntitySet="Services" />
-            <End Role="Vendors" EntitySet="Vendors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorContact" Association="Self.FK_VendorContact">
-            <End Role="Vendors" EntitySet="Vendors" />
-            <End Role="Contacts" EntitySet="Contacts" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="AHDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AHDBModelStoreContainer">
+    <EntitySet Name="Contacts" EntityType="AHDBModel.Store.Contacts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customers" EntityType="AHDBModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServiceComponents" EntityType="AHDBModel.Store.ServiceComponents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Services" EntityType="AHDBModel.Store.Services" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vendors" EntityType="AHDBModel.Store.Vendors" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CustomerContact" Association="AHDBModel.Store.FK_CustomerContact">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Contacts" EntitySet="Contacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorContact" Association="AHDBModel.Store.FK_VendorContact">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Contacts" EntitySet="Contacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerService" Association="AHDBModel.Store.FK_CustomerService">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceComponentVendor" Association="AHDBModel.Store.FK_ServiceComponentVendor">
+      <End Role="ServiceComponents" EntitySet="ServiceComponents" />
+      <End Role="Vendors" EntitySet="Vendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceServiceComponent" Association="AHDBModel.Store.FK_ServiceServiceComponent">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="ServiceComponents" EntitySet="ServiceComponents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceVendor" Association="AHDBModel.Store.FK_ServiceVendor">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Vendors" EntitySet="Vendors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Contacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="true" />
+    <Property Name="VendorId" Type="int" Nullable="true" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ServiceComponents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ServiceComponentId" Type="int" Nullable="true" />
+    <Property Name="ServiceId" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_CustomerContact">
+    <End Role="Customers" Type="AHDBModel.Store.Customers" Multiplicity="0..1" />
+    <End Role="Contacts" Type="AHDBModel.Store.Contacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contacts">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorContact">
+    <End Role="Vendors" Type="AHDBModel.Store.Vendors" Multiplicity="0..1" />
+    <End Role="Contacts" Type="AHDBModel.Store.Contacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contacts">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerService">
+    <End Role="Customers" Type="AHDBModel.Store.Customers" Multiplicity="1" />
+    <End Role="Services" Type="AHDBModel.Store.Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceComponentVendor">
+    <End Role="ServiceComponents" Type="AHDBModel.Store.ServiceComponents" Multiplicity="0..1" />
+    <End Role="Vendors" Type="AHDBModel.Store.Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceComponents">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vendors">
+        <PropertyRef Name="ServiceComponentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceServiceComponent">
+    <End Role="Services" Type="AHDBModel.Store.Services" Multiplicity="1" />
+    <End Role="ServiceComponents" Type="AHDBModel.Store.ServiceComponents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceComponents">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceVendor">
+    <End Role="Services" Type="AHDBModel.Store.Services" Multiplicity="0..1" />
+    <End Role="Vendors" Type="AHDBModel.Store.Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vendors">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -314,57 +313,56 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AHDBModelStoreContainer" CdmEntityContainer="AHDBEntities">
-          <EntitySetMapping Name="Contacts">
-            <EntityTypeMapping TypeName="AHDBModel.Contact">
-              <MappingFragment StoreEntitySet="Contacts">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="AHDBModel.Customer">
-              <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServiceComponents">
-            <EntityTypeMapping TypeName="AHDBModel.ServiceComponent">
-              <MappingFragment StoreEntitySet="ServiceComponents">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Services">
-            <EntityTypeMapping TypeName="AHDBModel.Service">
-              <MappingFragment StoreEntitySet="Services">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vendors">
-            <EntityTypeMapping TypeName="AHDBModel.Vendor">
-              <MappingFragment StoreEntitySet="Vendors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ServiceComponentId" ColumnName="ServiceComponentId" />
-                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AHDBModelStoreContainer" CdmEntityContainer="AHDBEntities">
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="IsTypeOf(AHDBModel.Contact)">
+        <MappingFragment StoreEntitySet="Contacts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(AHDBModel.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceComponents">
+      <EntityTypeMapping TypeName="IsTypeOf(AHDBModel.ServiceComponent)">
+        <MappingFragment StoreEntitySet="ServiceComponents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="IsTypeOf(AHDBModel.Service)">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendors">
+      <EntityTypeMapping TypeName="IsTypeOf(AHDBModel.Vendor)">
+        <MappingFragment StoreEntitySet="Vendors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ServiceComponentId" ColumnName="ServiceComponentId" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -378,7 +376,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
