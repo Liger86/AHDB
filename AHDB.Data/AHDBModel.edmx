@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellPhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCreatedAsUtcTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="VendorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCreatedAsUtcTime" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoteText" Type="nvarchar(max)" />
+          <Property Name="DateCreatedAsUtcTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RepairID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PurchaseOrder" Type="nvarchar" MaxLength="50" />
+          <Property Name="Completed" Type="bit" />
+          <Property Name="DateCreatedAsUtcTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime2" Precision="7" />
+          <Property Name="DueDate" Type="date" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCreatedAsUtcTime" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorRepair">
+          <Key>
+            <PropertyRef Name="RepairID" />
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="RepairID" Type="int" Nullable="false" />
+          <Property Name="VendorID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Contact_CustomerID_FK">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Contact_VendorID_FK">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VendorRep__Repai__1FCDBCEB">
+          <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
+          <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repair">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VendorRepair">
+              <PropertyRef Name="RepairID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VendorRep__Vendo__20C1E124">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
+          <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VendorRepair">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Note_RepairID_FK">
+          <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repair">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="RepairID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Repair_CustomerID_FK">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AHDBModelStoreContainer">
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repair" EntityType="Self.Repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VendorRepair" EntityType="Self.VendorRepair" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Contact_CustomerID_FK" Association="Self.Contact_CustomerID_FK">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="Contact_VendorID_FK" Association="Self.Contact_VendorID_FK">
+            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VendorRep__Repai__1FCDBCEB" Association="Self.FK__VendorRep__Repai__1FCDBCEB">
+            <End Role="Repair" EntitySet="Repair" />
+            <End Role="VendorRepair" EntitySet="VendorRepair" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VendorRep__Vendo__20C1E124" Association="Self.FK__VendorRep__Vendo__20C1E124">
+            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="VendorRepair" EntitySet="VendorRepair" />
+          </AssociationSet>
+          <AssociationSet Name="Note_RepairID_FK" Association="Self.Note_RepairID_FK">
+            <End Role="Repair" EntitySet="Repair" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="Repair_CustomerID_FK" Association="Self.Repair_CustomerID_FK">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Repair" EntitySet="Repair" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="VendorID" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.Contact_CustomerID_FK" FromRole="Contact" ToRole="Customer" />
+          <NavigationProperty Name="Vendor" Relationship="Self.Contact_VendorID_FK" FromRole="Contact" ToRole="Vendor" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Contacts" Relationship="Self.Contact_CustomerID_FK" FromRole="Customer" ToRole="Contact" />
+          <NavigationProperty Name="Repairs" Relationship="Self.Repair_CustomerID_FK" FromRole="Customer" ToRole="Repair" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoteText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="RepairID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Repair" Relationship="Self.Note_RepairID_FK" FromRole="Note" ToRole="Repair" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Completed" Type="Boolean" />
+          <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DateCompleted" Type="DateTime" Precision="7" />
+          <Property Name="DueDate" Type="DateTime" Precision="0" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.Repair_CustomerID_FK" FromRole="Repair" ToRole="Customer" />
+          <NavigationProperty Name="Notes" Relationship="Self.Note_RepairID_FK" FromRole="Repair" ToRole="Note" />
+          <NavigationProperty Name="Vendors" Relationship="Self.VendorRepair" FromRole="Repair" ToRole="Vendor" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Contacts" Relationship="Self.Contact_VendorID_FK" FromRole="Vendor" ToRole="Contact" />
+          <NavigationProperty Name="Repairs" Relationship="Self.VendorRepair" FromRole="Vendor" ToRole="Repair" />
+        </EntityType>
+        <Association Name="Contact_CustomerID_FK">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Contact_VendorID_FK">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Repair_CustomerID_FK">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Note_RepairID_FK">
+          <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repair">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="RepairID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VendorRepair">
+          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="AHDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="Self.Contact" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Notes" EntityType="Self.Note" />
+          <EntitySet Name="Repairs" EntityType="Self.Repair" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+          <AssociationSet Name="Contact_CustomerID_FK" Association="Self.Contact_CustomerID_FK">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="Contact_VendorID_FK" Association="Self.Contact_VendorID_FK">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="Repair_CustomerID_FK" Association="Self.Repair_CustomerID_FK">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Repair" EntitySet="Repairs" />
+          </AssociationSet>
+          <AssociationSet Name="Note_RepairID_FK" Association="Self.Note_RepairID_FK">
+            <End Role="Repair" EntitySet="Repairs" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="VendorRepair" Association="Self.VendorRepair">
+            <End Role="Repair" EntitySet="Repairs" />
+            <End Role="Vendor" EntitySet="Vendors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AHDBModelStoreContainer" CdmEntityContainer="AHDBContext">
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="AHDBModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CellPhoneNumber" ColumnName="CellPhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateCreatedAsUtcTime" ColumnName="DateCreatedAsUtcTime" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="AHDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="DateCreatedAsUtcTime" ColumnName="DateCreatedAsUtcTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="AHDBModel.Note">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NoteText" ColumnName="NoteText" />
+                <ScalarProperty Name="DateCreatedAsUtcTime" ColumnName="DateCreatedAsUtcTime" />
+                <ScalarProperty Name="RepairID" ColumnName="RepairID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repairs">
+            <EntityTypeMapping TypeName="AHDBModel.Repair">
+              <MappingFragment StoreEntitySet="Repair">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PurchaseOrder" ColumnName="PurchaseOrder" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="DateCreatedAsUtcTime" ColumnName="DateCreatedAsUtcTime" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AHDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="AHDBModel.Vendor">
+              <MappingFragment StoreEntitySet="Vendor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="DateCreatedAsUtcTime" ColumnName="DateCreatedAsUtcTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="VendorRepair" TypeName="AHDBModel.VendorRepair" StoreEntitySet="VendorRepair">
+            <EndProperty Name="Repair">
+              <ScalarProperty Name="ID" ColumnName="RepairID" />
+            </EndProperty>
+            <EndProperty Name="Vendor">
+              <ScalarProperty Name="ID" ColumnName="VendorID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

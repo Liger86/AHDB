@@ -26,14 +26,14 @@ namespace AHDB.Data
             public List<Repair> GetAllRepairs()
             {
                 List<Repair> repairs = new List<Repair>();
-                using (AHDBEntities myEntities = new AHDBEntities())
+                using (AHDBContext myEntities = new AHDBContext())
                 {
                     foreach (var item in myEntities.Repairs.ToList())
                     {
                         repairs.Add(
                             new Repair() 
                             {
-                                Id = item.Id,
+                                ID = item.ID,
                                 Description = item.Description, 
                                 Customer = item.Customer 
                             });
@@ -44,9 +44,9 @@ namespace AHDB.Data
 
             public void CreateNewRepair(string description, int customerId)
             {
-                using (AHDBEntities myEntities = new AHDBEntities())
+                using (AHDBContext myEntities = new AHDBContext())
                 {
-                    Repair myRepair = new Repair() { Description = description, CustomerId = customerId };
+                    Repair myRepair = new Repair() { Description = description, ID = customerId };
                     myEntities.Repairs.Add(myRepair);
                     myEntities.SaveChanges();
                 }
@@ -57,7 +57,7 @@ namespace AHDB.Data
         {
             public List<Customer> GetAllCustomers()
             {
-                using (AHDBEntities myEntities = new AHDBEntities())
+                using (AHDBContext myEntities = new AHDBContext())
                 {
                     return myEntities.Customers.ToList();
                 }

@@ -61,11 +61,11 @@ namespace AHDB.UI.ViewModels
                 repairs.Add(
                     new RepairViewModel()
                     {
-                        RepairId = item.Id,
+                        RepairId = item.ID,
                         Description = item.Description,
                         Customer = new CustomerViewModel()
                         {
-                            CustomerId = item.Customer.Id,
+                            CustomerId = item.Customer.ID,
                             CompanyName = item.Customer.CompanyName
                         }
                     });

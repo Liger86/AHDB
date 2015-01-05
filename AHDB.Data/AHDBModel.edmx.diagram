@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6e969b83740643b790f4a5d04e1fc805" Name="Diagram1">
+        <EntityTypeShape EntityType="AHDBModel.Contact" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Customer" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Note" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Repair" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.User" Width="1.5" PointX="1.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Vendor" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="AHDBModel.Contact_CustomerID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.Contact_VendorID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.Repair_CustomerID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.Note_RepairID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.VendorRepair" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

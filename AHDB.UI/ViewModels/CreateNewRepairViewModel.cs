@@ -89,7 +89,7 @@ namespace AHDB.UI.ViewModels
                 customers.Add(
                     new CustomerViewModel() 
                     { 
-                        CustomerId = item.Id, 
+                        CustomerId = item.ID, 
                         CompanyName = item.CompanyName 
                     });
             }
