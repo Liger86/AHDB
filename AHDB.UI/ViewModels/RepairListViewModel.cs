@@ -56,7 +56,7 @@ namespace AHDB.UI.ViewModels
         {
             ObservableCollection<RepairViewModel> repairs = new ObservableCollection<RepairViewModel>();
             FactoryManager myManager = new FactoryManager();
-            foreach (var item in myManager.GetRepairManager().GetAllRepairs())
+            foreach (var item in myManager.GetRepairManager().GetAllRepairsAssociatedWithVendor())
             {
                 repairs.Add(
                     new RepairViewModel()

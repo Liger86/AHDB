@@ -17,6 +17,7 @@ insert into Repair ([Description], PurchaseOrder, Completed, DateCreatedAsUtcTim
 insert into Repair ([Description], PurchaseOrder, Completed, DateCreatedAsUtcTime, CustomerID) values ('Some Description 12', 'PO#102', 0, GETUTCDATE(), 1)
 insert into Repair ([Description], PurchaseOrder, Completed, DateCreatedAsUtcTime, CustomerID) values ('Some Description 13', 'PO#103', 0, GETUTCDATE(), 2)
 insert into Repair ([Description], PurchaseOrder, Completed, DateCreatedAsUtcTime, CustomerID) values ('Some Description 14', 'PO#104', 0, GETUTCDATE(), 2)
+insert into Repair ([Description], PurchaseOrder, Completed, DateCreatedAsUtcTime, CustomerID) values ('Some Description 14', 'PO#104', 0, GETUTCDATE(), 2)
 
 
 SELECT * FROM Customer
@@ -26,6 +27,8 @@ SELECT * FROM VendorRepair
 
 delete from VendorRepair
 
+delete from Repair
+
 Select * from Repair
 inner join VendorRepair ON VendorRepair.RepairID = VendorRepair.RepairID
 inner join Vendor ON VendorRepair.RepairID = Vendor.ID
@@ -34,7 +37,11 @@ where Vendor.ID = 1
 Select * from Repair
 inner join VendorRepair ON VendorRepair.RepairID = VendorRepair.RepairID
 
-insert into VendorRepair (RepairID, VendorID) values (1, 2)
-insert into VendorRepair (RepairID, VendorID) values (2, 2)
-insert into VendorRepair (RepairID, VendorID) values (3, 3)
-insert into VendorRepair (RepairID, VendorID) values (4, 3)
+insert into VendorRepair (RepairID, VendorID) values (5, 2)
+insert into VendorRepair (RepairID, VendorID) values (6, 2)
+insert into VendorRepair (RepairID, VendorID) values (7, 3)
+insert into VendorRepair (RepairID, VendorID) values (8, 3)
+
+UPDATE Repair
+SET Completed = 1
+WHERE Repair.ID = 6
