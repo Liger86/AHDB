@@ -56,26 +56,34 @@ namespace AHDB.UI.ViewModels
         {
             ObservableCollection<RepairViewModel> repairs = new ObservableCollection<RepairViewModel>();
             FactoryManager myManager = new FactoryManager();
-            List<Data.Repair> dataReapair = myManager.GetRepairManager().GetAllNotCompletedRepairsAndTheirVendor();
-            foreach (var item in dataReapair)
+            foreach (AHDB.Data.Repair repair in myManager.GetRepairManager().GetAllNotCompletedRepairsAndTheirVendor())
             {
                 repairs.Add(
                     new RepairViewModel()
                     {
-                        RepairID = item.ID,
-                        Description = item.Description,
-                        PurchaseOrder = item.PurchaseOrder,
-                        Completed = item.Completed,
-                        DateCreated = item.DateCreatedAsUtcTime,
-                        DateCompleted = item.DateCompleted,
-                        DueDate = item.DueDate,
+                        RepairID = repair.ID,
+                        Description = repair.Description,
+                        PurchaseOrder = repair.PurchaseOrder,
+                        Completed = repair.Completed,
+                        DateCreated = repair.DateCreatedAsUtcTime,
+                        DateCompleted = repair.DateCompleted,
+                        DueDate = repair.DueDate,
                         Customer = new CustomerViewModel()
                         {
-                            CustomerId = item.Customer.ID,
-                            Description = item.Customer.Description,
-                            CompanyName = item.Customer.CompanyName,
-                            DateCreated = item.Customer.DateCreatedAsUtcTime
+                            CustomerId = repair.Customer.ID,
+                            Description = repair.Customer.Description,
+                            CompanyName = repair.Customer.CompanyName,
+                            DateCreated = repair.Customer.DateCreatedAsUtcTime
                         },
+                        Vendors = new ObservableCollection<VendorViewModel>
+                            (from i in repair.Vendors
+                             select new VendorViewModel
+                                  {
+                                      VendorID = i.ID,
+                                      Description = i.Description,
+                                      CompanyName = i.CompanyName,
+                                      DateCreated = i.DateCreatedAsUtcTime
+                                  })
                     });
             }
             this.Repairs = repairs;
