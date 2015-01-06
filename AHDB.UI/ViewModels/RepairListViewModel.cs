@@ -44,11 +44,11 @@ namespace AHDB.UI.ViewModels
             CreateNewRepairView myView = new CreateNewRepairView();
             myView.ShowDialog();
         }
-
         bool CanCreateNewRepair(object arg)
         {
             return true;
         }
+
         #endregion Commands
 
         #region Methods
@@ -56,18 +56,26 @@ namespace AHDB.UI.ViewModels
         {
             ObservableCollection<RepairViewModel> repairs = new ObservableCollection<RepairViewModel>();
             FactoryManager myManager = new FactoryManager();
-            foreach (var item in myManager.GetRepairManager().GetAllRepairsAssociatedWithVendor())
+            List<Data.Repair> dataReapair = myManager.GetRepairManager().GetAllNotCompletedRepairsAndTheirVendor();
+            foreach (var item in dataReapair)
             {
                 repairs.Add(
                     new RepairViewModel()
                     {
-                        RepairId = item.ID,
+                        RepairID = item.ID,
                         Description = item.Description,
+                        PurchaseOrder = item.PurchaseOrder,
+                        Completed = item.Completed,
+                        DateCreated = item.DateCreatedAsUtcTime,
+                        DateCompleted = item.DateCompleted,
+                        DueDate = item.DueDate,
                         Customer = new CustomerViewModel()
                         {
                             CustomerId = item.Customer.ID,
-                            CompanyName = item.Customer.CompanyName
-                        }
+                            Description = item.Customer.Description,
+                            CompanyName = item.Customer.CompanyName,
+                            DateCreated = item.Customer.DateCreatedAsUtcTime
+                        },
                     });
             }
             this.Repairs = repairs;

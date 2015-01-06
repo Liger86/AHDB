@@ -26,8 +26,12 @@
                       SelectedItem="{Binding SelectedRepair}"
                       AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Repair Id" Binding="{Binding RepairId}"/>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Repair Id" Binding="{Binding RepairID}"/>
+                    <DataGridTextColumn Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
+                    <DataGridCheckBoxColumn Header="Completed" Binding="{Binding Completed}"/>
+                    <DataGridTextColumn Header="Created" Binding="{Binding DateCreated}"/>
+                    <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}"/>
+                    <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor}"/>
                     <DataGridTextColumn Header="Company Name" Binding="{Binding Customer.CompanyName}"/>
                 </DataGrid.Columns>
             </DataGrid>

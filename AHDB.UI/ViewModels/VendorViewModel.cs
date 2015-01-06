@@ -1,20 +1,22 @@
-﻿using AHDB.UI.Common;
-using System.Collections.ObjectModel;
-using System;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AHDB.UI.Common;
 
 namespace AHDB.UI.ViewModels
 {
-    public class CustomerViewModel : ViewModelBase
+    public class VendorViewModel : ViewModelBase
     {
-        private int customerId;
-        public int CustomerId
+        private int vendorID;
+        public int VendorID
         {
-            get { return customerId; }
+            get { return vendorID; }
             set 
             {
-                customerId = value;
-                RaisePropertyChanged("CustomerId");
+                vendorID = value;
+                RaisePropertyChanged("VendorID");
             }
         }
 
@@ -45,21 +47,9 @@ namespace AHDB.UI.ViewModels
         {
             get { return dateCreated; }
             set 
-            {
+            { 
                 dateCreated = value;
                 RaisePropertyChanged("DateCreated");
-            }
-        }
-        
-
-        private ObservableCollection<RepairViewModel> repairs;
-        public ObservableCollection<RepairViewModel> Repairs
-        {
-            get { return repairs; }
-            set
-            {
-                repairs = value;
-                RaisePropertyChanged("Repairs");
             }
         }
     }

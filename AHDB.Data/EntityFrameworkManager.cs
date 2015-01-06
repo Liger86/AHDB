@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AHDB.Data.EntityManagers;
 using System.Data.Entity;
+using System.Collections.ObjectModel;
 
 namespace AHDB.Data
 {
@@ -20,26 +21,18 @@ namespace AHDB.Data
             return new CustomerManager();
         }
 
-
         class RepairManager : IRepairManager
         {
-            public List<Repair> GetAllRepairs()
+            public List<Repair> GetAllNotCompletedRepairsAndTheirVendor()
             {
-                List<Repair> repairs = new List<Repair>();
+                List<Repair> result = new List<Repair>();
                 using (AHDBContext myContext = new AHDBContext())
                 {
-                    foreach (var item in myContext.Repairs.ToList())
-                    {
-                        repairs.Add(
-                            new Repair() 
-                            {
-                                ID = item.ID,
-                                Description = item.Description, 
-                                Customer = item.Customer 
-                            });
-                    }
+                    result = (from repair in myContext.Repairs.Include("Vendors").Include("Customer")
+                                           where repair.Completed == false
+                                           select repair).ToList();
                 }
-                return repairs;
+                return result;
             }
 
             public void CreateNewRepair(string description, int customerId)
