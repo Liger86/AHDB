@@ -85,6 +85,7 @@ namespace AHDB.UI.ViewModels
                                       DateCreated = i.DateCreatedAsUtcTime
                                   })
                         //CurrentVendor = new VendorViewModel(){ VendorID = repair.Vendors.}
+                        //checking if git works
                     });
             }
             this.Repairs = repairs;
