@@ -104,5 +104,16 @@ namespace AHDB.UI.ViewModels
                 RaisePropertyChanged("Vendor");
             }
         }
+
+        private VendorViewModel currentVendor;
+        public VendorViewModel CurrentVendor
+        {
+            get { return currentVendor; }
+            set 
+            {
+                currentVendor = value;
+                RaisePropertyChanged("CurrentVendor");
+            }
+        }
     }
 }

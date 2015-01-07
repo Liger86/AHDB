@@ -84,6 +84,7 @@ namespace AHDB.UI.ViewModels
                                       CompanyName = i.CompanyName,
                                       DateCreated = i.DateCreatedAsUtcTime
                                   })
+                        //CurrentVendor = new VendorViewModel(){ VendorID = repair.Vendors.}
                     });
             }
             this.Repairs = repairs;

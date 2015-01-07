@@ -33,6 +33,7 @@
                     <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}"/>
                     <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor}"/>
                     <DataGridTextColumn Header="Company Name" Binding="{Binding Customer.CompanyName}"/>
+                    <!-- <DataGridComboBoxColumn Header="Vendors" SelectedItemBinding="{Binding SelectedRepair.CurrentVendor}" ItemsSource="{Binding SelectedRepair.Vendors}" DisplayMemberPath="CompanyName"/>-->
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
