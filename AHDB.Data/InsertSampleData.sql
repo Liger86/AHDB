@@ -24,28 +24,31 @@ SELECT * FROM Repair
 SELECT * FROM Vendor
 SELECT * FROM VendorRepair
 
-delete from VendorRepair
+DELETE FROM  VendorRepair
 
-delete from Repair
+DELETE FROM Repair
 
-Select * from Repair
+SELECT * FROM Repair
 inner join VendorRepair ON VendorRepair.RepairID = VendorRepair.RepairID
 inner join Vendor ON VendorRepair.RepairID = Vendor.ID
-where Vendor.ID = 1
+WHERE Vendor.ID = 1
 
-Select * from Repair
+SELECT * FROM Repair
 inner join VendorRepair ON VendorRepair.RepairID = VendorRepair.RepairID
 
-insert into VendorRepair (RepairID, VendorID) values (5, 2)
-insert into VendorRepair (RepairID, VendorID) values (6, 2)
-insert into VendorRepair (RepairID, VendorID) values (7, 3)
-insert into VendorRepair (RepairID, VendorID) values (8, 3)
-insert into VendorRepair (RepairID, VendorID) values (10, 3)
+INSERT INTO VendorRepair (RepairID, VendorID, DateCreatedAsUtcTime) VALUES (2, 2, GETUTCDATE())
+INSERT INTO VendorRepair (RepairID, VendorID, DateCreatedAsUtcTime) VALUES (3, 2, GETUTCDATE())
+INSERT INTO VendorRepair (RepairID, VendorID, DateCreatedAsUtcTime) VALUES (4, 3, GETUTCDATE())
+INSERT INTO VendorRepair (RepairID, VendorID, DateCreatedAsUtcTime) VALUES (5, 3, GETUTCDATE())
 
-delete VendorRepair
-where RepairID = 8
-go
+DELETE VendorRepair
+WHERE RepairID = 8
+GO
 
-delete Repair
+DELETE Repair
 WHERE Repair.ID = 8
-go
+GO
+
+ALTER DATABASE [AHDB] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+
+drop database [AHDB]

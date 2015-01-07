@@ -1,9 +1,8 @@
 --For creating database
-Create database [AHDB]
-Use [AHDB]
-Go
+CREATE DATABASE [AHDB]
+GO
 
-drop database [AHDB]
+USE [AHDB]
 GO
 
 --First create all tables
@@ -108,7 +107,10 @@ GO
 CREATE TABLE VendorRepair
 (
 	RepairID INT NOT NULL FOREIGN KEY REFERENCES Repair (ID),
-	VendorID INT NOT NULL FOREIGN KEY REFERENCES Vendor (ID) PRIMARY KEY(RepairID, VendorID)
+	VendorID INT NOT NULL FOREIGN KEY REFERENCES Vendor (ID) PRIMARY KEY(RepairID, VendorID),
+
+	Completed BIT NULL,
+	DateCreatedAsUtcTime DATETIME2 NOT NULL,
 )
 GO
 
