@@ -31,5 +31,6 @@ namespace AHDB.Data
         public virtual DbSet<Repair> Repairs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<VendorRepair> VendorRepairs { get; set; }
     }
 }

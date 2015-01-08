@@ -24,9 +24,9 @@
                       IsReadOnly="True" 
                       Margin="5"
                       SelectedItem="{Binding SelectedRepair}"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False" FontSize="16">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Repair Id" Binding="{Binding RepairID}"/>
+                    <DataGridTextColumn Width="Auto" Header="Repair Id" Binding="{Binding RepairID}"/>
                     <DataGridTextColumn Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
                     <DataGridCheckBoxColumn Header="Completed" Binding="{Binding Completed}"/>
                     <DataGridTextColumn Header="Created" Binding="{Binding DateCreated}"/>

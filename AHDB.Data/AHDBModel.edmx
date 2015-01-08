@@ -45,6 +45,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="PurchaseOrder" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuoteNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="Completed" Type="bit" />
           <Property Name="DateCreatedAsUtcTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DateCompleted" Type="datetime2" Precision="7" />
@@ -79,6 +80,8 @@
           </Key>
           <Property Name="RepairID" Type="int" Nullable="false" />
           <Property Name="VendorID" Type="int" Nullable="false" />
+          <Property Name="Completed" Type="bit" />
+          <Property Name="DateCreatedAsUtcTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <Association Name="Contact_CustomerID_FK">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -235,6 +238,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PurchaseOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuoteNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Completed" Type="Boolean" />
           <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DateCompleted" Type="DateTime" Precision="7" />
@@ -242,7 +246,7 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.Repair_CustomerID_FK" FromRole="Repair" ToRole="Customer" />
           <NavigationProperty Name="Notes" Relationship="Self.Note_RepairID_FK" FromRole="Repair" ToRole="Note" />
-          <NavigationProperty Name="Vendors" Relationship="Self.VendorRepair" FromRole="Repair" ToRole="Vendor" />
+          <NavigationProperty Name="VendorRepairs" Relationship="Self.FK__VendorRep__Repai__1FCDBCEB" FromRole="Repair" ToRole="VendorRepair" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -265,7 +269,19 @@
           <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Contacts" Relationship="Self.Contact_VendorID_FK" FromRole="Vendor" ToRole="Contact" />
-          <NavigationProperty Name="Repairs" Relationship="Self.VendorRepair" FromRole="Vendor" ToRole="Repair" />
+          <NavigationProperty Name="VendorRepairs" Relationship="Self.FK__VendorRep__Vendo__20C1E124" FromRole="Vendor" ToRole="VendorRepair" />
+        </EntityType>
+        <EntityType Name="VendorRepair">
+          <Key>
+            <PropertyRef Name="RepairID" />
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="RepairID" Type="Int32" Nullable="false" />
+          <Property Name="VendorID" Type="Int32" Nullable="false" />
+          <Property Name="Completed" Type="Boolean" />
+          <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK__VendorRep__Repai__1FCDBCEB" FromRole="VendorRepair" ToRole="Repair" />
+          <NavigationProperty Name="Vendor" Relationship="Self.FK__VendorRep__Vendo__20C1E124" FromRole="VendorRepair" ToRole="Vendor" />
         </EntityType>
         <Association Name="Contact_CustomerID_FK">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -315,9 +331,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="VendorRepair">
-          <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
-          <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+        <Association Name="FK__VendorRep__Repai__1FCDBCEB">
+          <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
+          <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repair">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VendorRepair">
+              <PropertyRef Name="RepairID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VendorRep__Vendo__20C1E124">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
+          <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VendorRepair">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AHDBContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
@@ -326,6 +362,7 @@
           <EntitySet Name="Repairs" EntityType="Self.Repair" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+          <EntitySet Name="VendorRepairs" EntityType="Self.VendorRepair" />
           <AssociationSet Name="Contact_CustomerID_FK" Association="Self.Contact_CustomerID_FK">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Contact" EntitySet="Contacts" />
@@ -342,9 +379,13 @@
             <End Role="Repair" EntitySet="Repairs" />
             <End Role="Note" EntitySet="Notes" />
           </AssociationSet>
-          <AssociationSet Name="VendorRepair" Association="Self.VendorRepair">
+          <AssociationSet Name="FK__VendorRep__Repai__1FCDBCEB" Association="Self.FK__VendorRep__Repai__1FCDBCEB">
             <End Role="Repair" EntitySet="Repairs" />
+            <End Role="VendorRepair" EntitySet="VendorRepairs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VendorRep__Vendo__20C1E124" Association="Self.FK__VendorRep__Vendo__20C1E124">
             <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="VendorRepair" EntitySet="VendorRepairs" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -395,6 +436,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PurchaseOrder" ColumnName="PurchaseOrder" />
+                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
                 <ScalarProperty Name="Completed" ColumnName="Completed" />
                 <ScalarProperty Name="DateCreatedAsUtcTime" ColumnName="DateCreatedAsUtcTime" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
@@ -426,14 +468,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="VendorRepair" TypeName="AHDBModel.VendorRepair" StoreEntitySet="VendorRepair">
-            <EndProperty Name="Repair">
-              <ScalarProperty Name="ID" ColumnName="RepairID" />
-            </EndProperty>
-            <EndProperty Name="Vendor">
-              <ScalarProperty Name="ID" ColumnName="VendorID" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="VendorRepairs">
+            <EntityTypeMapping TypeName="AHDBModel.VendorRepair">
+              <MappingFragment StoreEntitySet="VendorRepair">
+                <ScalarProperty Name="RepairID" ColumnName="RepairID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="DateCreatedAsUtcTime" ColumnName="DateCreatedAsUtcTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

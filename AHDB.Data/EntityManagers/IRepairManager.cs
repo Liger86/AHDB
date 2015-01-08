@@ -9,6 +9,6 @@ namespace AHDB.Data.EntityManagers
     public interface IRepairManager
     {
         void CreateNewRepair(string description, int customerId);
-        List<Repair> GetAllNotCompletedRepairsAndTheirVendor();
+        List<Repair> GetAllNotCompletedRepairsAndTheirVendors();
     }
 }

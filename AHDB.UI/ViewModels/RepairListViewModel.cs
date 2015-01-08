@@ -56,7 +56,10 @@ namespace AHDB.UI.ViewModels
         {
             ObservableCollection<RepairViewModel> repairs = new ObservableCollection<RepairViewModel>();
             FactoryManager myManager = new FactoryManager();
-            foreach (AHDB.Data.Repair repair in myManager.GetRepairManager().GetAllNotCompletedRepairsAndTheirVendor())
+
+            var result = myManager.GetRepairManager().GetAllNotCompletedRepairsAndTheirVendors();
+
+            foreach (AHDB.Data.Repair repair in result)
             {
                 repairs.Add(
                     new RepairViewModel()
@@ -68,25 +71,6 @@ namespace AHDB.UI.ViewModels
                         DateCreated = repair.DateCreatedAsUtcTime,
                         DateCompleted = repair.DateCompleted,
                         DueDate = repair.DueDate,
-                        Customer = new CustomerViewModel()
-                        {
-                            CustomerId = repair.Customer.ID,
-                            Description = repair.Customer.Description,
-                            CompanyName = repair.Customer.CompanyName,
-                            DateCreated = repair.Customer.DateCreatedAsUtcTime
-                        },
-                        Vendors = new ObservableCollection<VendorViewModel>
-                            (from i in repair.Vendors
-                             select new VendorViewModel
-                                  {
-                                      VendorID = i.ID,
-                                      Description = i.Description,
-                                      CompanyName = i.CompanyName,
-                                      DateCreated = i.DateCreatedAsUtcTime
-                                  })
-                        //CurrentVendor = new VendorViewModel(){ VendorID = repair.Vendors.}
-                        //checking if git works
-                        //another test
                     });
             }
             this.Repairs = repairs;

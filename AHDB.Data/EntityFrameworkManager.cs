@@ -23,14 +23,13 @@ namespace AHDB.Data
 
         class RepairManager : IRepairManager
         {
-            public List<Repair> GetAllNotCompletedRepairsAndTheirVendor()
+            public List<Repair> GetAllNotCompletedRepairsAndTheirVendors()
             {
                 List<Repair> result = new List<Repair>();
                 using (AHDBContext myContext = new AHDBContext())
                 {
-                    result = (from repair in myContext.Repairs.Include("Vendors").Include("Customer")
-                                           where repair.Completed == false
-                                           select repair).ToList();
+                    result = (from repair in myContext.Repairs
+                             select repair).ToList();
                 }
                 return result;
             }

@@ -12,6 +12,7 @@ CREATE TABLE Repair
 	[Description] NVARCHAR(MAX) NULL,
 
 	PurchaseOrder NVARCHAR(50) NULL,
+	QuoteNumber NVARCHAR(50) NULL,
 	Completed BIT NULL, 
 
 	DateCreatedAsUtcTime DATETIME2 NOT NULL,

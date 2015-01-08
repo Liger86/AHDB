@@ -32,11 +32,11 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -71,6 +71,8 @@
     <Compile Include="Customer.cs">
       <DependentUpon>AHDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\RepairDTO.cs" />
+    <Compile Include="DTOs\VendorDTO.cs" />
     <Compile Include="EntityFrameworkManager.cs" />
     <Compile Include="EntityManagers\ICustomerManager.cs" />
     <Compile Include="EntityManagers\IRepairManager.cs" />
@@ -89,6 +91,9 @@
     <Compile Include="Vendor.cs">
       <DependentUpon>AHDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="VendorRepair.cs">
+      <DependentUpon>AHDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -98,8 +103,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AHDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="AHDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AHDBModel.edmx</DependentUpon>
@@ -113,9 +116,10 @@
       <DependentUpon>AHDBModel.edmx</DependentUpon>
       <LastGenOutput>AHDBModel.cs</LastGenOutput>
     </None>
-    <None Include="App.Config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

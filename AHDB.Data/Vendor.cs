@@ -17,7 +17,7 @@ namespace AHDB.Data
         public Vendor()
         {
             this.Contacts = new HashSet<Contact>();
-            this.Repairs = new HashSet<Repair>();
+            this.VendorRepairs = new HashSet<VendorRepair>();
         }
     
         public int ID { get; set; }
@@ -26,6 +26,6 @@ namespace AHDB.Data
         public System.DateTime DateCreatedAsUtcTime { get; set; }
     
         public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<Repair> Repairs { get; set; }
+        public virtual ICollection<VendorRepair> VendorRepairs { get; set; }
     }
 }

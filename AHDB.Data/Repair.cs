@@ -17,12 +17,13 @@ namespace AHDB.Data
         public Repair()
         {
             this.Notes = new HashSet<Note>();
-            this.Vendors = new HashSet<Vendor>();
+            this.VendorRepairs = new HashSet<VendorRepair>();
         }
     
         public int ID { get; set; }
         public string Description { get; set; }
         public string PurchaseOrder { get; set; }
+        public string QuoteNumber { get; set; }
         public Nullable<bool> Completed { get; set; }
         public System.DateTime DateCreatedAsUtcTime { get; set; }
         public Nullable<System.DateTime> DateCompleted { get; set; }
@@ -31,6 +32,6 @@ namespace AHDB.Data
     
         public virtual Customer Customer { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
-        public virtual ICollection<Vendor> Vendors { get; set; }
+        public virtual ICollection<VendorRepair> VendorRepairs { get; set; }
     }
 }
