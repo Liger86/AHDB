@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AHDB.Data.EntityManagers;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
+using AHDB.DataTransfer;
 
 namespace AHDB.Data
 {
@@ -23,13 +24,44 @@ namespace AHDB.Data
 
         class RepairManager : IRepairManager
         {
-            public List<Repair> GetAllNotCompletedRepairsAndTheirVendors()
+            public List<RepairDTO> GetAllNotCompletedRepairsAndTheirVendors()
             {
-                List<Repair> result = new List<Repair>();
+                List<RepairDTO> result = new List<RepairDTO>();
                 using (AHDBContext myContext = new AHDBContext())
                 {
                     result = (from repair in myContext.Repairs
-                             select repair).ToList();
+                              where repair.Completed == false
+                              select new RepairDTO
+                              {
+                                  ID = repair.ID,
+                                  Description = repair.Description,
+                                  PurchaseOrder = repair.PurchaseOrder,
+                                  QuoteNumber = repair.QuoteNumber,
+                                  Completed = repair.Completed,
+                                  DateCreatedAsUtcTime = repair.DateCreatedAsUtcTime,
+                                  DateCompleted = repair.DateCompleted,
+                                  DueDate = repair.DueDate,
+                                  CustomerID = repair.CustomerID,
+                                  Customer = new CustomerDTO
+                                  {
+                                      ID = repair.Customer.ID,
+                                      CompanyName = repair.Customer.CompanyName,
+                                  },
+                                  VendorRepairs = (from vendorRepair in repair.VendorRepairs
+                                                   select new VendorRepairDTO
+                                                   {
+                                                       RepairID = vendorRepair.RepairID,
+                                                       VendorID = vendorRepair.VendorID,
+                                                       Completed = vendorRepair.Completed,
+                                                       DateCreatedAsUtcTime = vendorRepair.DateCreatedAsUtcTime,
+                                                       Vendor = new VendorDTO 
+                                                       {
+                                                           ID = vendorRepair.Vendor.ID,
+                                                           CompanyName = vendorRepair.Vendor.CompanyName,
+                                                           DateCreatedAsUtcTime = vendorRepair.Vendor.DateCreatedAsUtcTime
+                                                       }
+                                                   }).ToList(),
+                              }).ToList();
                 }
                 return result;
             }
