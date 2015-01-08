@@ -165,3 +165,13 @@ BEGIN
 	VALUES (@Description, @FirstName, @LastName, @PhoneNumber, @CellPhoneNumber, @Email, GETUTCDATE(), @VendorID, @CustomerID)
 END
 GO
+
+CREATE PROC spInsertVendorRepair
+@RepairID INT,
+@VendorID INT
+AS
+BEGIN
+	INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (@RepairID, @VendorID, 0, GETUTCDATE())
+END
+
+--Additional constraints
