@@ -9,7 +9,8 @@ namespace AHDB.Data.EntityManagers
 {
     public interface IRepairManager
     {
-        void CreateNewRepair(string description, int customerId);
+        void CreateNewRepair(string description,
+                string purchaseOrder, string quoteNumber, Nullable<DateTime> dueDate, Customer customer);
         List<RepairDTO> GetAllNotCompletedRepairsAndTheirVendors();
     }
 }

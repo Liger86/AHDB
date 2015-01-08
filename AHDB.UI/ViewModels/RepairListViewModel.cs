@@ -68,10 +68,16 @@ namespace AHDB.UI.ViewModels
                         RepairID = repair.ID,
                         Description = repair.Description,
                         PurchaseOrder = repair.PurchaseOrder,
+                        QuoteNumber = repair.QuoteNumber,
                         Completed = repair.Completed,
                         DateCreated = repair.DateCreatedAsUtcTime,
                         DateCompleted = repair.DateCompleted,
                         DueDate = repair.DueDate,
+                        Customer = new CustomerViewModel 
+                        {
+                            CustomerId = repair.Customer.ID,
+                            CompanyName = repair.Customer.CompanyName
+                        }
                     });
             }
             this.Repairs = repairs;

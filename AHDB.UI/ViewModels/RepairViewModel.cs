@@ -39,8 +39,20 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private bool? completed;
-        public bool? Completed
+        private string quoteNumber;
+        public string QuoteNumber
+        {
+            get { return quoteNumber; }
+            set 
+            { 
+                quoteNumber = value;
+                RaisePropertyChanged("QuoteNumber");
+            }
+        }
+        
+
+        private Nullable<bool> completed;
+        public Nullable<bool> Completed
         {
             get { return completed; }
             set 
@@ -50,8 +62,8 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private DateTime dateCreated;
-        public DateTime DateCreated
+        private Nullable<DateTime> dateCreated;
+        public Nullable<DateTime> DateCreated
         {
             get { return dateCreated; }
             set 
@@ -61,8 +73,8 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private DateTime? dateCompleted;
-        public DateTime? DateCompleted
+        private Nullable<DateTime> dateCompleted;
+        public Nullable<DateTime> DateCompleted
         {
             get { return dateCompleted; }
             set 
@@ -72,8 +84,8 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private DateTime? dueDate;
-        public DateTime? DueDate
+        private Nullable<DateTime> dueDate;
+        public Nullable<DateTime> DueDate
         {
             get { return dueDate; }
             set 
@@ -102,17 +114,6 @@ namespace AHDB.UI.ViewModels
             {
                 vendors = value;
                 RaisePropertyChanged("Vendor");
-            }
-        }
-
-        private VendorViewModel currentVendor;
-        public VendorViewModel CurrentVendor
-        {
-            get { return currentVendor; }
-            set 
-            {
-                currentVendor = value;
-                RaisePropertyChanged("CurrentVendor");
             }
         }
     }

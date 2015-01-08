@@ -66,17 +66,23 @@ namespace AHDB.Data
                 return result;
             }
 
-            public void CreateNewRepair(string description, int customerId)
+            public void CreateNewRepair(string description,
+                string purchaseOrder, string quoteNumber, Nullable<DateTime> dueDate, Customer customer)
             {
-                using (AHDBContext myContext = new AHDBContext())
+                Repair repair = new Repair();
+                repair.Description = description;
+                repair.PurchaseOrder = purchaseOrder;
+                repair.QuoteNumber = quoteNumber;
+                repair.DueDate = dueDate;
+                repair.Customer = customer;
+
+                using(AHDBContext myContext = new AHDBContext())
                 {
-                    Repair myRepair = new Repair() { Description = description, ID = customerId };
-                    myContext.Repairs.Add(myRepair);
+                    myContext.Repairs.Add(repair);
                     myContext.SaveChanges();
                 }
             }
         }
-
         class CustomerManager : ICustomerManager
         {
             public List<Customer> GetAllCustomers()

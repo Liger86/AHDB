@@ -23,7 +23,12 @@ namespace AHDB.UI.Views
         public CreateNewRepairView()
         {
             InitializeComponent();
-            this.DataContext = CreateNewRepairViewModel.Instance;
+            var vm = new CreateNewRepairViewModel();
+            this.DataContext = vm;
+            if (vm.CloseAction == null)
+            {
+                vm.CloseAction = new Action(() => this.Close());
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

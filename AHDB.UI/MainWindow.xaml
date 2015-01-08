@@ -27,13 +27,12 @@
                       AutoGenerateColumns="False" FontSize="16">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="Auto" Header="Repair Id" Binding="{Binding RepairID}"/>
-                    <DataGridTextColumn Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
-                    <DataGridCheckBoxColumn Header="Completed" Binding="{Binding Completed}"/>
-                    <DataGridTextColumn Header="Created" Binding="{Binding DateCreated}"/>
-                    <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}"/>
-                    <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor}"/>
-                    <DataGridTextColumn Header="Company Name" Binding="{Binding Customer.CompanyName}"/>
-                    <!-- <DataGridComboBoxColumn Header="Vendors" SelectedItemBinding="{Binding SelectedRepair.CurrentVendor}" ItemsSource="{Binding SelectedRepair.Vendors}" DisplayMemberPath="CompanyName"/>-->
+                    <DataGridTextColumn Width="*" Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
+                    <DataGridTextColumn Width="*" Header="Quote Number" Binding="{Binding QuoteNumber}"/>
+                    <DataGridCheckBoxColumn Width="*" Header="Completed" Binding="{Binding Completed}"/>
+                    <DataGridTextColumn Width="*" Header="Created" Binding="{Binding DateCreated}"/>
+                    <DataGridTextColumn Width="*" Header="Due Date" Binding="{Binding DueDate}"/>
+                    <DataGridTextColumn Width="*" Header="Customer" Binding="{Binding Customer.CompanyName}" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

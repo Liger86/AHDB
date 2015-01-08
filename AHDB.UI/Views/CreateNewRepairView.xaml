@@ -11,7 +11,7 @@
         <Menu Grid.Row="0">
             <MenuItem Header="File"/>
             <MenuItem Header="Repair">
-                <MenuItem Header="Create new Repair" Command="{Binding CreateNewRepair}"/>
+                <MenuItem Header="Create new Repair"/>
             </MenuItem>
             <MenuItem Header="Customer">
                 <MenuItem Header="Create new Customer"/>
