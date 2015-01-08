@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHDB.UI", "AHDB.UI\AHDB.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHDB.Data", "AHDB.Data\AHDB.Data.csproj", "{5A4F2A29-8507-49E5-ABDA-D8397A2A29BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHDB.DataTransfer", "AHDB.DataTransfer\AHDB.DataTransfer.csproj", "{0E2AC915-5CFE-4F23-A48B-163F22001D0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5A4F2A29-8507-49E5-ABDA-D8397A2A29BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A4F2A29-8507-49E5-ABDA-D8397A2A29BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A4F2A29-8507-49E5-ABDA-D8397A2A29BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E2AC915-5CFE-4F23-A48B-163F22001D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E2AC915-5CFE-4F23-A48B-163F22001D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E2AC915-5CFE-4F23-A48B-163F22001D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E2AC915-5CFE-4F23-A48B-163F22001D0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
