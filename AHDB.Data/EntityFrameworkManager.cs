@@ -67,18 +67,19 @@ namespace AHDB.Data
             }
 
             public void CreateNewRepair(string description,
-                string purchaseOrder, string quoteNumber, Nullable<DateTime> dueDate, Customer customer)
+                string purchaseOrder, string quoteNumber, Nullable<DateTime> dueDate, int customerID)
             {
                 Repair repair = new Repair();
                 repair.Description = description;
                 repair.PurchaseOrder = purchaseOrder;
                 repair.QuoteNumber = quoteNumber;
+                repair.Completed = false;
                 repair.DueDate = dueDate;
-                repair.Customer = customer;
+                repair.CustomerID = customerID;
 
                 using(AHDBContext myContext = new AHDBContext())
                 {
-                    myContext.Repairs.Add(repair);
+                    myContext.spInsertRepair(repair.Description, repair.PurchaseOrder, repair.Completed, repair.DateCompleted, repair.DueDate, repair.CustomerID);
                     myContext.SaveChanges();
                 }
             }

@@ -12,6 +12,8 @@ namespace AHDB.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class AHDBContext : DbContext
     {
@@ -32,5 +34,110 @@ namespace AHDB.Data
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorRepair> VendorRepairs { get; set; }
+    
+        public virtual int spInsertContact(string description, string firstName, string lastName, string phoneNumber, string cellPhoneNumber, string email, Nullable<int> customerID, Nullable<int> vendorID)
+        {
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("PhoneNumber", phoneNumber) :
+                new ObjectParameter("PhoneNumber", typeof(string));
+    
+            var cellPhoneNumberParameter = cellPhoneNumber != null ?
+                new ObjectParameter("CellPhoneNumber", cellPhoneNumber) :
+                new ObjectParameter("CellPhoneNumber", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var vendorIDParameter = vendorID.HasValue ?
+                new ObjectParameter("VendorID", vendorID) :
+                new ObjectParameter("VendorID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertContact", descriptionParameter, firstNameParameter, lastNameParameter, phoneNumberParameter, cellPhoneNumberParameter, emailParameter, customerIDParameter, vendorIDParameter);
+        }
+    
+        public virtual int spInsertCustomer(string description, string companyName)
+        {
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("CompanyName", companyName) :
+                new ObjectParameter("CompanyName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertCustomer", descriptionParameter, companyNameParameter);
+        }
+    
+        public virtual int spInsertRepair(string description, string purchaseOrder, Nullable<bool> completed, Nullable<System.DateTime> dateCompleted, Nullable<System.DateTime> dueDate, Nullable<int> customerID)
+        {
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var purchaseOrderParameter = purchaseOrder != null ?
+                new ObjectParameter("PurchaseOrder", purchaseOrder) :
+                new ObjectParameter("PurchaseOrder", typeof(string));
+    
+            var completedParameter = completed.HasValue ?
+                new ObjectParameter("Completed", completed) :
+                new ObjectParameter("Completed", typeof(bool));
+    
+            var dateCompletedParameter = dateCompleted.HasValue ?
+                new ObjectParameter("DateCompleted", dateCompleted) :
+                new ObjectParameter("DateCompleted", typeof(System.DateTime));
+    
+            var dueDateParameter = dueDate.HasValue ?
+                new ObjectParameter("DueDate", dueDate) :
+                new ObjectParameter("DueDate", typeof(System.DateTime));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertRepair", descriptionParameter, purchaseOrderParameter, completedParameter, dateCompletedParameter, dueDateParameter, customerIDParameter);
+        }
+    
+        public virtual int spInsertVendor(string description, string companyName)
+        {
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("CompanyName", companyName) :
+                new ObjectParameter("CompanyName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertVendor", descriptionParameter, companyNameParameter);
+        }
+    
+        public virtual int spInsertVendorRepair(Nullable<int> repairID, Nullable<int> vendorID)
+        {
+            var repairIDParameter = repairID.HasValue ?
+                new ObjectParameter("RepairID", repairID) :
+                new ObjectParameter("RepairID", typeof(int));
+    
+            var vendorIDParameter = vendorID.HasValue ?
+                new ObjectParameter("VendorID", vendorID) :
+                new ObjectParameter("VendorID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertVendorRepair", repairIDParameter, vendorIDParameter);
+        }
     }
 }

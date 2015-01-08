@@ -13,6 +13,7 @@ namespace AHDB.UI.ViewModels
     public sealed class CreateNewRepairViewModel : ViewModelBase
     {
         public Action CloseAction { get; set; }
+        public Action Refresh { get; set; }
 
         private ObservableCollection<CustomerViewModel> customers;
         public ObservableCollection<CustomerViewModel> Customers
@@ -36,13 +37,13 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private RepairViewModel newRepair = new RepairViewModel();
-        public RepairViewModel NewRepair
+        private RepairViewModel repair = new RepairViewModel();
+        public RepairViewModel Repair
         {
-            get { return newRepair; }
+            get { return repair; }
             set 
             {
-                newRepair = value;
+                repair = value;
                 RaisePropertyChanged("NewRepair");
             }
         }
@@ -51,13 +52,14 @@ namespace AHDB.UI.ViewModels
         public CommandBase<object> SaveNewRepair { get; private set; }
         void SaveNewRepairMethod(object arg)
         {
-            //FactoryManager myManager = new FactoryManager();
-            //myManager.GetRepairManager().CreateNewRepair(newRepair.Description, selectedCustomer.CustomerId);
+            FactoryManager myManager = new FactoryManager();
+            myManager.GetRepairManager().CreateNewRepair(repair.Description, null, null, null, selectedCustomer.CustomerId);
+            Refresh();
             CloseAction();
         }
         bool CanSaveNewRepair(object arg)
         {
-            if (string.IsNullOrEmpty(newRepair.Description))
+            if (string.IsNullOrEmpty(repair.Description))
             {
                 return false;
             }
@@ -86,24 +88,10 @@ namespace AHDB.UI.ViewModels
         }
         #endregion Methods
 
-        //#region Singleton
-        //private CreateNewRepairViewModel()
-        //{
-        //    GetCustomerList();
-        //    this.SaveNewRepair = new CommandBase<object>(SaveNewRepairMethod, CanSaveNewRepair);
-        //}
-
-        //private static readonly Lazy<CreateNewRepairViewModel> lazy =
-        //    new Lazy<CreateNewRepairViewModel>(() => new CreateNewRepairViewModel());
-        //public static CreateNewRepairViewModel Instance { get { return lazy.Value; } }
-        //#endregion
-
-        #region Singleton
         public CreateNewRepairViewModel()
         {
             GetCustomerList();
             this.SaveNewRepair = new CommandBase<object>(SaveNewRepairMethod, CanSaveNewRepair);
         }
-        #endregion
     }
 }

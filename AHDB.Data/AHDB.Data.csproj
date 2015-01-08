@@ -97,6 +97,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AHDB.DataTransfer\AHDB.DataTransfer.csproj">
+      <Project>{0e2ac915-5cfe-4f23-a48b-163f22001d0e}</Project>
+      <Name>AHDB.DataTransfer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="AHDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AHDBModel.Designer.cs</LastGenOutput>
@@ -116,12 +122,6 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AHDB.DataTransfer\AHDB.DataTransfer.csproj">
-      <Project>{0e2ac915-5cfe-4f23-a48b-163f22001d0e}</Project>
-      <Name>AHDB.DataTransfer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

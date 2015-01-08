@@ -24,10 +24,15 @@ namespace AHDB.UI.Views
         {
             InitializeComponent();
             var vm = new CreateNewRepairViewModel();
+
             this.DataContext = vm;
             if (vm.CloseAction == null)
             {
                 vm.CloseAction = new Action(() => this.Close());
+            }
+            if (vm.Refresh == null)
+            {
+                vm.Refresh = new Action(() => RepairListViewModel.Instance.Refresh());
             }
         }
 

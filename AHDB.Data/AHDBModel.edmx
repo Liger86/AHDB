@@ -155,6 +155,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spInsertContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="CellPhoneNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+          <Parameter Name="VendorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertRepair" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PurchaseOrder" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Completed" Type="bit" Mode="In" />
+          <Parameter Name="DateCompleted" Type="datetime2" Mode="In" />
+          <Parameter Name="DueDate" Type="date" Mode="In" />
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertVendorRepair" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RepairID" Type="int" Mode="In" />
+          <Parameter Name="VendorID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="AHDBModelStoreContainer">
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -387,6 +417,36 @@
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="VendorRepair" EntitySet="VendorRepairs" />
           </AssociationSet>
+          <FunctionImport Name="spInsertContact">
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="CellPhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+            <Parameter Name="VendorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertCustomer">
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertRepair">
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="PurchaseOrder" Mode="In" Type="String" />
+            <Parameter Name="Completed" Mode="In" Type="Boolean" />
+            <Parameter Name="DateCompleted" Mode="In" Type="DateTime" />
+            <Parameter Name="DueDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertVendor">
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertVendorRepair">
+            <Parameter Name="RepairID" Mode="In" Type="Int32" />
+            <Parameter Name="VendorID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -478,6 +538,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spInsertContact" FunctionName="AHDBModel.Store.spInsertContact" />
+          <FunctionImportMapping FunctionImportName="spInsertCustomer" FunctionName="AHDBModel.Store.spInsertCustomer" />
+          <FunctionImportMapping FunctionImportName="spInsertRepair" FunctionName="AHDBModel.Store.spInsertRepair" />
+          <FunctionImportMapping FunctionImportName="spInsertVendor" FunctionName="AHDBModel.Store.spInsertVendor" />
+          <FunctionImportMapping FunctionImportName="spInsertVendorRepair" FunctionName="AHDBModel.Store.spInsertVendorRepair" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -80,6 +80,7 @@ namespace AHDB.UI.ViewModels
                         }
                     });
             }
+
             this.Repairs = repairs;
         }
         #endregion Methods

@@ -37,7 +37,7 @@
                        Content="Customer"/>
                 <TextBox Grid.Column="1"
                          Grid.Row="0"
-                         Text="{Binding NewRepair.Description}"/>
+                         Text="{Binding Repair.Description}"/>
                 <TextBox Grid.Column="1"
                          Grid.Row="1"/>
                 <ComboBox x:Name="CBCustomers" Grid.Column="1"
