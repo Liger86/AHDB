@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a9983b50ab1544f0812be738c6325c6f" Name="Diagram1">
-        <EntityTypeShape EntityType="AHDBModel.Contact" Width="1.5" PointX="5.125" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Customer" Width="1.5" PointX="7.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Note" Width="1.5" PointX="0.5" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Repair" Width="2.25" PointX="2.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.User" Width="1.5" PointX="7.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Vendor" Width="1.5" PointX="2.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.VendorRepair" Width="1.5" PointX="0.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Contact" Width="2" PointX="5.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Customer" Width="1.5" PointX="8.375" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Note" Width="1.625" PointX="0.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Repair" Width="2.25" PointX="2.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.User" Width="1.5" PointX="8.375" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Vendor" Width="2.25" PointX="2.875" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.VendorRepair" Width="1.625" PointX="0.5" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="AHDBModel.Contact_CustomerID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="AHDBModel.Contact_VendorID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="AHDBModel.Repair_CustomerID_FK" ManuallyRouted="false" />
