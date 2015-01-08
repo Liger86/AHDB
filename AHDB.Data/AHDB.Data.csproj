@@ -71,8 +71,6 @@
     <Compile Include="Customer.cs">
       <DependentUpon>AHDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DTOs\RepairDTO.cs" />
-    <Compile Include="DTOs\VendorDTO.cs" />
     <Compile Include="EntityFrameworkManager.cs" />
     <Compile Include="EntityManagers\ICustomerManager.cs" />
     <Compile Include="EntityManagers\IRepairManager.cs" />
