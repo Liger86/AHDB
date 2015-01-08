@@ -111,6 +111,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AHDB.DataTransfer\AHDB.DataTransfer.csproj">
+      <Project>{0e2ac915-5cfe-4f23-a48b-163f22001d0e}</Project>
+      <Name>AHDB.DataTransfer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AHDB.Data\AHDB.Data.csproj">
       <Project>{5a4f2a29-8507-49e5-abda-d8397a2a29bf}</Project>
       <Name>AHDB.Data</Name>

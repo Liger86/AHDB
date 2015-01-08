@@ -14,6 +14,6 @@ namespace AHDB.DataTransfer
         public System.DateTime DateCreatedAsUtcTime { get; set; }
 
         public RepairDTO Repair { get; set; }
-        public VendorRepairDTO Vendor { get; set; }
+        public VendorDTO Vendor { get; set; }
     }
 }

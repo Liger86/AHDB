@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AHDB.Data;
 using System.Windows;
 using AHDB.UI.Views;
+using AHDB.DataTransfer;
 
 namespace AHDB.UI.ViewModels
 {
@@ -59,7 +60,7 @@ namespace AHDB.UI.ViewModels
 
             var result = myManager.GetRepairManager().GetAllNotCompletedRepairsAndTheirVendors();
 
-            foreach (AHDB.Data.Repair repair in result)
+            foreach (RepairDTO repair in result)
             {
                 repairs.Add(
                     new RepairViewModel()
