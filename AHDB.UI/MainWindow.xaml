@@ -24,13 +24,13 @@
                       IsReadOnly="True" 
                       Margin="5"
                       SelectedItem="{Binding SelectedRepair}"
-                      AutoGenerateColumns="False" FontSize="16">
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="Auto" Header="Repair Id" Binding="{Binding RepairID}"/>
                     <DataGridTextColumn Width="Auto" Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
                     <DataGridTextColumn Width="Auto" Header="Quote Number" Binding="{Binding QuoteNumber}"/>
                     <DataGridCheckBoxColumn Width="Auto" Header="Completed" Binding="{Binding Completed}"/>
-                    <DataGridTextColumn SortDirection="Ascending" Width="Auto" Header="Created" Binding="{Binding DateCreated}"/>
+                    <DataGridTextColumn Width="Auto" Header="Created" Binding="{Binding DateCreated}"/>
                     <DataGridTextColumn Width="Auto" Header="Due Date" Binding="{Binding DueDate}"/>
                     <DataGridTextColumn Width="*" Header="Customer" Binding="{Binding Customer.CompanyName}" />
                 </DataGrid.Columns>
