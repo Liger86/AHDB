@@ -126,17 +126,16 @@ BEGIN
 END
 GO
 
-CREATE PROC spInsertRepair
+ALTER PROC spInsertRepair
 @Description NVARCHAR(MAX),
-@PurchaseOrder NVARCHAR(MAX),
-@Completed BIT,
-@DateCompleted DATETIME2,
+@PurchaseOrder NVARCHAR(50),
+@QuoteNumber NVARCHAR(50),
 @DueDate DATE,
 @CustomerID INT
 AS
 BEGIN
-	INSERT INTO Repair ([Description], PurchaseOrder, Completed, DateCreatedAsUtcTime, DateCompleted, DueDate, CustomerID)
-	VALUES (@Description, @PurchaseOrder, @Completed, GETUTCDATE(), @DateCompleted, @DueDate, @CustomerID)
+	INSERT INTO Repair ([Description], PurchaseOrder, QuoteNumber, Completed, DateCreatedAsUtcTime, DueDate, CustomerID)
+	VALUES (@Description, @PurchaseOrder, @QuoteNumber, 0, GETUTCDATE(), @DueDate, @CustomerID)
 END
 GO
 
