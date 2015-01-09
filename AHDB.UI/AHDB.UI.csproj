@@ -67,7 +67,7 @@
     <Compile Include="Common\CommandBase.cs" />
     <Compile Include="ViewModels\CreateNewRepairViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
-    <Compile Include="ViewModels\RepairListViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RepairViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
     <Compile Include="Views\CreateNewRepairView.xaml.cs">

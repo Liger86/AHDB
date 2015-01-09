@@ -85,7 +85,7 @@ namespace AHDB.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertCustomer", descriptionParameter, companyNameParameter);
         }
     
-        public virtual int spInsertRepair(string description, string purchaseOrder, Nullable<bool> completed, Nullable<System.DateTime> dateCompleted, Nullable<System.DateTime> dueDate, Nullable<int> customerID)
+        public virtual int spInsertRepair(string description, string purchaseOrder, string quoteNumber, Nullable<System.DateTime> dueDate, Nullable<int> customerID)
         {
             var descriptionParameter = description != null ?
                 new ObjectParameter("Description", description) :
@@ -95,13 +95,9 @@ namespace AHDB.Data
                 new ObjectParameter("PurchaseOrder", purchaseOrder) :
                 new ObjectParameter("PurchaseOrder", typeof(string));
     
-            var completedParameter = completed.HasValue ?
-                new ObjectParameter("Completed", completed) :
-                new ObjectParameter("Completed", typeof(bool));
-    
-            var dateCompletedParameter = dateCompleted.HasValue ?
-                new ObjectParameter("DateCompleted", dateCompleted) :
-                new ObjectParameter("DateCompleted", typeof(System.DateTime));
+            var quoteNumberParameter = quoteNumber != null ?
+                new ObjectParameter("QuoteNumber", quoteNumber) :
+                new ObjectParameter("QuoteNumber", typeof(string));
     
             var dueDateParameter = dueDate.HasValue ?
                 new ObjectParameter("DueDate", dueDate) :
@@ -111,7 +107,7 @@ namespace AHDB.Data
                 new ObjectParameter("CustomerID", customerID) :
                 new ObjectParameter("CustomerID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertRepair", descriptionParameter, purchaseOrderParameter, completedParameter, dateCompletedParameter, dueDateParameter, customerIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertRepair", descriptionParameter, purchaseOrderParameter, quoteNumberParameter, dueDateParameter, customerIDParameter);
         }
     
         public virtual int spInsertVendor(string description, string companyName)

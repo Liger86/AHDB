@@ -11,7 +11,7 @@ namespace AHDB.UI
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = RepairListViewModel.Instance;
+            this.DataContext = MainWindowViewModel.Instance;
         }
     }
 }

@@ -79,7 +79,7 @@ namespace AHDB.Data
 
                 using(AHDBContext myContext = new AHDBContext())
                 {
-                    myContext.spInsertRepair(repair.Description, repair.PurchaseOrder, repair.Completed, repair.DateCompleted, repair.DueDate, repair.CustomerID);
+                    myContext.spInsertRepair(repair.Description, repair.PurchaseOrder, repair.QuoteNumber, repair.DueDate, repair.CustomerID);
                     myContext.SaveChanges();
                 }
             }

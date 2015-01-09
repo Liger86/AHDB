@@ -12,7 +12,7 @@ using AHDB.DataTransfer;
 
 namespace AHDB.UI.ViewModels
 {
-    public sealed class RepairListViewModel : ViewModelBase
+    public sealed class MainWindowViewModel : ViewModelBase
     {
         private ObservableCollection<RepairViewModel> repairs;
         public ObservableCollection<RepairViewModel> Repairs
@@ -86,16 +86,16 @@ namespace AHDB.UI.ViewModels
         #endregion Methods
 
         #region Singleton
-        private RepairListViewModel()
+        private MainWindowViewModel()
         {
             Refresh();
             this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
         }
 
-        private static readonly Lazy<RepairListViewModel> lazy =
-            new Lazy<RepairListViewModel>(() => new RepairListViewModel());
+        private static readonly Lazy<MainWindowViewModel> lazy =
+            new Lazy<MainWindowViewModel>(() => new MainWindowViewModel());
 
-        public static RepairListViewModel Instance { get { return lazy.Value; } }
+        public static MainWindowViewModel Instance { get { return lazy.Value; } }
         #endregion
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="ID" />
@@ -171,9 +171,8 @@
         </Function>
         <Function Name="spInsertRepair" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="PurchaseOrder" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="Completed" Type="bit" Mode="In" />
-          <Parameter Name="DateCompleted" Type="datetime2" Mode="In" />
+          <Parameter Name="PurchaseOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="QuoteNumber" Type="nvarchar" Mode="In" />
           <Parameter Name="DueDate" Type="date" Mode="In" />
           <Parameter Name="CustomerID" Type="int" Mode="In" />
         </Function>
@@ -218,8 +217,7 @@
             <End Role="Repair" EntitySet="Repair" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -434,8 +432,7 @@
           <FunctionImport Name="spInsertRepair">
             <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="PurchaseOrder" Mode="In" Type="String" />
-            <Parameter Name="Completed" Mode="In" Type="Boolean" />
-            <Parameter Name="DateCompleted" Mode="In" Type="DateTime" />
+            <Parameter Name="QuoteNumber" Mode="In" Type="String" />
             <Parameter Name="DueDate" Mode="In" Type="DateTime" />
             <Parameter Name="CustomerID" Mode="In" Type="Int32" />
           </FunctionImport>

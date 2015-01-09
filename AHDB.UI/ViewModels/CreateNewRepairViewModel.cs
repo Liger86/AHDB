@@ -53,7 +53,7 @@ namespace AHDB.UI.ViewModels
         void SaveNewRepairMethod(object arg)
         {
             FactoryManager myManager = new FactoryManager();
-            myManager.GetRepairManager().CreateNewRepair(repair.Description, null, null, null, selectedCustomer.CustomerId);
+            myManager.GetRepairManager().CreateNewRepair(repair.Description, repair.PurchaseOrder, repair.QuoteNumber, repair.DueDate, selectedCustomer.CustomerId);
             Refresh();
             CloseAction();
         }
