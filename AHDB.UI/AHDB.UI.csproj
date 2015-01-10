@@ -65,6 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CommandBase.cs" />
+    <Compile Include="ViewModels\CreateNewCustomerViewModel.cs" />
     <Compile Include="ViewModels\CreateNewRepairViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

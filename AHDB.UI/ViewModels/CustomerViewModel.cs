@@ -50,7 +50,6 @@ namespace AHDB.UI.ViewModels
                 RaisePropertyChanged("DateCreated");
             }
         }
-        
 
         private ObservableCollection<RepairViewModel> repairs;
         public ObservableCollection<RepairViewModel> Repairs

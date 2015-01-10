@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AHDB.UI.Common;
 
-namespace AHDB.Data.EntityManagers
+namespace AHDB.UI.ViewModels
 {
-    public interface ICustomerManager
+    public class CreateNewCustomerViewModel : ViewModelBase
     {
 
-        List<Customer> GetAllCustomers();
     }
 }
