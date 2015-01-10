@@ -69,12 +69,18 @@ namespace AHDB.Data
             public void CreateNewRepair(string description,
                 string purchaseOrder, string quoteNumber, Nullable<DateTime> dueDate, int customerID)
             {
+                //Convert incomming due date to utc and store it.
+                if (dueDate != null)
+                {
+                    dueDate = DateTime.SpecifyKind((DateTime)dueDate, DateTimeKind.Local);
+                }
+
                 Repair repair = new Repair();
                 repair.Description = description;
                 repair.PurchaseOrder = purchaseOrder;
                 repair.QuoteNumber = quoteNumber;
                 repair.Completed = false;
-                repair.DueDate = dueDate;
+                repair.DueDate = dueDate.Value.ToUniversalTime();
                 repair.CustomerID = customerID;
 
                 using(AHDBContext myContext = new AHDBContext())
