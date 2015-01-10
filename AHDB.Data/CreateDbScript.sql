@@ -17,10 +17,14 @@ CREATE TABLE Repair
 
 	DateCreatedAsUtcTime DATETIME2 NOT NULL,
 	DateCompleted DATETIME2 NULL,
-	DueDate DATE NULL,
+	DueDate DATETIME2 NULL,
 
 	CustomerID INT NOT NULL,
 )
+GO
+
+ALTER TABLE Repair
+ALTER COLUMN DueDate DATETIME2 NULL
 GO
 
 CREATE TABLE Customer
@@ -126,11 +130,11 @@ BEGIN
 END
 GO
 
-ALTER PROC spInsertRepair
+CREATE PROC spInsertRepair
 @Description NVARCHAR(MAX),
 @PurchaseOrder NVARCHAR(50),
 @QuoteNumber NVARCHAR(50),
-@DueDate DATE,
+@DueDate DATETIME2,
 @CustomerID INT
 AS
 BEGIN

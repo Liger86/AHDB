@@ -1,9 +1,6 @@
 USE [AHDB]
 GO
 
-spInsertCustomer 'Some Description 2', 'Company 2'
-GO
-
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 2', 'Company 2', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 3', 'Company 3', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 4', 'Company 4', GETUTCDATE())
@@ -26,7 +23,7 @@ SELECT * FROM Repair
 SELECT * FROM Vendor
 SELECT * FROM VendorRepair
 
-delete from Customer
+delete from Repair
 
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (2, 2, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (3, 2, 0, GETUTCDATE())
