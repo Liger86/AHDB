@@ -17,6 +17,9 @@
             <MenuItem Header="Customer">
                 <MenuItem Header="Create new Customer" Command="{Binding CreateNewCustomer}"/>
             </MenuItem>
+            <MenuItem Header="Vendor">
+                <MenuItem Header="Create new Vendor" Command="{Binding CreateNewVendor}"/>
+            </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <Label Content="Repairs"/>
@@ -24,7 +27,9 @@
                       IsReadOnly="True" 
                       Margin="5"
                       SelectedItem="{Binding SelectedRepair}"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="Auto" Header="Repair Id" Binding="{Binding RepairID}"/>
                     <DataGridTextColumn Width="Auto" Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
@@ -32,7 +37,14 @@
                     <DataGridCheckBoxColumn Width="Auto" Header="Completed" Binding="{Binding Completed}"/>
                     <DataGridTextColumn Width="Auto" Header="Created" Binding="{Binding DateCreated}"/>
                     <DataGridTextColumn Width="Auto" Header="Due Date" Binding="{Binding DueDate}"/>
-                    <DataGridTextColumn Width="*" Header="Customer" Binding="{Binding Customer.CompanyName}" />
+                    <DataGridTextColumn Width="*" Header="Customer" Binding="{Binding Customer.CompanyName}"/>
+                    <DataGridTemplateColumn Width="80" Header="Edit">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

@@ -59,6 +59,17 @@ namespace AHDB.UI.ViewModels
         {
             return true;
         }
+
+        public CommandBase<object> CreateNewVendor { get; private set; }
+        void CreateNewVendorMethod(object arg)
+        {
+            CreateNewVendorView myView = new CreateNewVendorView();
+            myView.ShowDialog();
+        }
+        bool CanCreateNewVendor(object arg)
+        {
+            return true;
+        }
         #endregion Commands
 
         #region Methods
@@ -100,6 +111,7 @@ namespace AHDB.UI.ViewModels
             Refresh();
             this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
+            this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);
         }
 
         private static readonly Lazy<MainWindowViewModel> lazy =

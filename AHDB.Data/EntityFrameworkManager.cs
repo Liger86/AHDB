@@ -22,6 +22,11 @@ namespace AHDB.Data
             return new CustomerManager();
         }
 
+        public EntityManagers.IVendorManager GetVendorManager()
+        {
+            return new VendorManager();
+        }
+
         class RepairManager : IRepairManager
         {
             public List<RepairDTO> GetAllNotCompletedRepairsAndTheirVendors()
@@ -106,13 +111,20 @@ namespace AHDB.Data
 
             public void CreateNewCustomer(string description, string companyName)
             {
-                Customer customer = new Customer();
-                customer.Description = description;
-                customer.CompanyName = companyName;
-
                 using (AHDBContext myContext = new AHDBContext())
                 {
-                    myContext.spInsertCustomer(customer.Description, customer.CompanyName);
+                    myContext.spInsertCustomer(description, companyName);
+                    myContext.SaveChanges();
+                }
+            }
+        }
+        class VendorManager : IVendorManager
+        {
+            public void CreateNewVendor(string description, string companyName)
+            {
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    myContext.spInsertVendor(description, companyName);
                     myContext.SaveChanges();
                 }
             }

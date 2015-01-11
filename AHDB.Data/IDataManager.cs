@@ -11,5 +11,6 @@ namespace AHDB.Data
     {
         IRepairManager GetRepairManager();
         ICustomerManager GetCustomerManager();
+        IVendorManager GetVendorManager();
     }
 }

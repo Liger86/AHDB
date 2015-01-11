@@ -67,6 +67,7 @@
     <Compile Include="Common\CommandBase.cs" />
     <Compile Include="ViewModels\CreateNewCustomerViewModel.cs" />
     <Compile Include="ViewModels\CreateNewRepairViewModel.cs" />
+    <Compile Include="ViewModels\CreateNewVendorViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RepairViewModel.cs" />
@@ -76,6 +77,9 @@
     </Compile>
     <Compile Include="Views\CreateNewRepairView.xaml.cs">
       <DependentUpon>CreateNewRepairView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateNewVendorView.xaml.cs">
+      <DependentUpon>CreateNewVendorView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateNewRepairView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateNewVendorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

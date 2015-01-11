@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AHDB.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,22 @@ namespace AHDB.UI.Views
         public CreateNewVendorView()
         {
             InitializeComponent();
+            var vm = new CreateNewVendorViewModel();
+
+            this.DataContext = vm;
+            if (vm.CloseAction == null)
+            {
+                vm.CloseAction = new Action(() => this.Close());
+            }
+            if (vm.RefreshAction == null)
+            {
+                vm.RefreshAction = new Action(() => MainWindowViewModel.Instance.Refresh());
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
