@@ -21,15 +21,16 @@
                 <MenuItem Header="Create new Vendor" Command="{Binding CreateNewVendor}"/>
             </MenuItem>
         </Menu>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <Label Content="Repairs"/>
-            <DataGrid ItemsSource="{Binding Repairs}" 
+        <DockPanel Grid.Row="1">
+            <Label Content="Repairs" DockPanel.Dock="Top"/>
+            <DataGrid ItemsSource="{Binding Repairs}" DockPanel.Dock="Top"
                       IsReadOnly="True" 
                       Margin="5"
                       SelectedItem="{Binding SelectedRepair}"
                       AutoGenerateColumns="False"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      ScrollViewer.CanContentScroll="True">
+                      ScrollViewer.CanContentScroll="True"
+                      SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="Auto" Header="Repair Id" Binding="{Binding RepairID}"/>
                     <DataGridTextColumn Width="Auto" Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
@@ -47,6 +48,6 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

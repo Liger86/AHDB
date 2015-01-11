@@ -65,7 +65,7 @@ namespace AHDB.UI.ViewModels
         }
         bool CanSaveNewRepair(object arg)
         {
-            if (selectedCustomer.CustomerId == -1)
+            if (selectedCustomer == null || selectedCustomer.CustomerId == -1)
             {
                 return false;
             }
