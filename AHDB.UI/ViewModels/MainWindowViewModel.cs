@@ -98,6 +98,8 @@ namespace AHDB.UI.ViewModels
                             CustomerId = repair.Customer.ID,
                             CompanyName = repair.Customer.CompanyName
                         }
+                        //Vendors = from vendorRepair in repair.VendorRepairs
+                        //          select new VendorViewModel { VendorID = vendorRepair.VendorID, CompanyName = vendorRepair.co }
                     });
             }
 

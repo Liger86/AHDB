@@ -6,6 +6,8 @@ namespace AHDB.UI.ViewModels
 {
     public class RepairViewModel : ViewModelBase
     {
+        // Additional properties for custom stuff are at bottom
+
         private int repairID;
         public int RepairID
         {
@@ -116,5 +118,55 @@ namespace AHDB.UI.ViewModels
                 RaisePropertyChanged("Vendor");
             }
         }
+
+        #region Additional properties
+        private int pastDueColorLevel;
+        public int PastDueColorLevel
+        {
+            get 
+            {
+                switch (DateTime.Compare((DateTime)dueDate, DateTime.Now))
+                {
+                    case 1:
+                        pastDueColorLevel = 1;
+                        break;
+                    case 0:
+                        pastDueColorLevel = 0;
+                        break;
+                    default:
+                        pastDueColorLevel = -1;
+                        break;
+                }
+                return pastDueColorLevel; 
+            }
+            set 
+            { 
+                pastDueColorLevel = value;
+                RaisePropertyChanged("PastDueColorLevel");
+            }
+        }
+
+        //private bool isVendorNull;
+        //public bool IsVendorNull
+        //{
+        //    get 
+        //    {
+        //        if (this.vendors == null)
+        //        {
+        //            isVendorNull = true;
+        //        }
+        //        else
+        //        {
+        //            isVendorNull = false;
+        //        }
+        //        return isVendorNull; 
+        //    }
+        //    set 
+        //    { 
+        //        isVendorNull = value;
+        //        RaisePropertyChanged("IsVendorNull");
+        //    }
+        //}
+        #endregion
     }
 }

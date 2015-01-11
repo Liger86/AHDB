@@ -1,7 +1,7 @@
 ﻿<Window x:Class="AHDB.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="600" Width="800"
+        Title="MainWindow" Height="600" Width="1000"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
@@ -22,8 +22,8 @@
             </MenuItem>
         </Menu>
         <DockPanel Grid.Row="1">
-            <Label Content="Repairs" DockPanel.Dock="Top"/>
-            <DataGrid ItemsSource="{Binding Repairs}" DockPanel.Dock="Top"
+            <GroupBox Header="Open Repairs">
+                <DataGrid ItemsSource="{Binding Repairs}" DockPanel.Dock="Top"
                       IsReadOnly="True" 
                       Margin="5"
                       SelectedItem="{Binding SelectedRepair}"
@@ -31,23 +31,55 @@
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.CanContentScroll="True"
                       SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="Auto" Header="Repair Id" Binding="{Binding RepairID}"/>
-                    <DataGridTextColumn Width="Auto" Header="Purchase Order" Binding="{Binding PurchaseOrder}"/>
-                    <DataGridTextColumn Width="Auto" Header="Quote Number" Binding="{Binding QuoteNumber}"/>
-                    <DataGridCheckBoxColumn Width="Auto" Header="Completed" Binding="{Binding Completed}"/>
-                    <DataGridTextColumn Width="Auto" Header="Created" Binding="{Binding DateCreated}"/>
-                    <DataGridTextColumn Width="Auto" Header="Due Date" Binding="{Binding DueDate}"/>
-                    <DataGridTextColumn Width="*" Header="Customer" Binding="{Binding Customer.CompanyName}"/>
-                    <DataGridTemplateColumn Width="80" Header="Edit">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Repair Id" Width="Auto" Binding="{Binding RepairID}"/>
+                        <DataGridTextColumn Header="Purchase Order" Width="Auto" Binding="{Binding PurchaseOrder}"/>
+                        <DataGridTextColumn Header="Quote Number" Width="Auto" Binding="{Binding QuoteNumber}"/>
+                        <DataGridCheckBoxColumn Header="Completed" Width="Auto" Binding="{Binding Completed}"/>
+                        <DataGridTextColumn Header="Created" Width="Auto" Binding="{Binding DateCreated}"/>
+                        <DataGridTextColumn Header="Due Date" Width="Auto" Binding="{Binding DueDate}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Background" Value="LightBlue"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding PastDueColorLevel}" Value="-1">
+                                            <Setter Property="Background" Value="LightCoral"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding PastDueColorLevel}" Value="0">
+                                            <Setter Property="Background" Value="White"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding PastDueColorLevel}" Value="1">
+                                            <Setter Property="Background" Value="LightGreen"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Customer" Width="Auto" Binding="{Binding Customer.CompanyName}"/>
+                        <DataGridTemplateColumn Header="Vendor" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Button Content="Assign" Visibility="{Binding IsVendorNull, Converter={StaticResource VisibilityOfBool}}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Edit" Width="80" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Edit"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
         </DockPanel>
+        <GroupBox Header="Repair Details" Grid.Row="2">
+            <Grid>
+                
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
