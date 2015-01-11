@@ -12,8 +12,14 @@ namespace AHDB.UI.ViewModels
 {
     public sealed class CreateNewRepairViewModel : ViewModelBase
     {
+        public CreateNewRepairViewModel()
+        {
+            GetCustomerList();
+            this.SaveNewRepair = new CommandBase<object>(SaveNewRepairMethod, CanSaveNewRepair);
+        }
+
         public Action CloseAction { get; set; }
-        public Action Refresh { get; set; }
+        public Action RefreshAction { get; set; }
 
         private ObservableCollection<CustomerViewModel> customers;
         public ObservableCollection<CustomerViewModel> Customers
@@ -54,12 +60,12 @@ namespace AHDB.UI.ViewModels
         {
             FactoryManager myManager = new FactoryManager();
             myManager.GetRepairManager().CreateNewRepair(repair.Description, repair.PurchaseOrder, repair.QuoteNumber, repair.DueDate, selectedCustomer.CustomerId);
-            Refresh();
+            RefreshAction();
             CloseAction();
         }
         bool CanSaveNewRepair(object arg)
         {
-            if (string.IsNullOrEmpty(repair.Description))
+            if (selectedCustomer.CustomerId == -1)
             {
                 return false;
             }
@@ -87,11 +93,5 @@ namespace AHDB.UI.ViewModels
             this.Customers = customers;
         }
         #endregion Methods
-
-        public CreateNewRepairViewModel()
-        {
-            GetCustomerList();
-            this.SaveNewRepair = new CommandBase<object>(SaveNewRepairMethod, CanSaveNewRepair);
-        }
     }
 }

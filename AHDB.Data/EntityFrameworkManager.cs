@@ -74,6 +74,10 @@ namespace AHDB.Data
                 {
                     dueDate = DateTime.SpecifyKind((DateTime)dueDate, DateTimeKind.Local);
                 }
+                else
+                {
+                    dueDate = DateTime.Now.ToUniversalTime();
+                }
 
                 Repair repair = new Repair();
                 repair.Description = description;
@@ -97,6 +101,19 @@ namespace AHDB.Data
                 using (AHDBContext myEntities = new AHDBContext())
                 {
                     return myEntities.Customers.ToList();
+                }
+            }
+
+            public void CreateNewCustomer(string description, string companyName)
+            {
+                Customer customer = new Customer();
+                customer.Description = description;
+                customer.CompanyName = companyName;
+
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    myContext.spInsertCustomer(customer.Description, customer.CompanyName);
+                    myContext.SaveChanges();
                 }
             }
         }

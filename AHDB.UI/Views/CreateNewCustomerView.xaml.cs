@@ -1,5 +1,4 @@
-﻿using AHDB.UI.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,18 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AHDB.UI.ViewModels;
 
 namespace AHDB.UI.Views
 {
     /// <summary>
-    /// Interaction logic for CreateNewRepairView.xaml
+    /// Interaction logic for CreateNewCustomerView.xaml
     /// </summary>
-    public partial class CreateNewRepairView : Window
+    public partial class CreateNewCustomerView : Window
     {
-        public CreateNewRepairView()
+        public CreateNewCustomerView()
         {
             InitializeComponent();
-            var vm = new CreateNewRepairViewModel();
+            var vm = new CreateNewCustomerViewModel();
 
             this.DataContext = vm;
             if (vm.CloseAction == null)

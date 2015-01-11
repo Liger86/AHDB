@@ -15,7 +15,7 @@
                 <MenuItem Header="Create new Repair" Command="{Binding CreateNewRepair}"/>
             </MenuItem>
             <MenuItem Header="Customer">
-                <MenuItem Header="Create new Customer"/>
+                <MenuItem Header="Create new Customer" Command="{Binding CreateNewCustomer}"/>
             </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Vertical">

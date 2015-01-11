@@ -8,7 +8,7 @@ namespace AHDB.Data.EntityManagers
 {
     public interface ICustomerManager
     {
-
+        void CreateNewCustomer(string description, string companyName);
         List<Customer> GetAllCustomers();
     }
 }
