@@ -36,6 +36,17 @@ namespace AHDB.UI.ViewModels
             }
         }
 
+        private ObservableCollection<VendorViewModel> vendors;
+        public ObservableCollection<VendorViewModel> Vendors
+        {
+            get { return vendors; }
+            set 
+            { 
+                vendors = value;
+                RaisePropertyChanged("Vendors");
+            }
+        }
+
         #region Commands
         // See constructor.
         public CommandBase<object> CreateNewRepair { get; private set; }
@@ -73,7 +84,7 @@ namespace AHDB.UI.ViewModels
         #endregion Commands
 
         #region Methods
-        public void Refresh()
+        public void RefreshRepairs()
         {
             ObservableCollection<RepairViewModel> repairs = new ObservableCollection<RepairViewModel>();
             FactoryManager myManager = new FactoryManager();
@@ -97,9 +108,20 @@ namespace AHDB.UI.ViewModels
                         {
                             CustomerId = repair.Customer.ID,
                             CompanyName = repair.Customer.CompanyName
-                        }
-                        //Vendors = from vendorRepair in repair.VendorRepairs
-                        //          select new VendorViewModel { VendorID = vendorRepair.VendorID, CompanyName = vendorRepair.co }
+                        },
+                        VendorRepairs = new ObservableCollection<VendorRepairViewModel>((from vendorRepair in repair.VendorRepairs
+                                        select new VendorRepairViewModel
+                                        {
+                                            VendorID = vendorRepair.VendorID,
+                                            RepairID = vendorRepair.RepairID,
+                                            Completed = vendorRepair.Completed,
+                                            DateCreatedAsUtcTime = vendorRepair.DateCreatedAsUtcTime,
+                                            Vendor = new VendorViewModel()
+                                            {
+                                                VendorID = vendorRepair.Vendor.ID,
+                                                CompanyName = vendorRepair.Vendor.CompanyName,
+                                            }
+                                        }).ToList())
                     });
             }
 
@@ -110,7 +132,7 @@ namespace AHDB.UI.ViewModels
         #region Singleton
         private MainWindowViewModel()
         {
-            Refresh();
+            RefreshRepairs();
             this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);

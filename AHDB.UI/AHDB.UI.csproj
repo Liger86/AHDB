@@ -71,6 +71,7 @@
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RepairViewModel.cs" />
+    <Compile Include="ViewModels\VendorRepairViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
     <Compile Include="Views\CreateNewCustomerView.xaml.cs">
       <DependentUpon>CreateNewCustomerView.xaml</DependentUpon>

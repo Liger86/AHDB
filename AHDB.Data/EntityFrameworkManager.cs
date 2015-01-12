@@ -53,6 +53,7 @@ namespace AHDB.Data
                                       CompanyName = repair.Customer.CompanyName,
                                   },
                                   VendorRepairs = (from vendorRepair in repair.VendorRepairs
+                                                   where vendorRepair.Completed != true
                                                    select new VendorRepairDTO
                                                    {
                                                        RepairID = vendorRepair.RepairID,

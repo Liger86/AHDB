@@ -108,14 +108,14 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private ObservableCollection<VendorViewModel> vendors;
-        public ObservableCollection<VendorViewModel> Vendors
+        private ObservableCollection<VendorRepairViewModel> vendorRepairs;
+        public ObservableCollection<VendorRepairViewModel> VendorRepairs
         {
-            get { return vendors; }
+            get { return vendorRepairs; }
             set 
             {
-                vendors = value;
-                RaisePropertyChanged("Vendor");
+                vendorRepairs = value;
+                RaisePropertyChanged("VendorRepairs");
             }
         }
 
@@ -146,27 +146,27 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        //private bool isVendorNull;
-        //public bool IsVendorNull
-        //{
-        //    get 
-        //    {
-        //        if (this.vendors == null)
-        //        {
-        //            isVendorNull = true;
-        //        }
-        //        else
-        //        {
-        //            isVendorNull = false;
-        //        }
-        //        return isVendorNull; 
-        //    }
-        //    set 
-        //    { 
-        //        isVendorNull = value;
-        //        RaisePropertyChanged("IsVendorNull");
-        //    }
-        //}
+        private bool repairHasNoVendors;
+        public bool RepairHasNoVendors
+        {
+            get
+            {
+                if (this.vendorRepairs.Count >= 1)
+                {
+                    repairHasNoVendors = false;
+                }
+                else
+                {
+                    repairHasNoVendors = true;
+                }
+                return repairHasNoVendors;
+            }
+            set
+            {
+                repairHasNoVendors = value;
+                RaisePropertyChanged("IsVendorNull");
+            }
+        }
         #endregion
     }
 }

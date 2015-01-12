@@ -1,6 +1,12 @@
 USE [AHDB]
 GO
 
+spInsertRepair 'test', 'Test', '202', '2015-01-11 03:35:11.233', 18
+go
+
+select getutcdate()
+go
+
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 2', 'Company 2', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 3', 'Company 3', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 4', 'Company 4', GETUTCDATE())
@@ -23,9 +29,14 @@ SELECT * FROM Repair
 SELECT * FROM Vendor
 SELECT * FROM VendorRepair
 
-delete from Repair
+DELETE FROM Repair
+GO
+DELETE FROM Customer
+GO
+DELETE FROM Vendor
+GO
 
-INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (2, 2, 0, GETUTCDATE())
+INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (85, 4, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (3, 2, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (4, 3, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (5, 3, 0, GETUTCDATE())

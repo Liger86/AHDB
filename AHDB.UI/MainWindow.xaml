@@ -60,7 +60,10 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <Button Content="Assign" Visibility="{Binding IsVendorNull, Converter={StaticResource VisibilityOfBool}}"/>
+                                        <Label Content="Assign a vendor" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
+                                        <ListBox ItemsSource="{Binding VendorRepairs}" DisplayMemberPath="Vendor.CompanyName"/>
+                                        <ComboBox ItemsSource="{Binding Vendors}" DisplayMemberPath="CompanyName" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
+                                        <Button Content="Assign" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

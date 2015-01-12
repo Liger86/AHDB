@@ -32,7 +32,7 @@ namespace AHDB.UI.Views
             }
             if (vm.RefreshAction == null)
             {
-                vm.RefreshAction = new Action(() => MainWindowViewModel.Instance.Refresh());
+                vm.RefreshAction = new Action(() => MainWindowViewModel.Instance.RefreshRepairs());
             }
         }
 
