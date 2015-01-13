@@ -1,4 +1,10 @@
 --For creating database
+USE [master]
+GO
+
+DROP DATABASE [AHDB]
+GO
+
 CREATE DATABASE [AHDB]
 GO
 

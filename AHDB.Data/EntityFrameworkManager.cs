@@ -27,6 +27,11 @@ namespace AHDB.Data
             return new VendorManager();
         }
 
+        public EntityManagers.IVendorRepairManager GetVendorRepairManager()
+        {
+            return new VendorRepairManager();
+        }
+
         class RepairManager : IRepairManager
         {
             public List<RepairDTO> GetAllNotCompletedRepairsAndTheirVendors()
@@ -126,6 +131,33 @@ namespace AHDB.Data
                 using (AHDBContext myContext = new AHDBContext())
                 {
                     myContext.spInsertVendor(description, companyName);
+                    myContext.SaveChanges();
+                }
+            }
+
+            public List<VendorDTO> GetVendorList()
+            {
+                List<VendorDTO> result = new List<VendorDTO>();
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    result = (from vendor in myContext.Vendors
+                              select new VendorDTO()
+                              {
+                                  ID = vendor.ID,
+                                  CompanyName = vendor.CompanyName
+                              }).ToList();
+                }
+                return result;
+            }
+        }
+
+        class VendorRepairManager : IVendorRepairManager
+        {
+            public void AssignVendorToRepair(int repairID, int vendorID)
+            {
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    myContext.spInsertVendorRepair(repairID, vendorID);
                     myContext.SaveChanges();
                 }
             }

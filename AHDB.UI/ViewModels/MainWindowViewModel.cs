@@ -36,7 +36,7 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private ObservableCollection<VendorViewModel> vendors;
+        private ObservableCollection<VendorViewModel> vendors = new ObservableCollection<VendorViewModel>();
         public ObservableCollection<VendorViewModel> Vendors
         {
             get { return vendors; }
@@ -81,6 +81,20 @@ namespace AHDB.UI.ViewModels
         {
             return true;
         }
+
+        public CommandBase<object> AssignVendorToRepair { get; private set; }
+        void AssignVendorToRepairMethod(object arg)
+        {
+            FactoryManager myManager = new FactoryManager();
+            myManager.GetVendorRepairManager().AssignVendorToRepair(selectedRepair.RepairID, selectedRepair.SelectedVendor.VendorID);
+            RefreshVendorList();
+            RefreshRepairs();
+        }
+        bool CanAssignVendor(object arg)
+        {
+            return true;
+        }
+
         #endregion Commands
 
         #region Methods
@@ -104,28 +118,43 @@ namespace AHDB.UI.ViewModels
                         DateCreated = repair.DateCreatedAsUtcTime,
                         DateCompleted = repair.DateCompleted,
                         DueDate = repair.DueDate,
-                        Customer = new CustomerViewModel 
+                        Customer = new CustomerViewModel
                         {
                             CustomerId = repair.Customer.ID,
                             CompanyName = repair.Customer.CompanyName
                         },
                         VendorRepairs = new ObservableCollection<VendorRepairViewModel>((from vendorRepair in repair.VendorRepairs
-                                        select new VendorRepairViewModel
-                                        {
-                                            VendorID = vendorRepair.VendorID,
-                                            RepairID = vendorRepair.RepairID,
-                                            Completed = vendorRepair.Completed,
-                                            DateCreatedAsUtcTime = vendorRepair.DateCreatedAsUtcTime,
-                                            Vendor = new VendorViewModel()
-                                            {
-                                                VendorID = vendorRepair.Vendor.ID,
-                                                CompanyName = vendorRepair.Vendor.CompanyName,
-                                            }
-                                        }).ToList())
+                                                                                         where vendorRepair.Completed == false
+                                                                                         select new VendorRepairViewModel
+                                                                                         {
+                                                                                             VendorID = vendorRepair.VendorID,
+                                                                                             RepairID = vendorRepair.RepairID,
+                                                                                             Completed = vendorRepair.Completed,
+                                                                                             DateCreatedAsUtcTime = vendorRepair.DateCreatedAsUtcTime,
+                                                                                             Vendor = new VendorViewModel()
+                                                                                             {
+                                                                                                 VendorID = vendorRepair.Vendor.ID,
+                                                                                                 CompanyName = vendorRepair.Vendor.CompanyName,
+                                                                                             }
+                                                                                         }).ToList())
                     });
             }
 
             this.Repairs = repairs;
+            RefreshVendorList();
+        }
+
+        void RefreshVendorList()
+        {
+            FactoryManager myManager = new FactoryManager();
+            var result = myManager.GetVendorManager().GetVendorList();
+            vendors.Clear();
+            List<VendorViewModel> vendorResult = new List<VendorViewModel>();
+            foreach (VendorDTO vendor in result)
+            {
+                vendorResult.Add(new VendorViewModel() { VendorID = vendor.ID, CompanyName = vendor.CompanyName });
+            }
+            vendors = new ObservableCollection<VendorViewModel>(vendorResult);
         }
         #endregion Methods
 
@@ -133,9 +162,11 @@ namespace AHDB.UI.ViewModels
         private MainWindowViewModel()
         {
             RefreshRepairs();
+            RefreshVendorList();
             this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);
+            this.AssignVendorToRepair = new CommandBase<object>(AssignVendorToRepairMethod, CanAssignVendor);
         }
 
         private static readonly Lazy<MainWindowViewModel> lazy =

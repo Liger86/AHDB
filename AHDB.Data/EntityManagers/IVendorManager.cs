@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AHDB.DataTransfer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace AHDB.Data.EntityManagers
     public interface IVendorManager
     {
         void CreateNewVendor(string description, string companyName);
+        List<VendorDTO> GetVendorList();
     }
 }

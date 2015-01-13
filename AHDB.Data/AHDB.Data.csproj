@@ -75,6 +75,7 @@
     <Compile Include="EntityManagers\ICustomerManager.cs" />
     <Compile Include="EntityManagers\IRepairManager.cs" />
     <Compile Include="EntityManagers\IVendorManager.cs" />
+    <Compile Include="EntityManagers\IVendorRepairManager.cs" />
     <Compile Include="FactoryManager.cs" />
     <Compile Include="IDataManager.cs" />
     <Compile Include="Note.cs">

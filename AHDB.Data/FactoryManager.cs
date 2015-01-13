@@ -30,5 +30,10 @@ namespace AHDB.Data
         {
             return dataManager.GetVendorManager();
         }
+
+        public IVendorRepairManager GetVendorRepairManager()
+        {
+            return dataManager.GetVendorRepairManager();
+        }
     }
 }

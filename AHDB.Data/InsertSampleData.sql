@@ -29,6 +29,11 @@ SELECT * FROM Repair
 SELECT * FROM Vendor
 SELECT * FROM VendorRepair
 
+USE [AHDB]
+GO
+
+DELETE FROM VendorRepair
+GO
 DELETE FROM Repair
 GO
 DELETE FROM Customer
@@ -36,7 +41,7 @@ GO
 DELETE FROM Vendor
 GO
 
-INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (85, 4, 0, GETUTCDATE())
+INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (1, 2, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (3, 2, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (4, 3, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (5, 3, 0, GETUTCDATE())
