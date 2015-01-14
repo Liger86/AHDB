@@ -85,10 +85,8 @@ namespace AHDB.UI.ViewModels
         public CommandBase<object> AssignVendorToRepair { get; private set; }
         void AssignVendorToRepairMethod(object arg)
         {
-            FactoryManager myManager = new FactoryManager();
-            myManager.GetVendorRepairManager().AssignVendorToRepair(selectedRepair.RepairID, selectedRepair.SelectedVendor.VendorID);
-            RefreshVendorList();
-            RefreshRepairs();
+            AssignVendorToRepairView myView = new AssignVendorToRepairView(selectedRepair);
+            myView.ShowDialog();
         }
         bool CanAssignVendor(object arg)
         {
@@ -141,28 +139,28 @@ namespace AHDB.UI.ViewModels
             }
 
             this.Repairs = repairs;
-            RefreshVendorList();
+            //RefreshVendorList();
         }
 
-        void RefreshVendorList()
-        {
-            FactoryManager myManager = new FactoryManager();
-            var result = myManager.GetVendorManager().GetVendorList();
-            vendors.Clear();
-            List<VendorViewModel> vendorResult = new List<VendorViewModel>();
-            foreach (VendorDTO vendor in result)
-            {
-                vendorResult.Add(new VendorViewModel() { VendorID = vendor.ID, CompanyName = vendor.CompanyName });
-            }
-            vendors = new ObservableCollection<VendorViewModel>(vendorResult);
-        }
+        //void RefreshVendorList()
+        //{
+        //    FactoryManager myManager = new FactoryManager();
+        //    var result = myManager.GetVendorManager().GetVendorList();
+        //    vendors.Clear();
+        //    List<VendorViewModel> vendorResult = new List<VendorViewModel>();
+        //    foreach (VendorDTO vendor in result)
+        //    {
+        //        vendorResult.Add(new VendorViewModel() { VendorID = vendor.ID, CompanyName = vendor.CompanyName });
+        //    }
+        //    vendors = new ObservableCollection<VendorViewModel>(vendorResult);
+        //}
         #endregion Methods
 
         #region Singleton
         private MainWindowViewModel()
         {
             RefreshRepairs();
-            RefreshVendorList();
+            //RefreshVendorList();
             this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);

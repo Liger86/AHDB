@@ -1,0 +1,13 @@
+﻿<Window x:Class="AHDB.UI.Views.AssignVendorToRepairView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Assign Vendor to Repair" Height="300" Width="300" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding Vendors}"
+                  SelectedItem="{Binding SelectedVendor}"
+                  DisplayMemberPath="CompanyName"
+                  IsEditable="True"/>
+        <Button Content="Assign" Height="40" Command="{Binding AssignRepairToVendor}"/>
+        <Button Content="Cancel" Click="Button_Click"/>
+    </StackPanel>
+</Window>

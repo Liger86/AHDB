@@ -62,11 +62,6 @@
                                     <StackPanel>
                                         <Label Content="Assign a vendor" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
                                         <ListBox ItemsSource="{Binding VendorRepairs}" DisplayMemberPath="Vendor.CompanyName"/>
-                                        <ComboBox 
-                                            ItemsSource="{Binding Path=DataContext.Vendors, RelativeSource={RelativeSource AncestorType=Window}}"
-                                            DisplayMemberPath="CompanyName"
-                                            SelectedItem="{Binding SelectedVendor}"
-                                            Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
                                         <Button Content="Assign" 
                                                 Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"
                                                 Command="{Binding Path=DataContext.AssignVendorToRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
