@@ -139,28 +139,15 @@ namespace AHDB.UI.ViewModels
             }
 
             this.Repairs = repairs;
-            //RefreshVendorList();
+            
         }
 
-        //void RefreshVendorList()
-        //{
-        //    FactoryManager myManager = new FactoryManager();
-        //    var result = myManager.GetVendorManager().GetVendorList();
-        //    vendors.Clear();
-        //    List<VendorViewModel> vendorResult = new List<VendorViewModel>();
-        //    foreach (VendorDTO vendor in result)
-        //    {
-        //        vendorResult.Add(new VendorViewModel() { VendorID = vendor.ID, CompanyName = vendor.CompanyName });
-        //    }
-        //    vendors = new ObservableCollection<VendorViewModel>(vendorResult);
-        //}
         #endregion Methods
 
         #region Singleton
         private MainWindowViewModel()
         {
             RefreshRepairs();
-            //RefreshVendorList();
             this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);
