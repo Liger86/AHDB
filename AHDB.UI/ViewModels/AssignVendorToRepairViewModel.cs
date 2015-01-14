@@ -12,6 +12,13 @@ namespace AHDB.UI.ViewModels
 {
     public class AssignVendorToRepairViewModel : ViewModelBase
     {
+        public AssignVendorToRepairViewModel(RepairViewModel repair)
+        {
+            this.AssignRepairToVendor = new CommandBase<object>(AssignNewRepairToVendorMethod, CanAssignNewRepairToVendor);
+            this.repair = repair;
+            RefreshVendorList();
+        }
+
         public Action CloseAction { get; set; }
         public Action RefreshAction { get; set; }
 
@@ -24,13 +31,6 @@ namespace AHDB.UI.ViewModels
                 repair = value;
                 RaisePropertyChanged("Repair");
             }
-        }
-
-        public AssignVendorToRepairViewModel(RepairViewModel repair)
-        {
-            this.AssignRepairToVendor = new CommandBase<object>(AssignNewRepairToVendorMethod, CanAssignNewRepairToVendor);
-            this.repair = repair;
-            RefreshVendorList();
         }
 
         private ObservableCollection<VendorViewModel> vendors;
