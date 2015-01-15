@@ -101,6 +101,7 @@
     <Compile Include="ViewModels\CreateNewVendorViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RepairDetailsViewModel.cs" />
     <Compile Include="ViewModels\RepairViewModel.cs" />
     <Compile Include="ViewModels\VendorRepairViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="Views\CreateNewVendorView.xaml.cs">
       <DependentUpon>CreateNewVendorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RepairDetailsView.xaml.cs">
+      <DependentUpon>RepairDetailsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateNewVendorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RepairDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
