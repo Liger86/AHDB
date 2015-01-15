@@ -167,17 +167,6 @@ namespace AHDB.UI.ViewModels
                 RaisePropertyChanged("IsVendorNull");
             }
         }
-
-        private VendorViewModel selectedVendor;
-        public VendorViewModel SelectedVendor
-        {
-            get { return selectedVendor; }
-            set
-            { 
-                selectedVendor = value;
-                RaisePropertyChanged("SelectedVendor");
-            }
-        }
         #endregion
     }
 }
