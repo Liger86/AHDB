@@ -93,20 +93,21 @@ namespace AHDB.UI.ViewModels
             return true;
         }
 
-        public CommandBase<object> SaveNote { get; private set; }
-        void SaveNoteMethod(object arg)
+        public CommandBase<object> AddNote { get; private set; }
+        void AddNoteMethod(object arg)
         {
-            FactoryManager myManager = new FactoryManager();
-            myManager.GetNoteManager().CreateNewNote(selectedRepair.SelectedNote.NoteText, selectedRepair.RepairID);
+            throw new NotImplementedException();
         }
-
-        bool CanSaveNote(object arg)
+        bool CanAddNote(object arg)
         {
-            if (selectedRepair != null)
+            if (selectedRepair == null)
+            {
+                return false;
+            }
+            else
             {
                 return true;
             }
-            return false;
         }
         #endregion Commands
 
@@ -166,7 +167,7 @@ namespace AHDB.UI.ViewModels
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);
             this.AssignVendorToRepair = new CommandBase<object>(AssignVendorToRepairMethod, CanAssignVendor);
-            this.SaveNote = new CommandBase<object>(SaveNoteMethod, CanSaveNote);
+            this.AddNote = new CommandBase<object>(AddNoteMethod, CanAddNote);
         }
 
         private static readonly Lazy<MainWindowViewModel> lazy =

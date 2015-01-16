@@ -125,14 +125,26 @@
                     <Label Content="Customer" VerticalAlignment="Center" Margin="0,0,5,0"/>
                     <TextBox Text="{Binding SelectedRepair.Customer.CompanyName}" VerticalAlignment="Center" IsReadOnly="True"/>
                 </DockPanel>
-                <DockPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="8" LastChildFill="True" Margin="5">
-                    <ComboBox ItemsSource="{Binding SelectedRepair.Notes}"
+                <GroupBox Header="Notes" Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" >
+                    <DockPanel Margin="5" LastChildFill="False">
+                        <ListBox ItemsSource="{Binding SelectedRepair.Notes}"
                              SelectedItem="{Binding SelectedRepair.SelectedNote}"
-                             DisplayMemberPath="NoteText" 
-                             DockPanel.Dock="Top"/>
-                    <Button Content="Save" Command="{Binding SaveNote}" DockPanel.Dock="Bottom"/>
-                    <TextBox Text="{Binding SelectedRepair.SelectedNote.NoteText}" DockPanel.Dock="Top"/>
-                </DockPanel>
+                             DockPanel.Dock="Top">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding NoteText}" TextWrapping="Wrap"/>
+                                        <Label Content="{Binding DateCreatedAsUtcTime}" HorizontalContentAlignment="Left"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DockPanel>
+                </GroupBox>
+                <Button Content="Add Note" 
+                        Grid.Column="2"
+                        Grid.Row="8"
+                        Command="{Binding AddNote}"/>
             </Grid>
         </GroupBox>
     </Grid>

@@ -1,7 +1,9 @@
 USE [AHDB]
 GO
 
-spInsertNote 'note2', 1
+spInsertNote 'note3', 1
+GO
+spInsertNote 'note5', 1
 GO
 
 select getutcdate()
