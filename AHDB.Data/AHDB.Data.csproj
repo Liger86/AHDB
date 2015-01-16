@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="EntityFrameworkManager.cs" />
     <Compile Include="EntityManagers\ICustomerManager.cs" />
+    <Compile Include="EntityManagers\INoteManager.cs" />
     <Compile Include="EntityManagers\IRepairManager.cs" />
     <Compile Include="EntityManagers\IVendorManager.cs" />
     <Compile Include="EntityManagers\IVendorRepairManager.cs" />

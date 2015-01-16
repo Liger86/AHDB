@@ -32,6 +32,11 @@ namespace AHDB.Data
             return new VendorRepairManager();
         }
 
+        public EntityManagers.INoteManager GetNoteManager()
+        {
+            return new NoteManager();
+        }
+
         class RepairManager : IRepairManager
         {
             public List<RepairDTO> GetAllNotCompletedRepairsAndTheirVendors()
@@ -150,7 +155,6 @@ namespace AHDB.Data
                 return result;
             }
         }
-
         class VendorRepairManager : IVendorRepairManager
         {
             public void AssignVendorToRepair(int repairID, int vendorID)
@@ -160,6 +164,26 @@ namespace AHDB.Data
                     myContext.spInsertVendorRepair(repairID, vendorID);
                     myContext.SaveChanges();
                 }
+            }
+        }
+        class NoteManager : INoteManager
+        {
+            public List<NoteDTO> GetNotesByRepair(int repairID)
+            {
+                List<NoteDTO> result = new List<NoteDTO>();
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    result = (from note in myContext.Notes
+                              where note.RepairID == repairID
+                              select new NoteDTO()
+                              {
+                                  ID = note.ID,
+                                  NoteText = note.NoteText,
+                                  DateCreatedAsUtcTime = note.DateCreatedAsUtcTime,
+                                  RepairID = note.RepairID
+                              }).ToList();
+                }
+                return result;
             }
         }
     }

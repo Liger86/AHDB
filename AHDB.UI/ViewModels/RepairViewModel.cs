@@ -1,6 +1,10 @@
-﻿using AHDB.UI.Common;
+﻿using AHDB.Data;
+using AHDB.DataTransfer;
+using AHDB.UI.Common;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AHDB.UI.ViewModels
 {
@@ -51,7 +55,6 @@ namespace AHDB.UI.ViewModels
                 RaisePropertyChanged("QuoteNumber");
             }
         }
-        
 
         private Nullable<bool> completed;
         public Nullable<bool> Completed
@@ -108,6 +111,32 @@ namespace AHDB.UI.ViewModels
             }
         }
 
+        private ObservableCollection<NoteViewModel> notes;
+        public ObservableCollection<NoteViewModel> Notes
+        {
+            get 
+            {
+                PopulateNotes();
+                return notes; 
+            }
+            set
+            { 
+                notes = value;
+                RaisePropertyChanged("Notes");
+            }
+        }
+
+        private NoteViewModel selectedNote;
+        public NoteViewModel SelectedNote
+        {
+            get { return selectedNote; }
+            set 
+            {
+                selectedNote = value;
+                RaisePropertyChanged("SelectedNote");
+            }
+        }
+
         private ObservableCollection<VendorRepairViewModel> vendorRepairs;
         public ObservableCollection<VendorRepairViewModel> VendorRepairs
         {
@@ -118,6 +147,24 @@ namespace AHDB.UI.ViewModels
                 RaisePropertyChanged("VendorRepairs");
             }
         }
+
+        #region Methods
+        void PopulateNotes()
+        {
+            FactoryManager myManager = new FactoryManager();
+
+            List<NoteDTO> result = myManager.GetNoteManager().GetNotesByRepair(this.repairID);
+
+            notes = new ObservableCollection<NoteViewModel>((from note in result
+                                                            select new NoteViewModel()
+                                                            {
+                                                                NoteID = note.ID,
+                                                                NoteText = note.NoteText,
+                                                                DateCreatedAsUtcTime = note.DateCreatedAsUtcTime,
+                                                                RepairID = note.RepairID
+                                                            }).ToList());
+        }
+        #endregion
 
         #region Additional properties
         private int pastDueColorLevel;

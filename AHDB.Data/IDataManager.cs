@@ -13,5 +13,6 @@ namespace AHDB.Data
         ICustomerManager GetCustomerManager();
         IVendorManager GetVendorManager();
         IVendorRepairManager GetVendorRepairManager();
+        INoteManager GetNoteManager();
     }
 }

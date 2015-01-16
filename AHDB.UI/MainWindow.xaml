@@ -82,7 +82,56 @@
         </DockPanel>
         <GroupBox Header="Repair Details" Grid.Row="2">
             <Grid>
-                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Column="0" Grid.Row="0" LastChildFill="True">
+                    <Label Content="Repair ID" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <Label Content="{Binding SelectedRepair.RepairID}" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Grid.Column="1" Grid.Row="0" LastChildFill="True">
+                    <Label Content="Completed" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <CheckBox IsChecked="{Binding SelectedRepair.Completed}" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Grid.Column="0" Grid.Row="1" LastChildFill="True">
+                    <Label Content="Purchase Order" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox Text="{Binding SelectedRepair.PurchaseOrder}" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True">
+                    <Label Content="Quote Number" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox Text="{Binding SelectedRepair.QuoteNumber}" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Grid.Column="0" Grid.Row="2" LastChildFill="True">
+                    <Label Content="Date Created" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox Text="{Binding SelectedRepair.DateCreated}" VerticalAlignment="Center" IsReadOnly="True"/>
+                </DockPanel>
+                <DockPanel Grid.Column="1" Grid.Row="2" LastChildFill="True">
+                    <Label Content="Due Date" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <DatePicker SelectedDate="{Binding SelectedRepair.DueDate}" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Grid.Column="0" Grid.Row="3" LastChildFill="True">
+                    <Label Content="Customer" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox Text="{Binding SelectedRepair.Customer.CompanyName}" VerticalAlignment="Center" IsReadOnly="True"/>
+                </DockPanel>
+                <DockPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="6" LastChildFill="True" Margin="5">
+                    
+                    <ListBox ItemsSource="{Binding SelectedRepair.Notes}"
+                             SelectedItem="{Binding SelectedRepair.SelectedNote}"
+                             DisplayMemberPath="NoteText" 
+                             DockPanel.Dock="Top"/>
+                    <Button Content="Save" DockPanel.Dock="Bottom"/>
+                    <TextBox Text="{Binding SelectedRepair.SelectedNote.NoteText}" DockPanel.Dock="Top"/>
+                </DockPanel>
             </Grid>
         </GroupBox>
     </Grid>
