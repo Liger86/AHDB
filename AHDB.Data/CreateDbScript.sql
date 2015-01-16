@@ -182,7 +182,14 @@ AS
 BEGIN
 	INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (@RepairID, @VendorID, 0, GETUTCDATE())
 END
+GO
 
 CREATE PROC spInsertNote
-@
+@NoteText NVARCHAR(MAX),
+@RepairID INT
+AS
+BEGIN
+	INSERT INTO Note (NoteText, DateCreatedAsUtcTime, RepairID) VALUES (@NoteText, GETUTCDATE(), @RepairID)
+END
+GO
 --Additional constraints

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="ID" />
@@ -169,6 +169,10 @@
           <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="spInsertNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoteText" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RepairID" Type="int" Mode="In" />
+        </Function>
         <Function Name="spInsertRepair" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="PurchaseOrder" Type="nvarchar" Mode="In" />
@@ -217,8 +221,7 @@
             <End Role="Repair" EntitySet="Repair" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -445,6 +448,10 @@
             <Parameter Name="RepairID" Mode="In" Type="Int32" />
             <Parameter Name="VendorID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spInsertNote">
+            <Parameter Name="NoteText" Mode="In" Type="String" />
+            <Parameter Name="RepairID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -541,6 +548,7 @@
           <FunctionImportMapping FunctionImportName="spInsertRepair" FunctionName="AHDBModel.Store.spInsertRepair" />
           <FunctionImportMapping FunctionImportName="spInsertVendor" FunctionName="AHDBModel.Store.spInsertVendor" />
           <FunctionImportMapping FunctionImportName="spInsertVendorRepair" FunctionName="AHDBModel.Store.spInsertVendorRepair" />
+          <FunctionImportMapping FunctionImportName="spInsertNote" FunctionName="AHDBModel.Store.spInsertNote" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

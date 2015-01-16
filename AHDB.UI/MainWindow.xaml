@@ -130,7 +130,7 @@
                              SelectedItem="{Binding SelectedRepair.SelectedNote}"
                              DisplayMemberPath="NoteText" 
                              DockPanel.Dock="Top"/>
-                    <Button Content="Save" DockPanel.Dock="Bottom"/>
+                    <Button Content="Save" Command="{Binding SaveNote}" DockPanel.Dock="Bottom"/>
                     <TextBox Text="{Binding SelectedRepair.SelectedNote.NoteText}" DockPanel.Dock="Top"/>
                 </DockPanel>
             </Grid>

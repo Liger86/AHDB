@@ -126,7 +126,7 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-        private NoteViewModel selectedNote;
+        private NoteViewModel selectedNote = new NoteViewModel();
         public NoteViewModel SelectedNote
         {
             get { return selectedNote; }

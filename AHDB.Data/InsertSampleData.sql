@@ -1,8 +1,8 @@
 USE [AHDB]
 GO
 
-spInsertRepair 'test', 'Test', '202', '2015-01-11 03:35:11.233', 18
-go
+spInsertNote 'note2', 1
+GO
 
 select getutcdate()
 go
@@ -28,9 +28,7 @@ SELECT * FROM Customer
 SELECT * FROM Repair
 SELECT * FROM Vendor
 SELECT * FROM VendorRepair
-
-USE [AHDB]
-GO
+SELECT * FROM Note
 
 DELETE FROM VendorRepair
 GO
@@ -46,6 +44,3 @@ INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) V
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (4, 3, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (5, 3, 0, GETUTCDATE())
 
-ALTER TABLE Repair
-ADD CONSTRAINT DF_Repair_DateCreatedAsUtcTime
-DEFAULT GETUTCDATE() FOR DateCreatedAsUtcTime

@@ -40,8 +40,8 @@ namespace AHDB.UI.ViewModels
         public ObservableCollection<VendorViewModel> Vendors
         {
             get { return vendors; }
-            set 
-            { 
+            set
+            {
                 vendors = value;
                 RaisePropertyChanged("Vendors");
             }
@@ -93,6 +93,21 @@ namespace AHDB.UI.ViewModels
             return true;
         }
 
+        public CommandBase<object> SaveNote { get; private set; }
+        void SaveNoteMethod(object arg)
+        {
+            FactoryManager myManager = new FactoryManager();
+            myManager.GetNoteManager().CreateNewNote(selectedRepair.SelectedNote.NoteText, selectedRepair.RepairID);
+        }
+
+        bool CanSaveNote(object arg)
+        {
+            if (selectedRepair != null)
+            {
+                return true;
+            }
+            return false;
+        }
         #endregion Commands
 
         #region Methods
@@ -139,9 +154,8 @@ namespace AHDB.UI.ViewModels
             }
 
             this.Repairs = repairs;
-            
-        }
 
+        }
         #endregion Methods
 
         #region Singleton
@@ -152,6 +166,7 @@ namespace AHDB.UI.ViewModels
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);
             this.AssignVendorToRepair = new CommandBase<object>(AssignVendorToRepairMethod, CanAssignVendor);
+            this.SaveNote = new CommandBase<object>(SaveNoteMethod, CanSaveNote);
         }
 
         private static readonly Lazy<MainWindowViewModel> lazy =

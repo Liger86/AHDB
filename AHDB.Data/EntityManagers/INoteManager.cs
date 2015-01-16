@@ -10,5 +10,6 @@ namespace AHDB.Data.EntityManagers
     public interface INoteManager
     {
         List<NoteDTO> GetNotesByRepair(int RepairID);
+        void CreateNewNote(string noteText, int repairID);
     }
 }

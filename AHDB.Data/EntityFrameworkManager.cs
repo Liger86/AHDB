@@ -185,6 +185,14 @@ namespace AHDB.Data
                 }
                 return result;
             }
+
+            public void CreateNewNote(string noteText, int repairID)
+            {
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    myContext.spInsertNote(noteText, repairID);
+                }
+            }
         }
     }
 }
