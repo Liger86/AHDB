@@ -70,7 +70,7 @@ namespace AHDB.UI.ViewModels
         #endregion
 
         #region Commands
-        public CommandBase<object> AssignRepairToVendor { get; set; }
+        public CommandBase<object> AssignRepairToVendor { get; private set; }
         void AssignNewRepairToVendorMethod(object arg)
         {
             FactoryManager myManager = new FactoryManager();

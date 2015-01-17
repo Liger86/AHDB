@@ -98,6 +98,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CommandBase.cs" />
+    <Compile Include="ViewModels\AddNoteViewModel.cs" />
     <Compile Include="ViewModels\AssignVendorToRepairViewModel.cs" />
     <Compile Include="ViewModels\CreateNewCustomerViewModel.cs" />
     <Compile Include="ViewModels\CreateNewRepairViewModel.cs" />
@@ -108,6 +109,9 @@
     <Compile Include="ViewModels\RepairViewModel.cs" />
     <Compile Include="ViewModels\VendorRepairViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
+    <Compile Include="Views\AddNoteView.xaml.cs">
+      <DependentUpon>AddNoteView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AssignVendorToRepairView.xaml.cs">
       <DependentUpon>AssignVendorToRepairView.xaml</DependentUpon>
     </Compile>
@@ -133,6 +137,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddNoteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AssignVendorToRepairView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

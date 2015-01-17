@@ -96,7 +96,8 @@ namespace AHDB.UI.ViewModels
         public CommandBase<object> AddNote { get; private set; }
         void AddNoteMethod(object arg)
         {
-            throw new NotImplementedException();
+            AddNoteView myView = new AddNoteView(selectedRepair);
+            myView.ShowDialog();
         }
         bool CanAddNote(object arg)
         {
