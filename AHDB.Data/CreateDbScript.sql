@@ -192,4 +192,12 @@ BEGIN
 	INSERT INTO Note (NoteText, DateCreatedAsUtcTime, RepairID) VALUES (@NoteText, GETUTCDATE(), @RepairID)
 END
 GO
+
+CREATE PROC spDeleteRepair
+@RepairID INT
+AS
+BEGIN
+	DELETE FROM Repair
+	WHERE ID = @RepairID
+END
 --Additional constraints

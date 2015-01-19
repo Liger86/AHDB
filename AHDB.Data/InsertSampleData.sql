@@ -3,13 +3,15 @@ GO
 
 spInsertNote 'note3', 1
 GO
-spInsertNote 'note5', 1
+spDeleteRepair 19
 GO
 
 select getutcdate()
 go
 
-INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 2', 'Company 2', GETUTCDATE())
+spInsertRepair 'test', 'test', 'test', GETUTCDATE(), 
+
+INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('test', 'test', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 3', 'Company 3', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 4', 'Company 4', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 5', 'Company 5', GETUTCDATE())
@@ -20,11 +22,7 @@ INSERT INTO Vendor ([Description], CompanyName, DateCreatedAsUtcTime) values ('S
 INSERT INTO Vendor ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 9', 'Company 9', GETUTCDATE())
 INSERT INTO Vendor ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 10', 'Company 10', GETUTCDATE())
 
-INSERT INTO Repair ([Description], PurchaseOrder, CustomerID) values ('Some Description 11', 'PO#101', 1)
-INSERT INTO Repair ([Description], PurchaseOrder, CustomerID) values ('Some Description 12', 'PO#102', 1)
-INSERT INTO Repair ([Description], PurchaseOrder, CustomerID) values ('Some Description 13', 'PO#103', 2)
-INSERT INTO Repair ([Description], PurchaseOrder, CustomerID) values ('Some Description 14', 'PO#104', 2)
-INSERT INTO Repair ([Description], PurchaseOrder, CustomerID) values ('Some Description 16', 'PO#106', 2)
+INSERT INTO Repair ([Description], PurchaseOrder, CustomerID) values ('test', 'PO#101', 1)
 
 SELECT * FROM Customer
 SELECT * FROM Repair
