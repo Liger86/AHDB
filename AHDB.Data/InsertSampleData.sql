@@ -40,6 +40,8 @@ DELETE FROM Customer
 GO
 DELETE FROM Vendor
 GO
+DELETE FROM NOTE
+GO
 
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (1, 2, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (3, 2, 0, GETUTCDATE())
