@@ -155,6 +155,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spDeleteRepair" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RepairID" Type="int" Mode="In" />
+        </Function>
         <Function Name="spInsertContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
@@ -452,6 +455,9 @@
             <Parameter Name="NoteText" Mode="In" Type="String" />
             <Parameter Name="RepairID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spDeleteRepair">
+            <Parameter Name="RepairID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -549,6 +555,7 @@
           <FunctionImportMapping FunctionImportName="spInsertVendor" FunctionName="AHDBModel.Store.spInsertVendor" />
           <FunctionImportMapping FunctionImportName="spInsertVendorRepair" FunctionName="AHDBModel.Store.spInsertVendorRepair" />
           <FunctionImportMapping FunctionImportName="spInsertNote" FunctionName="AHDBModel.Store.spInsertNote" />
+          <FunctionImportMapping FunctionImportName="spDeleteRepair" FunctionName="AHDBModel.Store.spDeleteRepair" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

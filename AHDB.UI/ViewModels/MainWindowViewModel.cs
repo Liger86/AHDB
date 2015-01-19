@@ -110,6 +110,17 @@ namespace AHDB.UI.ViewModels
                 return true;
             }
         }
+
+        public CommandBase<object> DeleteRepair { get; private set; }
+        void DeleteRepairMethod(object arg)
+        {
+            DeleteView myDeleteView = new DeleteView(selectedRepair);
+            myDeleteView.ShowDialog();
+        }
+        bool CanDeleteRepair(object arg)
+        {
+            return true;
+        }
         #endregion Commands
 
         #region Methods
@@ -169,6 +180,7 @@ namespace AHDB.UI.ViewModels
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);
             this.AssignVendorToRepair = new CommandBase<object>(AssignVendorToRepairMethod, CanAssignVendor);
             this.AddNote = new CommandBase<object>(AddNoteMethod, CanAddNote);
+            this.DeleteRepair = new CommandBase<object>(DeleteRepairMethod, CanDeleteRepair);
         }
 
         private static readonly Lazy<MainWindowViewModel> lazy =

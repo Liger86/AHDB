@@ -11,6 +11,7 @@ namespace AHDB.Data.EntityManagers
     {
         void CreateNewRepair(string description,
                 string purchaseOrder, string quoteNumber, Nullable<DateTime> dueDate, int customerID);
+        void DeleteRepair(int repairID);
         List<RepairDTO> GetAllNotCompletedRepairsAndTheirVendors();
     }
 }

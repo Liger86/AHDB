@@ -133,7 +133,7 @@
                     <DataGridTemplateColumn Header="Edit" Width="80" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Edit"/>
+                                <Button Content="Delete" Command="{Binding Path=DataContext.DeleteRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

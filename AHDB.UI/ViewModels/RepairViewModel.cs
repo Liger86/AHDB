@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AHDB.UI.ViewModels
 {
-    public class RepairViewModel : ViewModelBase
+    public class RepairViewModel : ViewModelBase, IViewModel
     {
         // Additional properties for custom stuff are at bottom
 
@@ -16,8 +16,8 @@ namespace AHDB.UI.ViewModels
         public int RepairID
         {
             get { return repairID; }
-            set 
-            { 
+            set
+            {
                 repairID = value;
                 RaisePropertyChanged("RepairID");
             }
@@ -27,7 +27,7 @@ namespace AHDB.UI.ViewModels
         public string Description
         {
             get { return description; }
-            set 
+            set
             {
                 description = value;
                 RaisePropertyChanged("Description");
@@ -38,8 +38,8 @@ namespace AHDB.UI.ViewModels
         public string PurchaseOrder
         {
             get { return purchaseOrder; }
-            set 
-            { 
+            set
+            {
                 purchaseOrder = value;
                 RaisePropertyChanged("PurchaseOrder");
             }
@@ -49,8 +49,8 @@ namespace AHDB.UI.ViewModels
         public string QuoteNumber
         {
             get { return quoteNumber; }
-            set 
-            { 
+            set
+            {
                 quoteNumber = value;
                 RaisePropertyChanged("QuoteNumber");
             }
@@ -60,8 +60,8 @@ namespace AHDB.UI.ViewModels
         public Nullable<bool> Completed
         {
             get { return completed; }
-            set 
-            { 
+            set
+            {
                 completed = value;
                 RaisePropertyChanged("Completed");
             }
@@ -71,8 +71,8 @@ namespace AHDB.UI.ViewModels
         public Nullable<DateTime> DateCreated
         {
             get { return dateCreated; }
-            set 
-            { 
+            set
+            {
                 dateCreated = value;
                 RaisePropertyChanged("DateCreated");
             }
@@ -82,8 +82,8 @@ namespace AHDB.UI.ViewModels
         public Nullable<DateTime> DateCompleted
         {
             get { return dateCompleted; }
-            set 
-            { 
+            set
+            {
                 dateCompleted = value;
                 RaisePropertyChanged("DateCompleted");
             }
@@ -93,8 +93,8 @@ namespace AHDB.UI.ViewModels
         public Nullable<DateTime> DueDate
         {
             get { return dueDate; }
-            set 
-            { 
+            set
+            {
                 dueDate = value;
                 RaisePropertyChanged("DueDate");
             }
@@ -104,8 +104,8 @@ namespace AHDB.UI.ViewModels
         public CustomerViewModel Customer
         {
             get { return customer; }
-            set 
-            { 
+            set
+            {
                 customer = value;
                 RaisePropertyChanged("Customer");
             }
@@ -114,13 +114,13 @@ namespace AHDB.UI.ViewModels
         private ObservableCollection<NoteViewModel> notes;
         public ObservableCollection<NoteViewModel> Notes
         {
-            get 
+            get
             {
                 PopulateNotes();
-                return notes; 
+                return notes;
             }
             set
-            { 
+            {
                 notes = value;
                 RaisePropertyChanged("Notes");
             }
@@ -130,7 +130,7 @@ namespace AHDB.UI.ViewModels
         public NoteViewModel SelectedNote
         {
             get { return selectedNote; }
-            set 
+            set
             {
                 selectedNote = value;
                 RaisePropertyChanged("SelectedNote");
@@ -141,7 +141,7 @@ namespace AHDB.UI.ViewModels
         public ObservableCollection<VendorRepairViewModel> VendorRepairs
         {
             get { return vendorRepairs; }
-            set 
+            set
             {
                 vendorRepairs = value;
                 RaisePropertyChanged("VendorRepairs");
@@ -156,13 +156,13 @@ namespace AHDB.UI.ViewModels
             List<NoteDTO> result = myManager.GetNoteManager().GetNotesByRepair(this.repairID);
 
             notes = new ObservableCollection<NoteViewModel>((from note in result
-                                                            select new NoteViewModel()
-                                                            {
-                                                                NoteID = note.ID,
-                                                                NoteText = note.NoteText,
-                                                                DateCreatedAsUtcTime = note.DateCreatedAsUtcTime,
-                                                                RepairID = note.RepairID
-                                                            }).ToList());
+                                                             select new NoteViewModel()
+                                                             {
+                                                                 NoteID = note.ID,
+                                                                 NoteText = note.NoteText,
+                                                                 DateCreatedAsUtcTime = note.DateCreatedAsUtcTime,
+                                                                 RepairID = note.RepairID
+                                                             }).ToList());
         }
         #endregion
 
@@ -170,7 +170,7 @@ namespace AHDB.UI.ViewModels
         private int pastDueColorLevel;
         public int PastDueColorLevel
         {
-            get 
+            get
             {
                 switch (DateTime.Compare((DateTime)dueDate, DateTime.Now))
                 {
@@ -184,10 +184,10 @@ namespace AHDB.UI.ViewModels
                         pastDueColorLevel = -1;
                         break;
                 }
-                return pastDueColorLevel; 
+                return pastDueColorLevel;
             }
-            set 
-            { 
+            set
+            {
                 pastDueColorLevel = value;
                 RaisePropertyChanged("PastDueColorLevel");
             }
@@ -215,5 +215,11 @@ namespace AHDB.UI.ViewModels
             }
         }
         #endregion
+
+        public void DeleteEntity()
+        {
+            FactoryManager myManager = new FactoryManager();
+            myManager.GetRepairManager().DeleteRepair(this.repairID);
+        }
     }
 }

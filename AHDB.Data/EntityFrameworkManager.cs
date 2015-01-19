@@ -109,6 +109,15 @@ namespace AHDB.Data
                     myContext.SaveChanges();
                 }
             }
+
+
+            public void DeleteRepair(int repairID)
+            {
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    myContext.spDeleteRepair(repairID);
+                }
+            }
         }
         class CustomerManager : ICustomerManager
         {

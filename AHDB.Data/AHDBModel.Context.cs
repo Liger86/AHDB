@@ -148,5 +148,14 @@ namespace AHDB.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertNote", noteTextParameter, repairIDParameter);
         }
+    
+        public virtual int spDeleteRepair(Nullable<int> repairID)
+        {
+            var repairIDParameter = repairID.HasValue ?
+                new ObjectParameter("RepairID", repairID) :
+                new ObjectParameter("RepairID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spDeleteRepair", repairIDParameter);
+        }
     }
 }

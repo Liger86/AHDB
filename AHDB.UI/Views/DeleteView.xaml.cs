@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AHDB.UI.Common;
+using AHDB.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,26 @@ namespace AHDB.UI.Views
     /// </summary>
     public partial class DeleteView : Window
     {
-        public DeleteView()
+        public DeleteView(IViewModel entity)
         {
             InitializeComponent();
+            var vm = new DeleteViewModel(entity);
+
+            this.DataContext = vm;
+
+            if (vm.RefreshAction == null)
+            {
+                vm.RefreshAction = new Action(() => MainWindowViewModel.Instance.RefreshRepairs());
+            }
+            if (vm.CloseAction == null)
+            {
+                vm.CloseAction = new Action(() => this.Close());
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
