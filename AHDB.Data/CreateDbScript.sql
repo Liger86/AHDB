@@ -200,4 +200,12 @@ BEGIN
 	DELETE FROM Repair
 	WHERE ID = @RepairID
 END
+
+CREATE PROC spUpdateRepair
+@Description NVARCHAR(MAX),
+@PurchaseOrder NVARCHAR(50),
+@QuoteNumber NVARCHAR(50),
+@Completed NVARCHAR(50),
+@DateCompleted DATETIME2,
+@
 --Additional constraints
