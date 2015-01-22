@@ -200,12 +200,27 @@ BEGIN
 	DELETE FROM Repair
 	WHERE ID = @RepairID
 END
+GO
 
 CREATE PROC spUpdateRepair
+@RepairID INT,
 @Description NVARCHAR(MAX),
 @PurchaseOrder NVARCHAR(50),
 @QuoteNumber NVARCHAR(50),
 @Completed NVARCHAR(50),
 @DateCompleted DATETIME2,
-@
+@DueDate DATETIME2
+AS
+BEGIN
+	UPDATE Repair 
+	SET [Description] = @Description,
+	PurchaseOrder = @PurchaseOrder,
+	QuoteNumber = @QuoteNumber,
+	Completed = @Completed,
+	DateCompleted = @DateCompleted,
+	DueDate = @DueDate
+	WHERE ID = @RepairID;
+END
+GO
+
 --Additional constraints
