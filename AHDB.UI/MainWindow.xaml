@@ -16,7 +16,7 @@
                 <MenuItem Header="Create new Vendor" Command="{Binding CreateNewVendor}"/>
             </MenuItem>
         </Menu>
-        <Expander DockPanel.Dock="Bottom">
+        <Expander DockPanel.Dock="Bottom" IsExpanded="True">
             <GroupBox Header="Repair Details">
                 <Grid>
                     <Grid.ColumnDefinitions>
