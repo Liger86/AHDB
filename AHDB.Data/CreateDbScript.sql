@@ -163,9 +163,9 @@ CREATE PROC spInsertContact
 @Description NVARCHAR(MAX),
 @FirstName NVARCHAR(50),
 @LastName NVARCHAR(50),
-@PhoneNumber nvarchar(50),
-@CellPhoneNumber nvarchar(50),
-@Email nvarchar(50),
+@PhoneNumber NVARCHAR(50),
+@CellPhoneNumber NVARCHAR(50),
+@Email NVARCHAR(50),
 @CustomerID INT,
 @VendorID INT
 AS
@@ -207,12 +207,12 @@ CREATE PROC spUpdateRepair
 @Description NVARCHAR(MAX),
 @PurchaseOrder NVARCHAR(50),
 @QuoteNumber NVARCHAR(50),
-@Completed NVARCHAR(50),
+@Completed BIT,
 @DateCompleted DATETIME2,
 @DueDate DATETIME2
 AS
 BEGIN
-	UPDATE Repair 
+	UPDATE Repair
 	SET [Description] = @Description,
 	PurchaseOrder = @PurchaseOrder,
 	QuoteNumber = @QuoteNumber,
