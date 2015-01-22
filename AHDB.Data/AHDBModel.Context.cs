@@ -157,5 +157,38 @@ namespace AHDB.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spDeleteRepair", repairIDParameter);
         }
+    
+        public virtual int spUpdateRepair(Nullable<int> repairID, string description, string purchaseOrder, string quoteNumber, Nullable<bool> completed, Nullable<System.DateTime> dateCompleted, Nullable<System.DateTime> dueDate)
+        {
+            var repairIDParameter = repairID.HasValue ?
+                new ObjectParameter("RepairID", repairID) :
+                new ObjectParameter("RepairID", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var purchaseOrderParameter = purchaseOrder != null ?
+                new ObjectParameter("PurchaseOrder", purchaseOrder) :
+                new ObjectParameter("PurchaseOrder", typeof(string));
+    
+            var quoteNumberParameter = quoteNumber != null ?
+                new ObjectParameter("QuoteNumber", quoteNumber) :
+                new ObjectParameter("QuoteNumber", typeof(string));
+    
+            var completedParameter = completed.HasValue ?
+                new ObjectParameter("Completed", completed) :
+                new ObjectParameter("Completed", typeof(bool));
+    
+            var dateCompletedParameter = dateCompleted.HasValue ?
+                new ObjectParameter("DateCompleted", dateCompleted) :
+                new ObjectParameter("DateCompleted", typeof(System.DateTime));
+    
+            var dueDateParameter = dueDate.HasValue ?
+                new ObjectParameter("DueDate", dueDate) :
+                new ObjectParameter("DueDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spUpdateRepair", repairIDParameter, descriptionParameter, purchaseOrderParameter, quoteNumberParameter, completedParameter, dateCompletedParameter, dueDateParameter);
+        }
     }
 }

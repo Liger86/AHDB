@@ -9,7 +9,7 @@ GO
 select getutcdate()
 go
 
-spInsertRepair 'test', 'test', 'test', GETUTCDATE(), 
+spInsertRepair 'test', 'test', 'test', null, '1'
 
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('test', 'test', GETUTCDATE())
 INSERT INTO Customer ([Description], CompanyName, DateCreatedAsUtcTime) values ('Some Description 3', 'Company 3', GETUTCDATE())
@@ -46,3 +46,7 @@ INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) V
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (4, 3, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (5, 3, 0, GETUTCDATE())
 
+UPDATE Repair 
+SET [Description] = 20,
+
+WHERE ID = 1;

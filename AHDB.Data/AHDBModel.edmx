@@ -191,6 +191,15 @@
           <Parameter Name="RepairID" Type="int" Mode="In" />
           <Parameter Name="VendorID" Type="int" Mode="In" />
         </Function>
+        <Function Name="spUpdateRepair" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RepairID" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PurchaseOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="QuoteNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="Completed" Type="bit" Mode="In" />
+          <Parameter Name="DateCompleted" Type="datetime2" Mode="In" />
+          <Parameter Name="DueDate" Type="datetime2" Mode="In" />
+        </Function>
         <EntityContainer Name="AHDBModelStoreContainer">
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -456,7 +465,16 @@
             <Parameter Name="RepairID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteRepair">
+          <Parameter Name="RepairID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateRepair">
             <Parameter Name="RepairID" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="PurchaseOrder" Mode="In" Type="String" />
+            <Parameter Name="QuoteNumber" Mode="In" Type="String" />
+            <Parameter Name="Completed" Mode="In" Type="Boolean" />
+            <Parameter Name="DateCompleted" Mode="In" Type="DateTime" />
+            <Parameter Name="DueDate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -556,6 +574,7 @@
           <FunctionImportMapping FunctionImportName="spInsertVendorRepair" FunctionName="AHDBModel.Store.spInsertVendorRepair" />
           <FunctionImportMapping FunctionImportName="spInsertNote" FunctionName="AHDBModel.Store.spInsertNote" />
           <FunctionImportMapping FunctionImportName="spDeleteRepair" FunctionName="AHDBModel.Store.spDeleteRepair" />
+          <FunctionImportMapping FunctionImportName="spUpdateRepair" FunctionName="AHDBModel.Store.spUpdateRepair" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -118,6 +118,15 @@ namespace AHDB.Data
                     myContext.spDeleteRepair(repairID);
                 }
             }
+
+
+            public void UpdateRepair(int repairID, string description, string purchaseOrder, string quoteNumber, bool completed, DateTime? dateCompleted, DateTime? dueDate)
+            {
+                using (AHDBContext myContext = new AHDBContext())
+                {
+                    myContext.spUpdateRepair()
+                }
+            }
         }
         class CustomerManager : ICustomerManager
         {
