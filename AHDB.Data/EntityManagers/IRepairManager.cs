@@ -16,7 +16,7 @@ namespace AHDB.Data.EntityManagers
             Nullable<DateTime> dueDate, 
             int customerID);
         void UpdateRepair(
-            Nullable<int> repairID,
+            int repairID,
             string description,
             string purchaseOrder, 
             string quoteNumber, 
