@@ -124,7 +124,7 @@ namespace AHDB.Data
             {
                 using (AHDBContext myContext = new AHDBContext())
                 {
-                    myContext.spUpdateRepair()
+                    myContext.spUpdateRepair(repairID, description, purchaseOrder, quoteNumber, completed, dateCompleted, dueDate);
                 }
             }
         }
