@@ -62,6 +62,13 @@
                         <Label Content="Customer" VerticalAlignment="Center" Margin="0,0,5,0"/>
                         <TextBox Text="{Binding SelectedRepair.Customer.CompanyName}" VerticalAlignment="Center" IsReadOnly="True"/>
                     </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="3">
+                        <Label Content="Date Completed"/>
+                        <TextBox Text="{Binding SelectedRepair.DateCompleted}" VerticalAlignment="Center" IsReadOnly="True"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="7">
+                        <Button Content="Save" Command="{Binding UpdateRepair}"/>
+                    </DockPanel>
                     <ScrollViewer Margin="5" Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox ItemsSource="{Binding SelectedRepair.Notes}"
                              SelectedItem="{Binding SelectedRepair.SelectedNote}"
@@ -130,7 +137,14 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Edit" Width="80" >
+                    <DataGridTemplateColumn Header="Edit" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete" Width="80" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Delete" Command="{Binding Path=DataContext.DeleteRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>

@@ -50,3 +50,5 @@ UPDATE Repair
 SET [Description] = 20,
 
 WHERE ID = 1;
+
+spInsertRepair 'test' 'test' 

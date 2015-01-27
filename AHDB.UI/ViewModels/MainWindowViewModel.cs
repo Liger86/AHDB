@@ -36,6 +36,17 @@ namespace AHDB.UI.ViewModels
             }
         }
 
+        private RepairViewModel copyOfSelectedRepair;
+        public RepairViewModel CopyOfSelectedRepair
+        {
+            get { return copyOfSelectedRepair; }
+            set 
+            { 
+                copyOfSelectedRepair = value;
+                RaisePropertyChanged("CopyOfSelectedRepair");
+            }
+        }
+
         private ObservableCollection<VendorViewModel> vendors = new ObservableCollection<VendorViewModel>();
         public ObservableCollection<VendorViewModel> Vendors
         {
@@ -123,6 +134,42 @@ namespace AHDB.UI.ViewModels
         }
         #endregion Commands
 
+        public CommandBase<object> UpdateRepair { get; private set; }
+        void UpdateRepairMethod(object arg)
+        {
+            FactoryManager myManager = new FactoryManager();
+            myManager.GetRepairManager().UpdateRepair
+               (selectedRepair.RepairID,
+                selectedRepair.Description,
+                selectedRepair.PurchaseOrder,
+                selectedRepair.QuoteNumber,
+                selectedRepair.Completed,
+                selectedRepair.DateCompleted,
+                selectedRepair.DueDate);
+            RefreshRepairs();
+        }
+        bool CanUpdateRepair(object arg)
+        {
+            if (selectedRepair == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public CommandBase<object> EditRepair { get; private set; }
+        void LoadObjectForEditMethod(object arg)
+        {
+            throw new NotImplementedException();
+        }
+        bool CanLoadObjectForEdit(object arg)
+        {
+            return false;
+        }
+
         #region Methods
         public void RefreshRepairs()
         {
@@ -181,6 +228,7 @@ namespace AHDB.UI.ViewModels
             this.AssignVendorToRepair = new CommandBase<object>(AssignVendorToRepairMethod, CanAssignVendor);
             this.AddNote = new CommandBase<object>(AddNoteMethod, CanAddNote);
             this.DeleteRepair = new CommandBase<object>(DeleteRepairMethod, CanDeleteRepair);
+            this.UpdateRepair = new CommandBase<object>(UpdateRepairMethod, CanUpdateRepair);
         }
 
         private static readonly Lazy<MainWindowViewModel> lazy =

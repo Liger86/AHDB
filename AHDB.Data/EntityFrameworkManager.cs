@@ -120,11 +120,18 @@ namespace AHDB.Data
             }
 
 
-            public void UpdateRepair(int repairID, string description, string purchaseOrder, string quoteNumber, bool completed, DateTime? dateCompleted, DateTime? dueDate)
+            public void UpdateRepair(int repairID, string description, string purchaseOrder, string quoteNumber, 
+                Nullable<bool> completed, DateTime? dateCompleted, DateTime? dueDate)
             {
+                if (completed == true && (dateCompleted == null))
+                {
+                    dateCompleted = DateTime.UtcNow;
+                }
+
                 using (AHDBContext myContext = new AHDBContext())
                 {
-                    myContext.spUpdateRepair(repairID, description, purchaseOrder, quoteNumber, completed, dateCompleted, dueDate);
+                    myContext.spUpdateRepair(repairID, description, purchaseOrder, quoteNumber, completed, 
+                        dateCompleted, dueDate);
                 }
             }
         }

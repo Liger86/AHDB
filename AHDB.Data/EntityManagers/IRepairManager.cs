@@ -20,7 +20,7 @@ namespace AHDB.Data.EntityManagers
             string description,
             string purchaseOrder, 
             string quoteNumber, 
-            bool completed, 
+            Nullable<bool> completed, 
             Nullable<DateTime> dateCompleted, 
             Nullable<DateTime> dueDate);
         void DeleteRepair(int repairID);
