@@ -110,7 +110,6 @@ namespace AHDB.Data
                 }
             }
 
-
             public void DeleteRepair(int repairID)
             {
                 using (AHDBContext myContext = new AHDBContext())
