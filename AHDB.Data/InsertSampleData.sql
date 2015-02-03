@@ -3,7 +3,7 @@ GO
 
 spInsertNote 'note3', 1
 GO
-spDeleteRepair 19
+spDeleteRepair 30
 GO
 
 select getutcdate()
