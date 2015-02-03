@@ -30,25 +30,9 @@ SELECT * FROM Vendor
 SELECT * FROM VendorRepair
 SELECT * FROM Note
 
-DELETE FROM VendorRepair
-GO
-DELETE FROM Repair
-GO
-DELETE FROM Customer
-GO
-DELETE FROM Vendor
-GO
-DELETE FROM NOTE
-GO
+drop table [User]
 
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (1, 2, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (3, 2, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (4, 3, 0, GETUTCDATE())
 INSERT INTO VendorRepair (RepairID, VendorID, Completed, DateCreatedAsUtcTime) VALUES (5, 3, 0, GETUTCDATE())
-
-UPDATE Repair 
-SET [Description] = 20,
-
-WHERE ID = 1;
-
-spInsertRepair 'test' 'test' 
