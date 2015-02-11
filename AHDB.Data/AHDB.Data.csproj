@@ -86,6 +86,9 @@
     <Compile Include="Repair.cs">
       <DependentUpon>AHDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="spGetCustomers_Result.cs">
+      <DependentUpon>AHDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>AHDBModel.tt</DependentUpon>
     </Compile>
