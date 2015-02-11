@@ -2,9 +2,6 @@
 USE [master]
 GO
 
-DROP DATABASE [AHDB]
-GO
-
 CREATE DATABASE [AHDB]
 GO
 
@@ -27,10 +24,6 @@ CREATE TABLE Repair
 
 	CustomerID INT NOT NULL,
 )
-GO
-
-ALTER TABLE Repair
-ALTER COLUMN DueDate DATETIME2 NULL
 GO
 
 CREATE TABLE Customer
@@ -193,12 +186,18 @@ BEGIN
 END
 GO
 
-CREATE PROC spDeleteRepair
-@RepairID INT
+--Stored Procedures for updating entities
+CREATE PROC spUpdateCustomer
+@CustomerId INT,
+@Description NVARCHAR(MAX),
+@CompanyName NVARCHAR(50)
 AS
 BEGIN
-	DELETE FROM Repair
-	WHERE ID = @RepairID
+	UPDATE Customer
+	SET
+	[Description] = @Description,
+	CompanyName = @CompanyName
+	WHERE Customer.ID = @CustomerId
 END
 GO
 
@@ -213,7 +212,8 @@ CREATE PROC spUpdateRepair
 AS
 BEGIN
 	UPDATE Repair
-	SET [Description] = @Description,
+	SET 
+	[Description] = @Description,
 	PurchaseOrder = @PurchaseOrder,
 	QuoteNumber = @QuoteNumber,
 	Completed = @Completed,
@@ -223,4 +223,138 @@ BEGIN
 END
 GO
 
---Additional constraints
+CREATE PROC spUpdateVendor
+@VendorId INT,
+@Description NVARCHAR(MAX),
+@CompanyName NVARCHAR(50)
+AS
+BEGIN
+	UPDATE Vendor
+	SET
+	[Description] = @Description,
+	CompanyName = @CompanyName
+	WHERE ID = @VendorId
+END
+GO
+
+CREATE PROC spUpdateContact
+@ContactId INT,
+@Description NVARCHAR(MAX),
+@FirstName NVARCHAR(50),
+@LastName NVARCHAR(50),
+@PhoneNumber NVARCHAR(50),
+@CellPhoneNumber NVARCHAR(50),
+@Email NVARCHAR(50),
+@CustomerID INT,
+@VendorID INT
+AS
+BEGIN
+	UPDATE Contact 
+	SET 
+	[Description] = @Description,
+	FirstName = @FirstName,
+	LastName = @LastName,
+	PhoneNumber = @PhoneNumber,
+	CellPhoneNumber = @CellPhoneNumber,
+	Email = @Email,
+	CustomerID = @CustomerID,
+	VendorID = @VendorID
+	WHERE ID = @ContactId
+END
+GO
+
+CREATE PROC spUpdateVendorRepair
+@RepairID INT,
+@VendorID INT,
+@Completed BIT
+AS
+BEGIN
+	UPDATE VendorRepair
+	SET
+	VendorID = @VendorID,
+	Completed = @Completed
+	WHERE RepairID = @RepairID
+END
+GO
+
+CREATE PROC spUpdateNote
+@NoteId INT,
+@NoteText NVARCHAR(MAX)
+AS
+BEGIN
+
+	UPDATE Note
+	SET
+	NoteText = @NoteText
+	WHERE ID = @NoteId
+END
+GO
+
+--Stored procedures for deleting entities
+CREATE PROC spDeleteCustomer
+@CustomerId INT
+AS
+BEGIN
+	DELETE FROM Customer
+	WHERE ID = @CustomerId
+END
+GO
+
+CREATE PROC spDeleteRepair
+@RepairId INT
+AS
+BEGIN
+	DELETE FROM Repair
+	WHERE ID = @RepairId
+END
+GO
+
+CREATE PROC spDeleteVendor
+@VendorId INT
+AS
+BEGIN
+	DELETE FROM Vendor
+	WHERE ID = @VendorId
+END
+GO
+
+CREATE PROC spDeleteContact
+@ContactId INT
+AS
+BEGIN
+	DELETE FROM Contact
+	WHERE ID = @ContactId
+END
+GO
+
+CREATE PROC spDeleteVendorRepair
+@RepairId INT
+AS
+BEGIN
+	DELETE FROM VendorRepair
+	WHERE RepairID = @RepairId
+END
+GO
+
+CREATE PROC spDeleteNote
+@NoteId INT
+AS
+BEGIN
+	DELETE FROM Note
+	WHERE ID = @NoteId
+END
+GO
+
+--Stored procedures for paging entities
+CREATE PROC spGetCustomers
+@PageNumber INT,
+@RowsPerPage INT
+AS
+BEGIN
+	SELECT ID, [Description], CompanyName, DateCreatedAsUtcTime
+	FROM Customer
+	ORDER BY ID
+	OFFSET (@PageNumber - 1) * @RowsPerPage ROWS
+	FETCH NEXT @RowsPerPage ROWS ONLY
+END
+GO
