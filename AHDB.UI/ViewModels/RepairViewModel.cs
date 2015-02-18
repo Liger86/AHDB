@@ -216,10 +216,12 @@ namespace AHDB.UI.ViewModels
         }
         #endregion
 
+        #region IViewModel members
         public void DeleteEntity()
         {
             FactoryManager myManager = new FactoryManager();
             myManager.GetRepairManager().DeleteRepair(this.repairID);
         }
+        #endregion IViewModel members
     }
 }
