@@ -12,7 +12,7 @@ using AHDB.DataTransfer;
 
 namespace AHDB.UI.ViewModels
 {
-    public sealed class MainWindowViewModel : ViewModelBase
+    sealed class MainWindowViewModel : ViewModelBase
     {
         private ObservableCollection<RepairViewModel> repairs;
         public ObservableCollection<RepairViewModel> Repairs
@@ -20,8 +20,15 @@ namespace AHDB.UI.ViewModels
             get { return repairs; }
             set
             {
-                repairs = value;
-                RaisePropertyChanged("Repairs");
+                if (repairs == value)
+                {
+                    return;
+                }
+                else
+                {
+                    repairs = value;
+                    RaisePropertyChanged("Repairs");
+                }
             }
         }
 
