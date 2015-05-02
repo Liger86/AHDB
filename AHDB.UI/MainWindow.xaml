@@ -3,156 +3,104 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="500" Width="1000"
         WindowStartupLocation="CenterScreen">
-    <DockPanel LastChildFill="False">
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File"/>
-            <MenuItem Header="Repair">
-                <MenuItem Header="Create new Repair" Command="{Binding CreateNewRepair}"/>
-            </MenuItem>
-            <MenuItem Header="Customer">
-                <MenuItem Header="Create new Customer" Command="{Binding CreateNewCustomer}"/>
-            </MenuItem>
-            <MenuItem Header="Vendor">
-                <MenuItem Header="Create new Vendor" Command="{Binding CreateNewVendor}"/>
-            </MenuItem>
-        </Menu>
-        <Expander DockPanel.Dock="Bottom" IsExpanded="True">
-            <GroupBox Header="Repair Details">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                    </Grid.RowDefinitions>
-                    <DockPanel Grid.Column="0" Grid.Row="0" LastChildFill="True">
-                        <Label Content="Repair ID" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <Label Content="{Binding SelectedRepair.RepairID}" VerticalAlignment="Center"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="1" Grid.Row="0" LastChildFill="True">
-                        <Label Content="Completed" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <CheckBox IsChecked="{Binding SelectedRepair.Completed}" VerticalAlignment="Center"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="0" Grid.Row="1" LastChildFill="True">
-                        <Label Content="Purchase Order" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBox Text="{Binding SelectedRepair.PurchaseOrder}" VerticalAlignment="Center"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True">
-                        <Label Content="Quote Number" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBox Text="{Binding SelectedRepair.QuoteNumber}" VerticalAlignment="Center"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="0" Grid.Row="2" LastChildFill="True">
-                        <Label Content="Date Created" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBox Text="{Binding SelectedRepair.DateCreated}" VerticalAlignment="Center" IsReadOnly="True"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="1" Grid.Row="2" LastChildFill="True">
-                        <Label Content="Due Date" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <DatePicker SelectedDate="{Binding SelectedRepair.DueDate}" VerticalAlignment="Center"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="0" Grid.Row="3" LastChildFill="True">
-                        <Label Content="Customer" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBox Text="{Binding SelectedRepair.Customer.CompanyName}" VerticalAlignment="Center" IsReadOnly="True"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="1" Grid.Row="3">
-                        <Label Content="Date Completed"/>
-                        <TextBox Text="{Binding SelectedRepair.DateCompleted}" VerticalAlignment="Center" IsReadOnly="True"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="0" Grid.Row="7">
-                        <Button Content="Save" Command="{Binding UpdateRepair}"/>
-                    </DockPanel>
-                    <ScrollViewer Margin="5" Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBox ItemsSource="{Binding SelectedRepair.Notes}"
-                             SelectedItem="{Binding SelectedRepair.SelectedNote}"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding NoteText}" TextWrapping="WrapWithOverflow"/>
-                                        <Label Content="{Binding DateCreatedAsUtcTime}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </ScrollViewer>
-                    <Button Content="Add Note" 
-                        Grid.Column="2"
-                        Grid.Row="8"
-                        Command="{Binding AddNote}"/>
-                </Grid>
+    <ScrollViewer>
+        <DockPanel LastChildFill="True">
+            <GroupBox Header="Repair Details" DockPanel.Dock="Bottom">
+                <Expander IsExpanded="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border BorderThickness="2" BorderBrush="Gray" CornerRadius="5" Padding="2" Margin="1" Grid.Column="0" Grid.Row="0">
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Repair ID"/>
+                                <TextBox Text="101"/>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="Gray" CornerRadius="5" Padding="2" Margin="1"  Grid.Column="1" Grid.Row="0">
+                            <StackPanel Orientation="Vertical" >
+                                <Label Content="Completed"/>
+                                <CheckBox/>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
+                            <Label Content="Customer"/>
+                            <TextBox/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+                            <Label Content="Quote Number"/>
+                            <TextBox Text="202"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="2">
+                            <Label Content="PO Number"/>
+                            <TextBox Text="303"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="2">
+                            <Label Content="Date Created"/>
+                            <DatePicker/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="3">
+                            <Label Content="Date Completed"/>
+                            <DatePicker/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="3">
+                            <Label Content="Due Date"/>
+                            <DatePicker/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
+                            <Label Content="Description"/>
+                            <TextBox Text="Description" AcceptsReturn="True" MaxHeight="105" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True"/>
+                        </StackPanel>
+                        <GroupBox Header="Notes" Padding="2" Margin="1" Grid.Column="2" Grid.Row="0" Grid.RowSpan="5">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                                <ListView>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                    <ListItem></ListItem>
+                                </ListView>
+                            </ScrollViewer>
+                        </GroupBox>
+                    </Grid>
+                </Expander>
             </GroupBox>
-        </Expander>
-        <GroupBox Header="Open Repairs">
-            <DataGrid ItemsSource="{Binding Repairs}"
-                      IsReadOnly="True" 
-                      Margin="5"
-                      SelectedItem="{Binding SelectedRepair}"
-                      AutoGenerateColumns="False"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      ScrollViewer.CanContentScroll="True"
-                      SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Repair Id" Width="Auto" Binding="{Binding RepairID}"/>
-                    <DataGridTextColumn Header="Purchase Order" Width="Auto" Binding="{Binding PurchaseOrder}"/>
-                    <DataGridTextColumn Header="Quote Number" Width="Auto" Binding="{Binding QuoteNumber}"/>
-                    <DataGridCheckBoxColumn Header="Completed" Width="Auto" Binding="{Binding Completed}"/>
-                    <DataGridTextColumn Header="Created" Width="Auto" Binding="{Binding DateCreated}"/>
-                    <DataGridTextColumn Header="Due Date" Width="Auto" Binding="{Binding DueDate}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Background" Value="LightBlue"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="-1">
-                                        <Setter Property="Background" Value="LightCoral"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="0">
-                                        <Setter Property="Background" Value="White"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="1">
-                                        <Setter Property="Background" Value="LightGreen"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Customer" Width="Auto" Binding="{Binding Customer.CompanyName}"/>
-                    <DataGridTemplateColumn Header="Vendor" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <Label Content="Assign a vendor" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
-                                    <ListBox ItemsSource="{Binding VendorRepairs}" DisplayMemberPath="Vendor.CompanyName"/>
-                                    <Button Content="Assign" 
-                                                Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"
-                                                Command="{Binding Path=DataContext.AssignVendorToRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Edit" Width="80">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Delete" Width="80" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete" Command="{Binding Path=DataContext.DeleteRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
-    </DockPanel>
+            <GroupBox Header="Repair List" DockPanel.Dock="Top">
+                <DockPanel>
+                    <DataGrid>
+
+                    </DataGrid>
+                </DockPanel>
+            </GroupBox>
+        </DockPanel>
+    </ScrollViewer>
 </Window>
