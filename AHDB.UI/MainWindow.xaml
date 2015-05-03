@@ -1,11 +1,13 @@
 ﻿<Window x:Class="AHDB.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="500" Width="1000"
-        WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="708" Width="1000"
+        WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -13,10 +15,109 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Repair Notes" Grid.Column="2" Grid.Row="1">
-            <TextBox TextWrapping="Wrap" SpellCheck.IsEnabled="True" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="331"/>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+            <Menu IsMainMenu="True">
+                <MenuItem Header="File">
+                    <MenuItem Header="Connect to Database"/>
+                    <MenuItem Header="Database Configuration"/>
+                    <Separator/>
+                    <MenuItem Header="Manage Users"/>
+                    <MenuItem Header="My Profile"/>
+                    <Separator/>
+                    <MenuItem Header="Exit"/>
+                </MenuItem>
+                <MenuItem Header="Repair">
+                    <MenuItem Header="Create new Repair"/>
+                    <MenuItem Header="Edit Repair"/>
+                    <Separator/>
+                    <MenuItem Header="Options"/>
+                </MenuItem>
+                <MenuItem Header="Customer">
+                    <MenuItem Header="Customer List"/>
+                    <MenuItem Header="Create new Customer"/>
+                </MenuItem>
+                <MenuItem Header="Vendor">
+                    <MenuItem Header="Vendor List"/>
+                    <MenuItem Header="Create new Vendor"/>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About"/>
+                    <MenuItem Header="Support">
+                        <MenuItem Header="Email Support"/>
+                        <MenuItem Header="Phone Support"/>
+                        <Separator/>
+                        <MenuItem Header="Report Bug"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Documentation"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <GroupBox Header="Repair List" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+            <DataGrid ItemsSource="{Binding Repairs}"
+                      IsReadOnly="True"
+                      Margin="5"
+                      SelectedItem="{Binding SelectedRepair}"
+                      AutoGenerateColumns="False"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.CanContentScroll="True"
+                      SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Repair Id" Width="Auto" Binding="{Binding RepairID}"/>
+                    <DataGridTextColumn Header="Purchase Order" Width="Auto" Binding="{Binding PurchaseOrder}"/>
+                    <DataGridTextColumn Header="Quote Number" Width="Auto" Binding="{Binding QuoteNumber}"/>
+                    <DataGridCheckBoxColumn Header="Completed" Width="Auto" Binding="{Binding Completed}"/>
+                    <DataGridTextColumn Header="Created" Width="136" Binding="{Binding DateCreated}"/>
+                    <DataGridTextColumn Header="Due Date" Width="136" Binding="{Binding DueDate}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Background" Value="LightBlue"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="-1">
+                                        <Setter Property="Background" Value="LightCoral"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="0">
+                                        <Setter Property="Background" Value="White"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="1">
+                                        <Setter Property="Background" Value="LightGreen"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Customer" Width="*" Binding="{Binding Customer.CompanyName}"/>
+                    <DataGridTemplateColumn Header="Vendor" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Label Content="Assign a vendor" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
+                                    <ListBox ItemsSource="{Binding VendorRepairs}" DisplayMemberPath="Vendor.CompanyName"/>
+                                    <Button Content="Assign" 
+                                                Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"
+                                                Command="{Binding Path=DataContext.AssignVendorToRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Edit" MinWidth="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete" MinWidth="60" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Command="{Binding Path=DataContext.DeleteRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </GroupBox>
-        <GroupBox Header="Repair Details" Grid.Row="1" Grid.ColumnSpan="2">
+        <GroupBox Header="Repair Details" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -85,69 +186,11 @@
                 </Border>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Repair List" Grid.ColumnSpan="3">
-            <DataGrid ItemsSource="{Binding Repairs}"
-                      IsReadOnly="True"
-                      Margin="5"
-                      SelectedItem="{Binding SelectedRepair}"
-                      AutoGenerateColumns="False"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      ScrollViewer.CanContentScroll="True"
-                      SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Repair Id" Width="Auto" Binding="{Binding RepairID}"/>
-                    <DataGridTextColumn Header="Purchase Order" Width="Auto" Binding="{Binding PurchaseOrder}"/>
-                    <DataGridTextColumn Header="Quote Number" Width="Auto" Binding="{Binding QuoteNumber}"/>
-                    <DataGridCheckBoxColumn Header="Completed" Width="Auto" Binding="{Binding Completed}"/>
-                    <DataGridTextColumn Header="Created" Width="Auto" Binding="{Binding DateCreated}"/>
-                    <DataGridTextColumn Header="Due Date" Width="Auto" Binding="{Binding DueDate}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Background" Value="LightBlue"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="-1">
-                                        <Setter Property="Background" Value="LightCoral"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="0">
-                                        <Setter Property="Background" Value="White"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="1">
-                                        <Setter Property="Background" Value="LightGreen"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Customer" Width="*" Binding="{Binding Customer.CompanyName}"/>
-                    <DataGridTemplateColumn Header="Vendor" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <Label Content="Assign a vendor" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
-                                    <ListBox ItemsSource="{Binding VendorRepairs}" DisplayMemberPath="Vendor.CompanyName"/>
-                                    <Button Content="Assign" 
-                                                Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"
-                                                Command="{Binding Path=DataContext.AssignVendorToRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Edit" MinWidth="60">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Delete" MinWidth="60" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete" Command="{Binding Path=DataContext.DeleteRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <GroupBox Header="Repair Notes" Grid.Column="2" Grid.Row="2" >
+            <DockPanel LastChildFill="False">
+                <TextBox TextWrapping="Wrap" SpellCheck.IsEnabled="True" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="331" DockPanel.Dock="Top"/>
+                <Button Content="Add Note" DockPanel.Dock="Bottom"/>
+            </DockPanel>
         </GroupBox>
     </Grid>
 </Window>
