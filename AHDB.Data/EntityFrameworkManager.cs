@@ -7,6 +7,7 @@ using AHDB.Data.EntityManagers;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
 using AHDB.DataTransfer;
+using System.Data.SqlClient;
 
 namespace AHDB.Data
 {
@@ -148,7 +149,10 @@ namespace AHDB.Data
             {
                 using (AHDBContext myContext = new AHDBContext())
                 {
-                    myContext.spInsertCustomer(description, companyName);
+                    myContext.Database.SqlQuery<Customer>(
+                        "spInsertCustomer @Description, @CompanyName", 
+                        new SqlParameter("Description", description),
+                        new SqlParameter("CompanyName", companyName));
                     myContext.SaveChanges();
                 }
             }
