@@ -102,6 +102,9 @@
     </ApplicationDefinition>
     <Compile Include="Common\CommandBase.cs" />
     <Compile Include="Common\IViewModel.cs" />
+    <Compile Include="UserControls\MenuUserControlView.xaml.cs">
+      <DependentUpon>MenuUserControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddNoteViewModel.cs" />
     <Compile Include="ViewModels\AssignVendorToRepairViewModel.cs" />
     <Compile Include="ViewModels\CreateNewCustomerViewModel.cs" />
@@ -145,6 +148,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\MenuUserControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddNoteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

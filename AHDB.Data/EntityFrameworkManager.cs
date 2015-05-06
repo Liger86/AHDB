@@ -149,11 +149,7 @@ namespace AHDB.Data
             {
                 using (AHDBContext myContext = new AHDBContext())
                 {
-                    myContext.Database.SqlQuery<Customer>(
-                        "spInsertCustomer @Description, @CompanyName", 
-                        new SqlParameter("Description", description),
-                        new SqlParameter("CompanyName", companyName));
-                    myContext.SaveChanges();
+                    
                 }
             }
         }
