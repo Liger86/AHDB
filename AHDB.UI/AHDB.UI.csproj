@@ -105,6 +105,9 @@
     <Compile Include="UserControls\MenuUserControlView.xaml.cs">
       <DependentUpon>MenuUserControlView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\RepairDetailsUserControlView.xaml.cs">
+      <DependentUpon>RepairDetailsUserControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\RepairListUserControlView.xaml.cs">
       <DependentUpon>RepairListUserControlView.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\MenuUserControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\RepairDetailsUserControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
