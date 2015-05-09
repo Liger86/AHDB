@@ -8,6 +8,7 @@
         <userControls:MenuUserControlView x:Key="MenuUserControlView"/>
         <userControls:RepairListUserControlView x:Key="RepairListUserControlView"/>
         <userControls:RepairDetailsUserControlView x:Key="RepairDetailsUserControlView"/>
+        <userControls:RepairNotesUserControlView x:Key="RepairNotesUserControlView"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,11 +25,6 @@
         <ContentControl Content="{StaticResource MenuUserControlView}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
         <ContentControl Content="{StaticResource RepairListUserControlView}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"/>
         <ContentControl Content="{StaticResource RepairDetailsUserControlView}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <GroupBox Header="Repair Notes" Grid.Column="2" Grid.Row="2" >
-            <DockPanel LastChildFill="False">
-                <TextBox TextWrapping="Wrap" SpellCheck.IsEnabled="True" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="331" DockPanel.Dock="Top"/>
-                <Button Content="Add Note" DockPanel.Dock="Bottom"/>
-            </DockPanel>
-        </GroupBox>
+        <ContentControl Content="{StaticResource RepairNotesUserControlView}" Grid.Column="3" Grid.Row="2"/>
     </Grid>
 </Window>
