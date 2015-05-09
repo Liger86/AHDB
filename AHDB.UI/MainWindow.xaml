@@ -6,6 +6,7 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <userControls:MenuUserControlView x:Key="MenuUserControlView"/>
+        <userControls:RepairListUserControlView x:Key="RepairListUserControlView"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -20,71 +21,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <ContentControl Content="{StaticResource MenuUserControlView}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
-        <GroupBox Header="Repair List" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
-            <DataGrid ItemsSource="{Binding Repairs}"
-                      IsReadOnly="True"
-                      Margin="5"
-                      SelectedItem="{Binding SelectedRepair}"
-                      AutoGenerateColumns="False"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                      ScrollViewer.CanContentScroll="True"
-                      SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Repair Id" Width="Auto" Binding="{Binding RepairID}"/>
-                    <DataGridTextColumn Header="Purchase Order" Width="Auto" Binding="{Binding PurchaseOrder}"/>
-                    <DataGridTextColumn Header="Quote Number" Width="Auto" Binding="{Binding QuoteNumber}"/>
-                    <DataGridCheckBoxColumn Header="Completed" Width="Auto" Binding="{Binding Completed}"/>
-                    <DataGridTextColumn Header="Created" Width="*" Binding="{Binding DateCreated}"/>
-                    <DataGridTextColumn Header="Due Date" Width="*" Binding="{Binding DueDate}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Background" Value="LightBlue"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="-1">
-                                        <Setter Property="Background" Value="LightCoral"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="0">
-                                        <Setter Property="Background" Value="White"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding PastDueColorLevel}" Value="1">
-                                        <Setter Property="Background" Value="LightGreen"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Customer" Width="*" Binding="{Binding Customer.CompanyName}"/>
-                    <DataGridTemplateColumn Header="Vendor" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <Label Content="Assign a vendor" Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"/>
-                                    <ListBox ItemsSource="{Binding VendorRepairs}" DisplayMemberPath="Vendor.CompanyName"/>
-                                    <Button Content="Assign" 
-                                                Visibility="{Binding RepairHasNoVendors, Converter={StaticResource VisibilityOfBool}}"
-                                                Command="{Binding Path=DataContext.AssignVendorToRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Edit" MinWidth="60">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Delete" MinWidth="60" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete" Command="{Binding Path=DataContext.DeleteRepair, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+        <ContentControl Content="{StaticResource RepairListUserControlView}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"/>
         <GroupBox Header="Repair Details" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
