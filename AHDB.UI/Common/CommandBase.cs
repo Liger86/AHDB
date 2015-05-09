@@ -41,11 +41,16 @@ namespace AHDB.UI.Common
             }
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler CanExecuteChanged;
+
+        void RaiseCanExecuteChanged()
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            if (this.CanExecuteChanged != null)
+            {
+                this.CanExecuteChanged(this, EventArgs.Empty);
+            }
         }
+
 
         public void Execute(object parameter)
         {
