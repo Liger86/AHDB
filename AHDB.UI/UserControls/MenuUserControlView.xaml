@@ -16,7 +16,7 @@
             <MenuItem Header="Exit"/>
         </MenuItem>
         <MenuItem Header="Repair">
-            <MenuItem Header="Create new Repair"/>
+            <MenuItem Header="Create new Repair" Command="{Binding CreateNewRepair}"/>
             <MenuItem Header="Edit Repair"/>
             <Separator/>
             <MenuItem Header="Options"/>
