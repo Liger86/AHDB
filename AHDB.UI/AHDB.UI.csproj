@@ -111,6 +111,9 @@
     <Compile Include="UserControls\RepairListUserControlView.xaml.cs">
       <DependentUpon>RepairListUserControlView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\RepairNotesUserControlView.xaml.cs">
+      <DependentUpon>RepairNotesUserControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddNoteViewModel.cs" />
     <Compile Include="ViewModels\AssignVendorToRepairViewModel.cs" />
     <Compile Include="ViewModels\CreateNewCustomerViewModel.cs" />
@@ -163,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\RepairListUserControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\RepairNotesUserControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
