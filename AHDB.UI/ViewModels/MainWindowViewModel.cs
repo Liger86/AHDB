@@ -43,18 +43,6 @@ namespace AHDB.UI.ViewModels
             }
         }
 
-
-        private RepairViewModel copyOfSelectedRepair;
-        public RepairViewModel CopyOfSelectedRepair
-        {
-            get { return copyOfSelectedRepair; }
-            set 
-            { 
-                copyOfSelectedRepair = value;
-                RaisePropertyChanged("CopyOfSelectedRepair");
-            }
-        }
-
         private ObservableCollection<VendorViewModel> vendors = new ObservableCollection<VendorViewModel>();
         public ObservableCollection<VendorViewModel> Vendors
         {
@@ -200,7 +188,6 @@ namespace AHDB.UI.ViewModels
             this.AssignVendorToRepair = new CommandBase<object>(AssignVendorToRepairMethod, CanAssignVendor);
             this.AddNote = new CommandBase<object>(AddNoteMethod, CanAddNote);
             this.DeleteRepair = new CommandBase<object>(DeleteRepairMethod, CanDeleteRepair);
-            this.UpdateRepair = new CommandBase<object>(UpdateRepairMethod, CanUpdateRepair);
         }
 
         private static readonly Lazy<MainWindowViewModel> lazy =
