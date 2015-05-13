@@ -17,11 +17,11 @@ namespace AHDB.UI.ViewModels
         public DeleteViewModel(IViewModel entity)
         {
             this.entity = entity;
-            this.DeleteCommand = new CommandBase<object>(DeleteCommandMethod, CanDeleteCommand);
+            this.DeleteCommand = new CommandBase<DeleteViewModel>(DeleteCommandMethod, CanDeleteCommand);
         }
 
         #region Commands
-        public CommandBase<object> DeleteCommand { get; private set; }
+        public CommandBase<DeleteViewModel> DeleteCommand { get; private set; }
         void DeleteCommandMethod(object arg)
         {
             entity.DeleteEntity();

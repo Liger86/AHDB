@@ -42,15 +42,13 @@ namespace AHDB.UI.Common
         }
 
         public event EventHandler CanExecuteChanged;
-
-        void RaiseCanExecuteChanged()
+        public void RaiseCanExecuteChanged()
         {
             if (this.CanExecuteChanged != null)
             {
                 this.CanExecuteChanged(this, EventArgs.Empty);
             }
         }
-
 
         public void Execute(object parameter)
         {

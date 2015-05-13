@@ -142,42 +142,6 @@ namespace AHDB.UI.ViewModels
         }
         #endregion Commands
 
-        public CommandBase<object> UpdateRepair { get; private set; }
-        void UpdateRepairMethod(object arg)
-        {
-            FactoryManager myManager = new FactoryManager();
-            myManager.GetRepairManager().UpdateRepair
-               (selectedRepair.RepairID,
-                selectedRepair.Description,
-                selectedRepair.PurchaseOrder,
-                selectedRepair.QuoteNumber,
-                selectedRepair.Completed,
-                selectedRepair.DateCompleted,
-                selectedRepair.DueDate);
-            RefreshRepairs();
-        }
-        bool CanUpdateRepair(object arg)
-        {
-            if (selectedRepair == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public CommandBase<object> EditRepair { get; private set; }
-        void LoadObjectForEditMethod(object arg)
-        {
-            throw new NotImplementedException();
-        }
-        bool CanLoadObjectForEdit(object arg)
-        {
-            return false;
-        }
-
         #region Methods
         public void RefreshRepairs()
         {

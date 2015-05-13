@@ -35,10 +35,5 @@ namespace AHDB.UI.Views
                 vm.RefreshAction = new Action(() => MainWindowViewModel.Instance.RefreshRepairs());
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }
