@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHDB.Business", "AHDB.Busin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHDBService", "AHDBService\AHDBService.csproj", "{AAD79047-9EC8-4763-BE13-0BBDB43ECC23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHDBServiceHost", "AHDBServiceHost\AHDBServiceHost.csproj", "{378DC867-F3BA-452E-9D83-08E3FC6FEA1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AAD79047-9EC8-4763-BE13-0BBDB43ECC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAD79047-9EC8-4763-BE13-0BBDB43ECC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAD79047-9EC8-4763-BE13-0BBDB43ECC23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{378DC867-F3BA-452E-9D83-08E3FC6FEA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{378DC867-F3BA-452E-9D83-08E3FC6FEA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{378DC867-F3BA-452E-9D83-08E3FC6FEA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{378DC867-F3BA-452E-9D83-08E3FC6FEA1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

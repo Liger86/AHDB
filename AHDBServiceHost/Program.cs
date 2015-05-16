@@ -10,6 +10,7 @@ namespace AHDBServiceHost
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
