@@ -16,13 +16,14 @@ namespace AHDB.Business
             set { id = value; }
         }
 
-        private int myVar;
+        private string description;
 
-        public int MyProperty
+        public string Description
         {
-            get { return myVar; }
-            set { myVar = value; }
+            get { return description; }
+            set { description = value; }
         }
-        
+
+
     }
 }
