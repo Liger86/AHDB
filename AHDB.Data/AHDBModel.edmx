@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="ID" />
@@ -61,8 +61,7 @@
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Hash" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Salt" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -282,8 +281,7 @@
             <End Role="Repair" EntitySet="Repair" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -351,8 +349,7 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Hash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Salt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -482,22 +479,22 @@
             <End Role="VendorRepair" EntitySet="VendorRepairs" />
           </AssociationSet>
           <FunctionImport Name="spDeleteContact">
-            <Parameter Name="ContactId" Mode="In" Type="Int32" />
+          <Parameter Name="ContactId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteCustomer">
-            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteNote">
-            <Parameter Name="NoteId" Mode="In" Type="Int32" />
+          <Parameter Name="NoteId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteRepair">
-            <Parameter Name="RepairId" Mode="In" Type="Int32" />
+          <Parameter Name="RepairId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteVendor">
-            <Parameter Name="VendorId" Mode="In" Type="Int32" />
+          <Parameter Name="VendorId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteVendorRepair">
-            <Parameter Name="RepairId" Mode="In" Type="Int32" />
+          <Parameter Name="RepairId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetCustomers" ReturnType="Collection(AHDBModel.spGetCustomers_Result)">
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
@@ -642,14 +639,13 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AHDBModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Hash" ColumnName="Hash" />
-                <ScalarProperty Name="Salt" ColumnName="Salt" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vendors">
