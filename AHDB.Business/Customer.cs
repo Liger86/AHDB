@@ -4,11 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AHDB.Business;
 
 namespace AHDB.Business
 {
-    public class Customer
+    public class Customer : IRepository<Customer>
     {
+        #region Fields and properties
         private int id;
         public int ID
         {
@@ -50,5 +52,28 @@ namespace AHDB.Business
             get { return repairs; }
             set { repairs = value; }
         }
+        #endregion Fields and properties
+
+        #region IRepository members
+        public string Create(Customer obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer Retrieve(int key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Customer obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(string key)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion IRepository members
     }
 }

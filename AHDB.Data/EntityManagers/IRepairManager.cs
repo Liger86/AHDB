@@ -10,10 +10,10 @@ namespace AHDB.Data.EntityManagers
     public interface IRepairManager
     {
         void CreateNewRepair(
-            string description, 
-            string purchaseOrder, 
-            string quoteNumber, 
-            Nullable<DateTime> dueDate, 
+            string description,
+            string purchaseOrder,
+            string quoteNumber,
+            Nullable<DateTime> dueDate,
             int customerID);
         void UpdateRepair(
             int repairID,
@@ -21,7 +21,7 @@ namespace AHDB.Data.EntityManagers
             string purchaseOrder, 
             string quoteNumber, 
             Nullable<bool> completed, 
-            Nullable<DateTime> dateCompleted, 
+            Nullable<DateTime> dateCompleted,
             Nullable<DateTime> dueDate);
         void DeleteRepair(int repairID);
         List<RepairDTO> GetAllNotCompletedRepairsAndTheirVendors();
