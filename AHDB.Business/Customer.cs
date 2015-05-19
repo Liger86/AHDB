@@ -50,7 +50,5 @@ namespace AHDB.Business
             get { return repairs; }
             set { repairs = value; }
         }
-
-
     }
 }
