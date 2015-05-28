@@ -12,6 +12,6 @@ namespace AHDBService
     public interface IAHDBService
     {
         [OperationContract]
-        void SaveCustomer(string description, string companyName, DateTime dateCreatedAsUtcTime);
+        string GetMessage(string name);
     }
 }

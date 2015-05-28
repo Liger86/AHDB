@@ -10,9 +10,9 @@ namespace AHDBService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "AHDBService" in both code and config file together.
     public class AHDBService : IAHDBService
     {
-        public void SaveCustomer(string description, string companyName, DateTime dateCreatedAsUtcTime)
+        public string GetMessage(string name)
         {
-            Console.WriteLine("{0} saved.", companyName );
+            return "Hello " + name;
         }
     }
 }
