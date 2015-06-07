@@ -14,7 +14,6 @@ GO
 --First create all tables
 CREATE TABLE Repair
 (
-
 	ID INT NOT NULL PRIMARY KEY IDENTITY,
 	[Description] NVARCHAR(MAX) NULL,
 
