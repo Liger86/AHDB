@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="ID" />
@@ -51,6 +51,15 @@
           <Property Name="DateCompleted" Type="datetime2" Precision="7" />
           <Property Name="DueDate" Type="datetime2" Precision="7" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -106,7 +115,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VendorRep__Repai__1FCDBCEB">
+        <Association Name="FK__VendorRep__Repai__22AA2996">
           <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
           <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
           <ReferentialConstraint>
@@ -118,7 +127,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VendorRep__Vendo__20C1E124">
+        <Association Name="FK__VendorRep__Vendo__239E4DCF">
           <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
           <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
           <ReferentialConstraint>
@@ -151,6 +160,18 @@
             </Principal>
             <Dependent Role="Repair">
               <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Role_UserID_FK">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -253,6 +274,7 @@
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Repair" EntityType="Self.Repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VendorRepair" EntityType="Self.VendorRepair" Schema="dbo" store:Type="Tables" />
@@ -264,11 +286,11 @@
             <End Role="Vendor" EntitySet="Vendor" />
             <End Role="Contact" EntitySet="Contact" />
           </AssociationSet>
-          <AssociationSet Name="FK__VendorRep__Repai__1FCDBCEB" Association="Self.FK__VendorRep__Repai__1FCDBCEB">
+          <AssociationSet Name="FK__VendorRep__Repai__22AA2996" Association="Self.FK__VendorRep__Repai__22AA2996">
             <End Role="Repair" EntitySet="Repair" />
             <End Role="VendorRepair" EntitySet="VendorRepair" />
           </AssociationSet>
-          <AssociationSet Name="FK__VendorRep__Vendo__20C1E124" Association="Self.FK__VendorRep__Vendo__20C1E124">
+          <AssociationSet Name="FK__VendorRep__Vendo__239E4DCF" Association="Self.FK__VendorRep__Vendo__239E4DCF">
             <End Role="Vendor" EntitySet="Vendor" />
             <End Role="VendorRepair" EntitySet="VendorRepair" />
           </AssociationSet>
@@ -280,8 +302,13 @@
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Repair" EntitySet="Repair" />
           </AssociationSet>
+          <AssociationSet Name="Role_UserID_FK" Association="Self.Role_UserID_FK">
+            <End Role="User" EntitySet="User" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -338,7 +365,17 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.Repair_CustomerID_FK" FromRole="Repair" ToRole="Customer" />
           <NavigationProperty Name="Notes" Relationship="Self.Note_RepairID_FK" FromRole="Repair" ToRole="Note" />
-          <NavigationProperty Name="VendorRepairs" Relationship="Self.FK__VendorRep__Repai__1FCDBCEB" FromRole="Repair" ToRole="VendorRepair" />
+          <NavigationProperty Name="VendorRepairs" Relationship="Self.FK__VendorRep__Repai__22AA2996" FromRole="Repair" ToRole="VendorRepair" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.Role_UserID_FK" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -349,7 +386,8 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.Role_UserID_FK" FromRole="User" ToRole="Role" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -360,7 +398,7 @@
           <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Contacts" Relationship="Self.Contact_VendorID_FK" FromRole="Vendor" ToRole="Contact" />
-          <NavigationProperty Name="VendorRepairs" Relationship="Self.FK__VendorRep__Vendo__20C1E124" FromRole="Vendor" ToRole="VendorRepair" />
+          <NavigationProperty Name="VendorRepairs" Relationship="Self.FK__VendorRep__Vendo__239E4DCF" FromRole="Vendor" ToRole="VendorRepair" />
         </EntityType>
         <EntityType Name="VendorRepair">
           <Key>
@@ -371,8 +409,8 @@
           <Property Name="VendorID" Type="Int32" Nullable="false" />
           <Property Name="Completed" Type="Boolean" />
           <Property Name="DateCreatedAsUtcTime" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Repair" Relationship="Self.FK__VendorRep__Repai__1FCDBCEB" FromRole="VendorRepair" ToRole="Repair" />
-          <NavigationProperty Name="Vendor" Relationship="Self.FK__VendorRep__Vendo__20C1E124" FromRole="VendorRepair" ToRole="Vendor" />
+          <NavigationProperty Name="Repair" Relationship="Self.FK__VendorRep__Repai__22AA2996" FromRole="VendorRepair" ToRole="Repair" />
+          <NavigationProperty Name="Vendor" Relationship="Self.FK__VendorRep__Vendo__239E4DCF" FromRole="VendorRepair" ToRole="Vendor" />
         </EntityType>
         <Association Name="Contact_CustomerID_FK">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -422,7 +460,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VendorRep__Repai__1FCDBCEB">
+        <Association Name="FK__VendorRep__Repai__22AA2996">
           <End Role="Repair" Type="Self.Repair" Multiplicity="1" />
           <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
           <ReferentialConstraint>
@@ -434,7 +472,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VendorRep__Vendo__20C1E124">
+        <Association Name="Role_UserID_FK">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VendorRep__Vendo__239E4DCF">
           <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
           <End Role="VendorRepair" Type="Self.VendorRepair" Multiplicity="*" />
           <ReferentialConstraint>
@@ -451,6 +501,7 @@
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Notes" EntityType="Self.Note" />
           <EntitySet Name="Repairs" EntityType="Self.Repair" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Vendors" EntityType="Self.Vendor" />
           <EntitySet Name="VendorRepairs" EntityType="Self.VendorRepair" />
@@ -470,31 +521,35 @@
             <End Role="Repair" EntitySet="Repairs" />
             <End Role="Note" EntitySet="Notes" />
           </AssociationSet>
-          <AssociationSet Name="FK__VendorRep__Repai__1FCDBCEB" Association="Self.FK__VendorRep__Repai__1FCDBCEB">
+          <AssociationSet Name="FK__VendorRep__Repai__22AA2996" Association="Self.FK__VendorRep__Repai__22AA2996">
             <End Role="Repair" EntitySet="Repairs" />
             <End Role="VendorRepair" EntitySet="VendorRepairs" />
           </AssociationSet>
-          <AssociationSet Name="FK__VendorRep__Vendo__20C1E124" Association="Self.FK__VendorRep__Vendo__20C1E124">
+          <AssociationSet Name="Role_UserID_FK" Association="Self.Role_UserID_FK">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VendorRep__Vendo__239E4DCF" Association="Self.FK__VendorRep__Vendo__239E4DCF">
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="VendorRepair" EntitySet="VendorRepairs" />
           </AssociationSet>
           <FunctionImport Name="spDeleteContact">
-          <Parameter Name="ContactId" Mode="In" Type="Int32" />
+            <Parameter Name="ContactId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteCustomer">
-          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteNote">
-          <Parameter Name="NoteId" Mode="In" Type="Int32" />
+            <Parameter Name="NoteId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteRepair">
-          <Parameter Name="RepairId" Mode="In" Type="Int32" />
+            <Parameter Name="RepairId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteVendor">
-          <Parameter Name="VendorId" Mode="In" Type="Int32" />
+            <Parameter Name="VendorId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteVendorRepair">
-          <Parameter Name="RepairId" Mode="In" Type="Int32" />
+            <Parameter Name="RepairId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetCustomers" ReturnType="Collection(AHDBModel.spGetCustomers_Result)">
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
@@ -636,16 +691,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AHDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleName" ColumnName="Role" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AHDBModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                </MappingFragment>
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vendors">

@@ -2,12 +2,6 @@
 USE [master]
 GO
 
-DROP DATABASE [AHDB]
-GO
-
-CREATE DATABASE [AHDB]
-GO
-
 USE [AHDB]
 GO
 
@@ -92,6 +86,14 @@ CREATE TABLE [User]
 )
 GO
 
+CREATE TABLE [Role]
+(
+	ID INT NOT NULL PRIMARY KEY IDENTITY,
+	[Description] NVARCHAR(50) NULL,
+	RoleName NVARCHAR(50) NOT NULL,
+	UserId INT NULL
+)
+
 --Creating relationships
 ALTER TABLE Repair add constraint Repair_CustomerID_FK
 FOREIGN KEY (CustomerID) REFERENCES Customer(ID)
@@ -107,6 +109,10 @@ GO
 
 ALTER TABLE Note add constraint Note_RepairID_FK
 FOREIGN KEY (RepairID) references Repair(ID)
+GO
+
+ALTER TABLE [Role] add constraint Role_UserID_FK
+FOREIGN KEY (UserId) references [User](ID)
 GO
 
 --Bridge table for many-to-many

@@ -85,6 +85,9 @@
     <Compile Include="Repair.cs">
       <DependentUpon>AHDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>AHDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="spGetCustomers_Result.cs">
       <DependentUpon>AHDBModel.tt</DependentUpon>
     </Compile>
@@ -125,13 +128,7 @@
       <DependentUpon>AHDBModel.edmx</DependentUpon>
       <LastGenOutput>AHDBModel.cs</LastGenOutput>
     </None>
-    <None Include="App.config" />
-    <None Include="App.Debug.config">
-      <DependentUpon>App.config</DependentUpon>
-    </None>
-    <None Include="App.Release.config">
-      <DependentUpon>App.config</DependentUpon>
-    </None>
+    <None Include="App.Config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

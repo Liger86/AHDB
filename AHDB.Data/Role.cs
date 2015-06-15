@@ -12,20 +12,13 @@ namespace AHDB.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Role
     {
-        public User()
-        {
-            this.Roles = new HashSet<Role>();
-        }
-    
         public int ID { get; set; }
         public string Description { get; set; }
-        public string Username { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Password { get; set; }
+        public string RoleName { get; set; }
+        public Nullable<int> UserId { get; set; }
     
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -4,20 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="025dfde620b24b599eb69469917e35ad" Name="Diagram1">
-        <EntityTypeShape EntityType="AHDBModel.Contact" Width="1.5" PointX="7.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Customer" Width="1.5" PointX="9.625" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Note" Width="1.5" PointX="9.625" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Repair" Width="1.5" PointX="7.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.User" Width="1.5" PointX="2.625" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.Vendor" Width="1.5" PointX="5" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AHDBModel.VendorRepair" Width="1.5" PointX="5" PointY="5.125" IsExpanded="true" />
+      <Diagram DiagramId="98bd5cbbc2da492cb9075e4bce504723" Name="Diagram1">
+        <EntityTypeShape EntityType="AHDBModel.Contact" Width="1.5" PointX="0.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Customer" Width="1.5" PointX="3.125" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Note" Width="1.5" PointX="7.375" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Repair" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Role" Width="1.5" PointX="7.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.User" Width="1.5" PointX="9.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.Vendor" Width="1.5" PointX="3.125" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AHDBModel.VendorRepair" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="AHDBModel.Contact_CustomerID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="AHDBModel.Contact_VendorID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="AHDBModel.Repair_CustomerID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="AHDBModel.Note_RepairID_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="AHDBModel.FK__VendorRep__Repai__1FCDBCEB" ManuallyRouted="false" />
-        <AssociationConnector Association="AHDBModel.FK__VendorRep__Vendo__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.FK__VendorRep__Repai__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.Role_UserID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="AHDBModel.FK__VendorRep__Vendo__239E4DCF" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

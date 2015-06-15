@@ -31,6 +31,7 @@ namespace AHDB.Data
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Note> Notes { get; set; }
         public virtual DbSet<Repair> Repairs { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorRepair> VendorRepairs { get; set; }
