@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace AHDB.UI.Common
@@ -10,12 +6,16 @@ namespace AHDB.UI.Common
     public class CommandBase<T> : ICommand
     {
         #region Constructors
-        public CommandBase(Action<T> execute, Predicate<T> canExecute)
+        public CommandBase(Action<T> execute) : this(execute, null, null) { }
+
+        public CommandBase(Action<T> execute, Predicate<T> canExecute) : this(execute, canExecute, null) { }
+
+        public CommandBase(Action<T> execute, Predicate<T> canExecute, string label)
         {
             this._execute = execute;
             this._canExecute = canExecute;
+            this.Label = label;
         }
-        public CommandBase(Action<T> execute) : this(execute, null) { }
         #endregion Constructors
 
         #region Fields
