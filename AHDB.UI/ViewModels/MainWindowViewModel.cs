@@ -181,7 +181,7 @@ namespace AHDB.UI.ViewModels
         #region Singleton
         private MainWindowViewModel()
         {
-            RefreshRepairs();
+            //RefreshRepairs();
             this.CreateNewRepair = new CommandBase<object>(CreateNewRepairMethod, CanCreateNewRepair);
             this.CreateNewCustomer = new CommandBase<object>(CreateNewCustomerMethod, CanCreateNewCustomer);
             this.CreateNewVendor = new CommandBase<object>(CreateNewVendorMethod, CanCreateNewVendor);

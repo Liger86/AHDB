@@ -9,7 +9,7 @@ using AHDB.Business;
 
 namespace AHDB.Business
 {
-    public class Customer : IRepository<Customer>
+    public class Customer
     {
         #region Fields and properties
         private int id;
@@ -54,27 +54,5 @@ namespace AHDB.Business
             set { repairs = value; }
         }
         #endregion Fields and properties
-
-        #region IRepository members
-        public string Create(Customer obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Customer Retrieve(int key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Customer obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(string key)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion IRepository members
     }
 }

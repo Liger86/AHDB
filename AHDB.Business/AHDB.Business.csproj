@@ -41,13 +41,15 @@
   <ItemGroup>
     <Compile Include="Contact.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repair.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vendor.cs" />
     <Compile Include="VendorRepair.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
